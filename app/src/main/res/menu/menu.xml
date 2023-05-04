@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <group
+            android:id="@+id/grupo1"
+            android:checkableBehavior="single">
+
+
+                <item
+                    android:id="@+id/clasifications_Fragment"
+                    android:icon="@drawable/champion_icon"
+                    android:checkable="true"
+                    android:title="Historial de accidentes activos"
+                    />
+        </group>
+
+        <group
+            android:id="@+id/grupo2"
+            android:checkableBehavior="single">
+                <item
+                    android:id="@+id/history_Fragment"
+                    android:icon="@drawable/clock_history_report_icon"
+                    android:checkable="true"
+                    android:title="Clasificacion de contribuidores"
+
+                    />
+        </group>
+
+
+</menu>

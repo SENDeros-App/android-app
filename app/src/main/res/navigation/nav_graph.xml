@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home_Fragment">
+
+    <fragment
+        android:id="@+id/home_Fragment"
+        android:name="com.example.senderos4.Fragment.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_Fragment_to_clasifications_Fragment"
+            app:destination="@id/clasifications_Fragment" />
+        <action
+            android:id="@+id/action_home_Fragment_to_history_Fragment"
+            app:destination="@id/history_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clasifications_Fragment"
+        android:name="com.example.senderos4.Fragment.ClasificationsFragment"
+        android:label="clasifications"
+        tools:layout="@layout/fragment_clasifications" >
+        <action
+            android:id="@+id/action_clasifications_Fragment_to_home_Fragment"
+            app:destination="@id/home_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/history_Fragment"
+        android:name="com.example.senderos4.Fragment.HistoryFragment"
+        android:label="history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_history_Fragment_to_home_Fragment"
+            app:destination="@id/home_Fragment" />
+    </fragment>
+</navigation>

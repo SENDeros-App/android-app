@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SENDeros4" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.SENDeros4" parent="Base.Theme.SENDeros4" >
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
+
+    <!--estilo de toolbar-->
+    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+        <!-- Configuración del fondo transparente -->
+        <item name="android:background">#00FFFFFF</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- Configuración del color de los iconos -->
+        <item name="android:textColorPrimary">#190202</item>
+        <item name="android:textColorSecondary">#7515D7</item>
+    </style>
+
+
+</resources>
