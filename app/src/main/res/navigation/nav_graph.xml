@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/home_Fragment">
+    app:startDestination="@id/map_fragment">
 
     <fragment
-        android:id="@+id/home_Fragment"
-        android:name="com.example.senderos4.Fragment.HomeFragment"
+        android:id="@+id/map_fragment"
+        android:name="com.example.senderos4.Fragment.MapFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_map" >
         <action
             android:id="@+id/action_home_Fragment_to_clasifications_Fragment"
             app:destination="@id/clasifications_Fragment" />
@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_clasifications" >
         <action
             android:id="@+id/action_clasifications_Fragment_to_home_Fragment"
-            app:destination="@id/home_Fragment" />
+            app:destination="@id/map_fragment" />
     </fragment>
     <fragment
         android:id="@+id/history_Fragment"
@@ -33,6 +33,6 @@
         tools:layout="@layout/fragment_history" >
         <action
             android:id="@+id/action_history_Fragment_to_home_Fragment"
-            app:destination="@id/home_Fragment" />
+            app:destination="@id/map_fragment" />
     </fragment>
 </navigation>
