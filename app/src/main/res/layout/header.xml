@@ -18,7 +18,22 @@
             android:padding="@dimen/little_padding_8"
             app:srcCompat="@drawable/setting_icon" />
 
-        <Button
+
+        <ImageView
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/medium_padding_16"
+            android:src="@drawable/user_desconected_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo invitado"
+            android:layout_gravity="center"
+            android:paddingBottom="@dimen/medium_padding_16"/>
+        <!--<Button
             android:id="@+id/button_iniciarSesion"
             android:layout_width="247dp"
             android:layout_height="wrap_content"
@@ -33,7 +48,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/text_button_registrarse" />
+            android:text="@string/text_button_registrarse" />-->
 
         <SearchView
             android:id="@+id/search_alert"
