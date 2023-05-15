@@ -6,4 +6,10 @@
     <string name="text_button_registrarse">Registrarse</string>
     <string name="hint_searchView">¿Incidentes cercanos?</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="general_text">General</string>
+    <string name="map_text">Visualización del mapa</string>
+    <string name="warning_text">Reportes de Avisos</string>
+    <string name="account_text">Cuenta</string>
+    <string name="app_text">Aplicacion</string>
+    <string name="senderos_text">SENDeros © 2023</string>
 </resources>
