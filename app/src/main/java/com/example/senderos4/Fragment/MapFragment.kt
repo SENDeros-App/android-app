@@ -1,11 +1,16 @@
 package com.example.senderos4.Fragment
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.senderos4.R
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -21,6 +26,10 @@ class MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
 
     private lateinit var map: GoogleMap
+
+    companion object {
+        const val REQUEST_CODE_LOCATION = 0
+    }
 
 
     override fun onCreateView(
@@ -185,12 +194,12 @@ class MapFragment : Fragment(), OnMapReadyCallback,
     }
 
     override fun onMyLocationButtonClick(): Boolean {
-        //TODO("Not yet implemented")
+        Toast.makeText(requireContext(), "Boton pulsado", Toast.LENGTH_LONG).show()
         return false
     }
 
     override fun onMyLocationClick(p0: Location) {
-        TODO("Not yet implemented")
+        Toast.makeText(requireContext(), "Estás en ${p0.latitude}, ${p0.altitude}", Toast.LENGTH_SHORT).show()
     }
 
 }
