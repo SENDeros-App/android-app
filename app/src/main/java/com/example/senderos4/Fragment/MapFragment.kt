@@ -12,9 +12,15 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.senderos4.R
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.tasks.Task
 
 class MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
@@ -49,6 +55,31 @@ class MapFragment : Fragment(), OnMapReadyCallback,
         map = googleMap
         enableLocation()
         map.setOnMyLocationClickListener(this)
+        getCurrentLocation {
+            moveCamera(it)
+        }
+
+    }
+
+    private fun getCurrentLocation(onComplete: (Location) -> Unit) {
+        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        val locationTask: Task<Location> =
+            fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+        locationTask.addOnSuccessListener { currentLocation ->
+            onComplete(currentLocation)
+        }
+    }
+
+    private fun moveCamera(location: Location) {
+        val ubi = LatLng(location.latitude, location.longitude)
+        map.moveCamera(CameraUpdateFactory.newLatLng(ubi))
+        val cameraPosition = CameraPosition.builder()
+            .target(ubi)
+            .zoom(18f)
+            .bearing(90f)
+            .tilt(45f)
+            .build()
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
     private fun isLocationPermissionGranted() =
