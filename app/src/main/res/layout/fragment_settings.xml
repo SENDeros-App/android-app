@@ -5,7 +5,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#d9d9d9"
         tools:context=".Fragment.Settings.SettingsFragment">
 
     <LinearLayout
@@ -21,8 +20,8 @@
             android:layout_height="68dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/margincard"
+            android:layout_marginTop="75dp"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,8 +59,8 @@
             android:layout_height="68dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/margincard"
+            android:layout_marginTop="@dimen/margincard"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout

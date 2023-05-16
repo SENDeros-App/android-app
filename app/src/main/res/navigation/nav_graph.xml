@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_home_Fragment_to_history_Fragment"
             app:destination="@id/history_Fragment" />
+        <action
+            android:id="@+id/action_map_fragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/clasifications_Fragment"
@@ -35,4 +38,18 @@
             android:id="@+id/action_history_Fragment_to_home_Fragment"
             app:destination="@id/map_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.senderos4.Fragment.Settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_generalFragment"
+            app:destination="@id/generalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/generalFragment"
+        android:name="com.example.senderos4.Fragment.Settings.GeneralFragment"
+        android:label="fragment_general"
+        tools:layout="@layout/fragment_general" />
 </navigation>
