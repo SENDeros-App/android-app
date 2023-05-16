@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.senderos4.R
 
-class ClasificationsFragment : Fragment() {
+class ClasificationsFragment : HiddenMenuFragment() {
 
 
     override fun onCreateView(
@@ -17,5 +17,6 @@ class ClasificationsFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_clasifications, container, false)
     }
+
 
 }

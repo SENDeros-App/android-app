@@ -10,7 +10,7 @@ import com.example.senderos4.R
 
 
 
-class HistoryFragment : Fragment() {
+class HistoryFragment :HiddenMenuFragment() {
 
 
     override fun onCreateView(

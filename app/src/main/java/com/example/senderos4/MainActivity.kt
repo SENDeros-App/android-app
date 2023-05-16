@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -23,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationVIew: NavigationView
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var loginButtom:ImageView
-
+    private lateinit var loginBottom: ImageView
+    private lateinit var settigBottom: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,14 +40,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, drawerLayout)
         navigationVIew.setupWithNavController(navController)
 
-        toolbar.setTitleTextColor(Color.TRANSPARENT)
+       // toolbar.setTitleTextColor(Color.TRANSPARENT)
 
     }
 
     private fun addListeners() {
-        loginButtom.setOnClickListener {
+        loginBottom.setOnClickListener {
             navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment) //id del fragmento hacia donde nos va a mover
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+
+        settigBottom.setOnClickListener {
+            navController.navigate(R.id.action_map_fragment_to_settingsFragment)
+            drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
 
@@ -57,7 +63,8 @@ class MainActivity : AppCompatActivity() {
         navigationVIew = findViewById(R.id.navigationView)
 
         val headerView = navigationVIew.getHeaderView(0)
-        loginButtom = headerView.findViewById(R.id.login)
+        loginBottom = headerView.findViewById(R.id.login)
+        settigBottom = headerView.findViewById(R.id.setting_options)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -75,9 +82,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    //eliminar boton inicio de sesion falta completar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return super.onCreateOptionsMenu(menu)
+        return true
     }
 
 
