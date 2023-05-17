@@ -14,4 +14,6 @@
     <string name="senderos_text">SENDeros © 2023</string>
     <string name="mapSetting_text">Refrescar Mi Mapa</string>
     <string name="languaje_text">Idioma</string>
+    <string name="DarkMode">Modo Oscuro</string>
+    <string name="ModeState">Desactivado</string>
 </resources>
