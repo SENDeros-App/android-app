@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.Settings.GeneralFragment"
-    android:background="#d9d9d9"
+    android:background="@color/backgroundSettings"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#d9d9d9"
+        android:background="@color/backgroundSettings"
         >
 
         <androidx.cardview.widget.CardView
@@ -21,8 +21,8 @@
             android:layout_height="68dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/margincard"
+            android:layout_marginTop="@dimen/margincard"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
                     android:id="@+id/textGeneral1View"
                     android:layout_width="78dp"
                     android:layout_height="23dp"
-                    android:text="Idioma"
+                    android:text="@string/languaje_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.24"
@@ -61,8 +61,8 @@
             android:layout_height="68dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/margincard"
+            android:layout_marginTop="@dimen/margincard"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +74,7 @@
                     android:id="@+id/textRefreshView"
                     android:layout_width="228dp"
                     android:layout_height="25dp"
-                    android:text="Refrescar Mi Mapa"
+                    android:text="@string/mapSetting_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.448"
