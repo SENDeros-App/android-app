@@ -3,4 +3,5 @@
     <dimen name="big_padding_32">32dp</dimen>
     <dimen name="little_padding_8">8dp</dimen>
     <dimen name="medium_padding_16">16dp</dimen>
+    <dimen name="margincard">5dp</dimen>
 </resources>

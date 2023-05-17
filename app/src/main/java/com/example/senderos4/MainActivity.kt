@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var loginButtom:ImageView
+    private lateinit var buttonSetting: ImageView
 
 
 
@@ -48,6 +49,12 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment) //id del fragmento hacia donde nos va a mover
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         }
+
+        buttonSetting.setOnClickListener {
+
+            navController.navigate(R.id.action_map_fragment_to_settingsFragment)
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
     }
 
     fun bind() {
@@ -58,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         val headerView = navigationVIew.getHeaderView(0)
         loginButtom = headerView.findViewById(R.id.login)
+        buttonSetting = headerView.findViewById(R.id.setting_options)
     }
 
     override fun onSupportNavigateUp(): Boolean {
