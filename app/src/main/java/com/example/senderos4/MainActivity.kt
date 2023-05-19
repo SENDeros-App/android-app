@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var loginBottom: ImageView
-    private lateinit var settigBottom: ImageView
+    private lateinit var settingBottom: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-        settigBottom.setOnClickListener {
+        settingBottom.setOnClickListener {
             navController.navigate(R.id.action_map_fragment_to_settingsFragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         val headerView = navigationVIew.getHeaderView(0)
         loginBottom = headerView.findViewById(R.id.login)
-        settigBottom = headerView.findViewById(R.id.setting_options)
+        settingBottom = headerView.findViewById(R.id.setting_options)
     }
 
     override fun onSupportNavigateUp(): Boolean {
