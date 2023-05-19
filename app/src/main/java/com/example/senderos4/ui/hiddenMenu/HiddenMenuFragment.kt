@@ -1,4 +1,4 @@
-package com.example.senderos4.Fragment
+package com.example.senderos4.ui.hiddenMenu
 
 
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment

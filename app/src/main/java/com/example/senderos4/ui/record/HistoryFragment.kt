@@ -1,16 +1,16 @@
-package com.example.senderos4.Fragment
+package com.example.senderos4.ui.record
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.senderos4.ui.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.R
 
 
 
 
-class HistoryFragment :HiddenMenuFragment() {
+class HistoryFragment : HiddenMenuFragment() {
 
 
     override fun onCreateView(
