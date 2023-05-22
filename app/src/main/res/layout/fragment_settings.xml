@@ -373,6 +373,27 @@
             />
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="190dp"
+            android:layout_height="98dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.171"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.298"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="174dp"
+                android:layout_height="64dp"
+                android:hint="User name"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="171dp"
+
+                />
+
 
     </LinearLayout>
 

@@ -16,4 +16,5 @@
     <string name="languaje_text">Idioma</string>
     <string name="DarkMode">Modo Oscuro</string>
     <string name="ModeState">Desactivado</string>
+    <string name="Welcome_Text">¡Bienvenido de nuevo! ¡Estamos emocionados de que estés aquí de nuevo en nuestra aplicación!</string>
 </resources>
