@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.action_map_fragment_to_settingsFragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
+
+  
     }
 
     fun bind() {
@@ -63,8 +65,10 @@ class MainActivity : AppCompatActivity() {
         navigationVIew = findViewById(R.id.navigationView)
 
         val headerView = navigationVIew.getHeaderView(0)
+
         loginBottom = headerView.findViewById(R.id.login)
         settingBottom = headerView.findViewById(R.id.setting_options)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
