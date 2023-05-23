@@ -1,4 +1,4 @@
-package com.example.senderos4.ui.Map
+package com.example.senderos4.Fragment.Map
 
 import android.Manifest
 import android.content.pm.PackageManager

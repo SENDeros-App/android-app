@@ -1,4 +1,4 @@
-package com.example.senderos4.ui.hiddenMenu
+package com.example.senderos4.Fragment.hiddenMenu
 
 
 import android.os.Bundle
