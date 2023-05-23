@@ -6,7 +6,7 @@
         android:layout_height="?android:attr/actionBarSize"
         android:id="@+id/myToolbar"
         android:elevation="8dp"
-    android:theme="@style/ToolbarTheme">
+        android:theme="@style/ToolbarTheme">
 
     <!--@style/ThemeOverlay.AppCompat.Dark.ActionBar-->
 </androidx.appcompat.widget.Toolbar>
