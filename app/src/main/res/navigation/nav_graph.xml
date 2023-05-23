@@ -21,11 +21,6 @@
             app:destination="@id/containerFragment" />
     </fragment>
 
-    <!--<fragment
-        android:id="@+id/clasifications_Fragment"
-        android:name="com.example.senderos4.ui.clasificacion.fragments.ClassificationsFragment"
-        android:label="clasifications"
-        tools:layout="@layout/fragment_clasifications" />-->
     <fragment
         android:id="@+id/history_Fragment"
         android:name="com.example.senderos4.ui.record.HistoryFragment"
