@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/map_fragment"
-        android:name="com.example.senderos4.Fragment.MapFragment"
-        android:label="Home"
+        android:name="com.example.senderos4.Fragment.Map.MapFragment"
+        android:label=""
         tools:layout="@layout/fragment_map" >
         <action
             android:id="@+id/action_home_Fragment_to_clasifications_Fragment"
@@ -20,9 +20,10 @@
             android:id="@+id/action_map_fragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/clasifications_Fragment"
-        android:name="com.example.senderos4.Fragment.ClasificationsFragment"
+        android:name="com.example.senderos4.Fragment.clasificacion.ClasificationsFragment"
         android:label="clasifications"
         tools:layout="@layout/fragment_clasifications" >
         <action
@@ -31,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/history_Fragment"
-        android:name="com.example.senderos4.Fragment.HistoryFragment"
+        android:name="com.example.senderos4.Fragment.record.HistoryFragment"
         android:label="history"
         tools:layout="@layout/fragment_history" >
         <action
@@ -41,15 +42,11 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.senderos4.Fragment.Settings.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        android:label="settings"
+        tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/action_settingsFragment_to_generalFragment"
-            app:destination="@id/generalFragment" />
+            android:id="@+id/action_settingsFragment_to_map_fragment"
+            app:destination="@id/map_fragment" />
     </fragment>
-    <fragment
-        android:id="@+id/generalFragment"
-        android:name="com.example.senderos4.Fragment.Settings.GeneralFragment"
-        android:label="fragment_general"
-        tools:layout="@layout/fragment_general" />
+
 </navigation>

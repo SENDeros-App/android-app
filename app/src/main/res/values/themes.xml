@@ -11,7 +11,7 @@
 
 
     <!--estilo de toolbar-->
-    <style name="ToolbarTheme" parent="Widget.AppCompat.Toolbar">
+    <style name="ToolbarTheme" >
         <!-- Configuración del fondo transparente -->
         <item name="android:background">#00FFFFFF</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
