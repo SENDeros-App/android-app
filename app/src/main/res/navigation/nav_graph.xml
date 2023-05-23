@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.senderos4.Fragment.Settings.SettingsFragment"
-        android:label="setting"
+        android:label="settings"
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_map_fragment"
