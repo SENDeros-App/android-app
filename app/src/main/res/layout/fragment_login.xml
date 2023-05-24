@@ -10,13 +10,14 @@
     <ImageButton
         android:layout_width="716dp"
         android:layout_height="452dp"
+        android:layout_marginStart="52dp"
         android:src="@drawable/BackgroundLogin"
-        android:tint="#6DB69FF8"
         android:tintMode="add"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498"
-        tools:layout_editor_absoluteX="52dp" />
+        app:tint="#6DB69FF8" />
 
     <ImageView
         android:layout_width="280dp"
@@ -53,7 +54,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="345dp"
             android:layout_height="57dp"
-            android:hint="Nombre de Usuario"
+            android:hint="@string/userName"
             tools:layout_editor_absoluteX="74dp"
             tools:layout_editor_absoluteY="171dp"
 
@@ -76,7 +77,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="345dp"
             android:layout_height="57dp"
-            android:hint="password"
+            android:hint="@string/passwordText"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Olvidaste password?"
+        android:text="@string/forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.907"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +98,7 @@
         android:layout_height="59dp"
         android:layout_marginTop="64dp"
         android:backgroundTint="#5442F8"
-        android:text="Iniciar Sesion"
+        android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
@@ -107,7 +108,7 @@
         android:layout_width="169dp"
         android:layout_height="65dp"
         android:layout_marginTop="56dp"
-        android:text="Aun No posees Cuenta En SENDeros App?"
+        android:text="@string/registrationText"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
-        android:text="Registrate "
+        android:text="@string/register"
         android:textColor="#673AB7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

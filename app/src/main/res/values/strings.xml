@@ -17,4 +17,10 @@
     <string name="DarkMode">Modo Oscuro</string>
     <string name="ModeState">Desactivado</string>
     <string name="Welcome_Text">¡Bienvenido de nuevo! ¡Estamos emocionados de que estés aquí de nuevo en nuestra aplicación!</string>
+    <string name="userName">Nombre de Usuario</string>
+    <string name="passwordText">Contraseña</string>
+    <string name="forgotPassword">Olvidaste Contraseña?</string>
+    <string name="login">Iniciar Sesion</string>
+    <string name="registrationText">¿Aun no posees cuenta en SENDeros App?</string>
+    <string name="register">Registrate</string>
 </resources>
