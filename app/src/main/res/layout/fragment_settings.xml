@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".Fragment.Settings.SettingsFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:attr/actionBarSize"
+    android:background="#d9d9d9"
+    tools:context=".Fragment.Settings.SettingsFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#d9d9d9"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/general"
             android:layout_width="match_parent"
             android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="@dimen/margincard"
-            android:layout_marginTop="75dp"
-            >
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/general_action_fragment"
@@ -57,16 +58,14 @@
             android:id="@+id/mapview"
             android:layout_width="match_parent"
             android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="@dimen/margincard"
-            android:layout_marginTop="@dimen/margincard"
-            >
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textMapView"
@@ -97,26 +96,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:text="@string/warning_text"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            />
+            android:paddingStart="16dp"
+            android:text="@string/warning_text" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/warning"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            >
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textWarningView"
@@ -146,16 +142,14 @@
             android:id="@+id/area"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            >
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textAreaView"
@@ -184,26 +178,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:text="@string/account_text"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            />
+            android:paddingStart="16dp"
+            android:text="@string/account_text" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/account"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            >
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textAccountView"
@@ -234,26 +225,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:text="@string/app_text"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            />
+            android:paddingStart="16dp"
+            android:text="@string/app_text" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/support"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            >
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textSupportView"
@@ -285,16 +273,14 @@
             android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            >
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textInfoView"
@@ -326,16 +312,14 @@
             android:id="@+id/Invitation"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            >
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textInvitationView"
@@ -366,15 +350,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/senderos_text"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:textAlignment="center"
-            />
+            android:text="@string/senderos_text"
+            android:textAlignment="center" />
 
 
     </LinearLayout>
 
-
-
-    </ScrollView>
+</ScrollView>

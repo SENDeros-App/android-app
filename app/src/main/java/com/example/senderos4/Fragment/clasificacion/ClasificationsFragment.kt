@@ -1,16 +1,13 @@
-package com.example.senderos4.Fragment
+package com.example.senderos4.Fragment.clasificacion
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.senderos4.Fragment.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.R
 
-
-
-
-class HistoryFragment : Fragment() {
+class ClasificationsFragment : HiddenMenuFragment() {
 
 
     override fun onCreateView(
@@ -18,7 +15,8 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false)
+        return inflater.inflate(R.layout.fragment_clasifications, container, false)
     }
+
 
 }

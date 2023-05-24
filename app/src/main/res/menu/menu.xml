@@ -11,7 +11,7 @@
                     android:id="@+id/clasifications_Fragment"
                     android:icon="@drawable/champion_icon"
                     android:checkable="true"
-                    android:title="Historial de accidentes activos"
+                    android:title="@string/historial_de_accidentes_activos"
                     />
         </group>
 
@@ -22,7 +22,7 @@
                     android:id="@+id/history_Fragment"
                     android:icon="@drawable/clock_history_report_icon"
                     android:checkable="true"
-                    android:title="Clasificacion de contribuidores"
+                    android:title="@string/clasificacion_de_contribuidores"
 
                     />
         </group>
