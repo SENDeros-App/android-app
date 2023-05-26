@@ -46,7 +46,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun addListeners() {
         loginBottom.setOnClickListener {
-            navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment) //id del fragmento hacia donde nos va a mover
+
+            //id del fragmento hacia donde nos va a mover
+            navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
@@ -55,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-  
     }
 
     fun bind() {

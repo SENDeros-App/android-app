@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/map_fragment"
-        android:name="com.example.senderos4.Fragment.Map.MapFragment"
+        android:name="com.example.senderos4.ui.Map.MapFragment"
         android:label=""
         tools:layout="@layout/fragment_map" >
         <action
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/clasifications_Fragment"
-        android:name="com.example.senderos4.Fragment.clasificacion.ClasificationsFragment"
+        android:name="com.example.senderos4.ui.clasificacion.ClasificationsFragment"
         android:label="clasifications"
         tools:layout="@layout/fragment_clasifications" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/history_Fragment"
-        android:name="com.example.senderos4.Fragment.record.HistoryFragment"
+        android:name="com.example.senderos4.ui.record.HistoryFragment"
         android:label="history"
         tools:layout="@layout/fragment_history" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.senderos4.Fragment.Settings.SettingsFragment"
+        android:name="com.example.senderos4.ui.Settings.SettingsFragment"
         android:label="settings"
         tools:layout="@layout/fragment_settings">
         <action

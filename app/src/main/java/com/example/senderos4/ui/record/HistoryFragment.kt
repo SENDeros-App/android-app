@@ -1,10 +1,10 @@
-package com.example.senderos4.Fragment.record
+package com.example.senderos4.ui.record
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.senderos4.Fragment.hiddenMenu.HiddenMenuFragment
+import com.example.senderos4.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.R
 
 
