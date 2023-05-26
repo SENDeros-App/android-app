@@ -23,6 +23,6 @@
     <string name="passwordText">Contraseña</string>
     <string name="forgotPassword">Olvidaste Contraseña?</string>
     <string name="login">Iniciar Sesion</string>
-    <string name="registrationText">¿Aun no posees cuenta en SENDeros App?</string>
+    <string name="InvitationText">¿Aun no posees cuenta en SENDeros App?</string>
     <string name="register">Registrate</string>
 </resources>
