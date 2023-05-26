@@ -4,13 +4,14 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.senderos4.R
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -21,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
+
 
 class MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
@@ -59,7 +61,10 @@ class MapFragment : Fragment(), OnMapReadyCallback,
             moveCamera(it)
         }
 
+        //map.setPadding(0,1200,0,0)
     }
+
+
 
     private fun getCurrentLocation(onComplete: (Location) -> Unit) {
         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
