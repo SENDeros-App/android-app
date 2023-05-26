@@ -1,9 +1,11 @@
 package com.example.senderos4
 
+import android.content.ClipData.Item
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -46,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addListeners() {
         loginBottom.setOnClickListener {
-            navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment) //id del fragmento hacia donde nos va a mover
+            navController.navigate(R.id.action_map_fragment_to_loginFragment) //id del fragmento hacia donde nos va a mover
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
@@ -55,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-  
     }
 
     fun bind() {
