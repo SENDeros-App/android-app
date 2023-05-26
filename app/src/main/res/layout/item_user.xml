@@ -27,7 +27,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textSize="30sp"
+                        android:textSize="@dimen/text_size_item_"
                         tools:text="1"
                         android:text="0"/>
 
@@ -41,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textSize="30sp"
+                        android:textSize="@dimen/text_size_item_"
                         tools:text="name user" />
 
                 </LinearLayout>
@@ -57,7 +57,7 @@
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
                         android:gravity="end"
-                        android:textSize="30sp"
+                        android:textSize="@dimen/text_size_item_"
                         tools:text="500px" />
 
                 </LinearLayout>

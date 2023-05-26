@@ -14,7 +14,6 @@ class ClasificationAdapter:RecyclerView.Adapter<ClasificationAdapter.ViewHolderU
 
     class ViewHolderUser(itemView: View):RecyclerView.ViewHolder(itemView) {
         fun bind(user:User){
-
             itemView.findViewById<TextView>(R.id.nameUser).text = user.name
             itemView.findViewById<TextView>(R.id.pxUser).text = user.px
         }
