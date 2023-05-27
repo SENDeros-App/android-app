@@ -30,7 +30,7 @@ class ClasificationsFragment : HiddenMenuFragment() {
 
 
         view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClasificationAdapter().apply {
-            submitData(viewModel.getUsers())
+            submitData(viewModel.getHeaders(), viewModel.getUsers())
         }
     }
 
