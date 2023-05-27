@@ -1,7 +1,6 @@
 package com.example.senderos4.ui.clasificacion.adapter
 
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -34,7 +33,7 @@ class ClasificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
     override fun getItemCount(): Int {
-        return users.size + getHeaderCount()
+        return users.size + 2
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -66,25 +65,32 @@ class ClasificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         notifyDataSetChanged()
     }
 
-    private fun getHeaderCount(): Int {
+    /*private fun getHeaderCount(): Int {
         // Calcular la cantidad de encabezados según la lógica deseada (cada dos usuarios, cada cuatro usuarios)
-        return users.size / 2
-    }
+        return users.size / 5
+    }*/
 
     private fun isHeaderPosition(position: Int): Boolean {
         // Verificar si la posición es una posición de encabezado
-        return (position % 3 == 2)
+        //return (position % 6 == 5)
+        return (position == 6 || position == 15)
     }
 
     private fun getHeaderPosition(position: Int): Int {
         // Obtener la posición del encabezado correspondiente para la posición dada
-
-        return position / 3 // Encabezado en las posiciones 2, 5, 8, etc. (posición / 3)
+        //return position / 6 // Encabezado en las posiciones 2, 5, 8, etc. (posición / 3)
+        // Obtener la posición del encabezado correspondiente para la posición dada
+        return when (position) {
+            6 -> 0 // Primer encabezado en la posición 6
+            15 -> 1 // Segundo encabezado en la posición 15
+            else -> throw IllegalArgumentException("Posición de encabezado no válida")
+        }
     }
 
     private fun getUserPosition(position: Int): Int {
         // Obtener la posición del usuario correspondiente para la posición dada
-        return if (position > 2) (position - getHeaderCount()) else position
+        //return if (position > 2) (position - getHeaderCount()) else position
+        return if (position >= 6) (position - 2) else position
     }
 
     inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

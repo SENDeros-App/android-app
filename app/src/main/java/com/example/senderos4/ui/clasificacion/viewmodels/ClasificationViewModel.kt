@@ -9,7 +9,7 @@ import com.example.senderos4.ui.clasificacion.repositories.ClasificationReposito
 
 class ClasificationViewModel(private val userRepository: ClasificationRepository):ViewModel() {
 
-    fun getUsers()= userRepository.getUsuarios()
+    fun getUsers()= userRepository.getUsersTop()
     fun getHeaders()=userRepository.getHeaders()
     companion object{
         val Factory = viewModelFactory {
