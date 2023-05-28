@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/clasifications_Fragment"
-        android:name="com.example.senderos4.ui.clasificacion.ClasificationsFragment"
+        android:name="com.example.senderos4.ui.clasificacion.ClassificationsFragment"
         android:label="clasifications"
         tools:layout="@layout/fragment_clasifications" >
         <action

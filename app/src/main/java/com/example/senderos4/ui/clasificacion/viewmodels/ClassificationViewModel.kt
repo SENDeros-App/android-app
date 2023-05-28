@@ -5,17 +5,17 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.senderos4.SenderosApplication
-import com.example.senderos4.ui.clasificacion.repositories.ClasificationRepository
+import com.example.senderos4.ui.clasificacion.repositories.ClassificationRepository
 
-class ClasificationViewModel(private val userRepository: ClasificationRepository):ViewModel() {
+class ClassificationViewModel(private val userRepository: ClassificationRepository):ViewModel() {
 
-    fun getUsers()= userRepository.getUsersTop()
+    fun getTop()= userRepository.getUsersTop()
     fun getHeaders()=userRepository.getHeaders()
     companion object{
         val Factory = viewModelFactory {
             initializer {
-                val userRepository = (this[APPLICATION_KEY] as SenderosApplication).clasificationRepository
-                ClasificationViewModel(userRepository)
+                val userRepository = (this[APPLICATION_KEY] as SenderosApplication).classificationRepository
+                ClassificationViewModel(userRepository)
             }
         }
     }

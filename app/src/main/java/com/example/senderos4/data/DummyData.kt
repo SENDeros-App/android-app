@@ -54,6 +54,9 @@ val px17 = "94"
 val name18 = "perlita"
 val px18 = "1032"
 
+val name19 = "nestor"
+val px19 = "2000"
+
 val header = "Ascenso"
 
 val header2 = "Descenso"
@@ -76,7 +79,8 @@ val users = listOf(
     User(name15, px15),
     User(name16, px16),
     User(name17, px17),
-    User(name18, px18)
+    User(name18, px18),
+    User(name19, px19)
 )
 
 val headers = listOf(

@@ -8,13 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.senderos4.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.R
-import com.example.senderos4.ui.clasificacion.adapter.ClasificationAdapter
-import com.example.senderos4.ui.clasificacion.viewmodels.ClasificationViewModel
+import com.example.senderos4.ui.clasificacion.adapter.ClassificationAdapter
+import com.example.senderos4.ui.clasificacion.viewmodels.ClassificationViewModel
 
-class ClasificationsFragment : HiddenMenuFragment() {
+class ClassificationsFragment : HiddenMenuFragment() {
 
-    private  val viewModel: ClasificationViewModel by viewModels{
-        ClasificationViewModel.Factory
+    private  val viewModel: ClassificationViewModel by viewModels{
+        ClassificationViewModel.Factory
     }
 
     override fun onCreateView(
@@ -29,8 +29,8 @@ class ClasificationsFragment : HiddenMenuFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClasificationAdapter().apply {
-            submitData(viewModel.getHeaders(), viewModel.getUsers())
+        view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
+            submitData(viewModel.getHeaders(), viewModel.getTop())
         }
     }
 

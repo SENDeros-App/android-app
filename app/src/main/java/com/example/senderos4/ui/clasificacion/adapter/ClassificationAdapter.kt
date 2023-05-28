@@ -9,14 +9,28 @@ import com.example.senderos4.R
 import com.example.senderos4.data.Header
 import com.example.senderos4.data.User
 
-class ClasificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
     private val VIEW_TYPE_HEADER = 0
     private val VIEW_TYPE_USER = 1
 
-    private var headers: List<Header> = emptyList()
-    private var users: List<User> = emptyList()
+    private var headers: List<Header>?=null
+    private var users: List<User>?=null
+
+    inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(header:Header) {
+            itemView.findViewById<TextView>(R.id.header_title).text = header.tittle
+        }
+    }
+
+    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(user: User) {
+            itemView.findViewById<TextView>(R.id.nameUser).text = user.name
+            itemView.findViewById<TextView>(R.id.pxUser).text = user.px
+
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -32,8 +46,24 @@ class ClasificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         }
     }
 
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder.itemViewType) {
+            VIEW_TYPE_HEADER -> {
+                val headerHolder = holder as HeaderViewHolder
+                val headerPosition = getHeaderPosition(position)
+                headerHolder.bind(headers?.get(headerPosition) ?: Header("") )
+            }
+            VIEW_TYPE_USER -> {
+                val userHolder = holder as UserViewHolder
+                val userPosition = getUserPosition(position)
+                userHolder.bind(users?.get(userPosition) ?: User("", ""))
+            }
+        }
+    }
+
     override fun getItemCount(): Int {
-        return users.size + 2
+        val itemCount = users?.size?.plus(2) ?: 0
+        return itemCount
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -44,20 +74,6 @@ class ClasificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder.itemViewType) {
-            VIEW_TYPE_HEADER -> {
-                val headerHolder = holder as HeaderViewHolder
-                val headerPosition = getHeaderPosition(position)
-                headerHolder.bind(headers[headerPosition])
-            }
-            VIEW_TYPE_USER -> {
-                val userHolder = holder as UserViewHolder
-                val userPosition = getUserPosition(position)
-                userHolder.bind(users[userPosition])
-            }
-        }
-    }
 
     fun submitData(headers: List<Header>, users: List<User>) {
         this.headers = headers
@@ -65,23 +81,15 @@ class ClasificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         notifyDataSetChanged()
     }
 
-    /*private fun getHeaderCount(): Int {
-        // Calcular la cantidad de encabezados según la lógica deseada (cada dos usuarios, cada cuatro usuarios)
-        return users.size / 5
-    }*/
-
     private fun isHeaderPosition(position: Int): Boolean {
         // Verificar si la posición es una posición de encabezado
-        //return (position % 6 == 5)
-        return (position == 6 || position == 15)
+        return (position == 5 || position == 15)
     }
 
     private fun getHeaderPosition(position: Int): Int {
         // Obtener la posición del encabezado correspondiente para la posición dada
-        //return position / 6 // Encabezado en las posiciones 2, 5, 8, etc. (posición / 3)
-        // Obtener la posición del encabezado correspondiente para la posición dada
         return when (position) {
-            6 -> 0 // Primer encabezado en la posición 6
+            5 -> 0 // Primer encabezado en la posición 6
             15 -> 1 // Segundo encabezado en la posición 15
             else -> throw IllegalArgumentException("Posición de encabezado no válida")
         }
@@ -89,24 +97,13 @@ class ClasificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private fun getUserPosition(position: Int): Int {
         // Obtener la posición del usuario correspondiente para la posición dada
-        //return if (position > 2) (position - getHeaderCount()) else position
-        return if (position >= 6) (position - 2) else position
+        return if (position >= 5) (position - 2) else position
     }
 
-    inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(header:Header) {
-            itemView.findViewById<TextView>(R.id.header_title).text = header.tittle
-        }
-    }
-
-    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(user: User) {
-            itemView.findViewById<TextView>(R.id.nameUser).text = user.name
-            itemView.findViewById<TextView>(R.id.pxUser).text = user.px
-
-        }
-    }
 }
+
+
+
     /*private val VIEW_TYPE_HEADER = 0
     private val VIEW_TYPE_USER = 1
 
