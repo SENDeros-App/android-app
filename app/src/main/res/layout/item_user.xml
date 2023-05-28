@@ -10,13 +10,13 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/little_padding_8"
-            app:cardUseCompatPadding="true">
+            android:padding="@dimen/little_padding_8">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="13dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -30,12 +30,16 @@
                         android:layout_margin="8dp"
                         android:textSize="@dimen/text_size_item_"
                         tools:text="1"
-                        android:text="0"/>
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        />
 
                     <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/champion_icon" />
+                        android:layout_width="36dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_user_item" />
 
                     <TextView
                         android:id="@+id/nameUser"
@@ -43,23 +47,34 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:textSize="@dimen/text_size_item_"
-                        tools:text="name user" />
+                        android:layout_gravity="center"
+                        tools:text="name user"
+                        android:textStyle="bold"/>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/pxUserLinear"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="end">
 
                     <TextView
                         android:id="@+id/pxUser"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
-                        android:gravity="end"
                         android:textSize="@dimen/text_size_item_"
-                        tools:text="500px" />
+                        tools:text="500"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="px"
+                        android:textSize="@dimen/text_size_item_"
+                        android:layout_margin="8dp"
+                        android:textStyle="bold"/>
 
                 </LinearLayout>
 

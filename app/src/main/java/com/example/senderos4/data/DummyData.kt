@@ -57,9 +57,9 @@ val px18 = "1032"
 val name19 = "nestor"
 val px19 = "2000"
 
-val header = "Ascenso"
+val header = "ZONA DE ASCENSO"
 
-val header2 = "Descenso"
+val header2 = "ZONA DE DESCENZO"
 
 val users = listOf(
     User(name, px),

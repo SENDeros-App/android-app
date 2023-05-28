@@ -12,8 +12,8 @@
     <string name="account_text">Cuenta</string>
     <string name="app_text">Aplicacion</string>
     <string name="senderos_text">SENDeros © 2023</string>
-    <string name="historial_de_accidentes_activos">historial_de_accidentes_activos</string>
-    <string name="clasificacion_de_contribuidores">clasificacion_de_contribuidores</string>
+    <string name="historial_de_accidentes_activos">Historial de accidentes activos</string>
+    <string name="clasificacion_de_contribuidores">Clasificacion de contribuidores</string>
     <string name="mapSetting_text">Refrescar Mi Mapa</string>
     <string name="languaje_text">Idioma</string>
     <string name="DarkMode">Modo Oscuro</string>
