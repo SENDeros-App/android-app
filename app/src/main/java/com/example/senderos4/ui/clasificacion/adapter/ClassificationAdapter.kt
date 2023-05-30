@@ -29,6 +29,8 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             itemView.findViewById<TextView>(R.id.nameUser).text = user.name
             itemView.findViewById<TextView>(R.id.pxUser).text = user.px
 
+                itemView.findViewById<TextView>(R.id.numPosition).text="${position+1}"
+
         }
     }
 
@@ -61,11 +63,6 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         }
     }
 
-    override fun getItemCount(): Int {
-        val itemCount = users?.size?.plus(2) ?: 0
-        return itemCount
-    }
-
     override fun getItemViewType(position: Int): Int {
         return if (isHeaderPosition(position)) {
             VIEW_TYPE_HEADER
@@ -81,6 +78,11 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         notifyDataSetChanged()
     }
 
+    override fun getItemCount(): Int {
+        val itemCount = users?.size?.plus(2) ?: 0
+        return itemCount
+    }
+
     private fun isHeaderPosition(position: Int): Boolean {
         // Verificar si la posición es una posición de encabezado
         return (position == 5 || position == 15)
@@ -89,15 +91,15 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private fun getHeaderPosition(position: Int): Int {
         // Obtener la posición del encabezado correspondiente para la posición dada
         return when (position) {
-            5 -> 0 // Primer encabezado en la posición 6
-            15 -> 1 // Segundo encabezado en la posición 15
-            else -> throw IllegalArgumentException("Posición de encabezado no válida")
+            5 -> 0 // Primer header
+            15 -> 1 // Segundo header
+            else -> throw IllegalArgumentException("no correspondienye")//-1 // no se como manejarlo
         }
     }
 
     private fun getUserPosition(position: Int): Int {
         // Obtener la posición del usuario correspondiente para la posición dada
-        return if (position >= 5) (position - 2) else position
+        return if (position > 5) (position - 2) else position
     }
 
 }

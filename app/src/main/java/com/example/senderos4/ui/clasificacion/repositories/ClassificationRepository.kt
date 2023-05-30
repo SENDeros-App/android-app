@@ -3,11 +3,17 @@ package com.example.senderos4.ui.clasificacion.repositories
 import com.example.senderos4.data.Header
 import com.example.senderos4.data.User
 
-    class ClassificationRepository(private val users:List<User>, private var headers:List<Header>) {
+class ClassificationRepository(private val users:List<User>, private var headers:List<Header>) {
+    fun getUsersTop():List<User>{
+         val topUsers = users.sortedByDescending { it.px.toInt() }.take(17)
 
-        fun getUsersTop():List<User>{
-            val topUsers = users.sortedByDescending { it.px.toInt() }.take(17)
-            return topUsers
+        //prueba para mandar la numeracino segun posicion
+        for ((i, v) in topUsers.withIndex()){
+            println("[${i+1}, $v]")
         }
-        fun getHeaders()=headers
+
+        return topUsers
     }
+    fun getHeaders()=headers
+
+}
