@@ -16,11 +16,12 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 
 
@@ -60,12 +61,31 @@ class MapFragment : Fragment(), OnMapReadyCallback,
         getCurrentLocation {
             moveCamera(it)
         }
-        GoogleMapOptions()
-            .mapId(resources.getString(R.string.map_id))
-        //map.setPadding(0,1200,0,0)
+        map.setPadding(0,1200,0,0)
+        addingMarker()
+
     }
 
+    private fun addingMarker() {
 
+        val bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)
+
+        map.setOnMapClickListener { latLng ->
+            // Agrega un marcador en la posición donde el usuario ha hecho clic.
+
+            //map.addMarker(MarkerOptions().position(latLng))
+
+            map.addMarker(MarkerOptions()
+                //.icon(bitmapDescriptor)
+                .title("Prueba Imagen")
+                .snippet("Descrpción del marcador")
+                .position(latLng)
+            )
+
+            /*map.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))
+                .anchor(0.0f,1.0f).position(latLng))*/
+        }
+    }
 
     private fun getCurrentLocation(onComplete: (Location) -> Unit) {
         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
