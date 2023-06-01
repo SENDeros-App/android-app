@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.clasificacion.fragments.ContainerFragment">
+    tools:context=".ui.clasificacion.fragments.ContainerFragment"
+    android:layout_marginTop="?android:attr/actionBarSize"
+    >
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"

@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         loginBottom.setOnClickListener {
 
             //id del fragmento hacia donde nos va a mover
-            navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment)
+            //navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 

@@ -8,7 +8,7 @@
 
 
                 <item
-                    android:id="@+id/clasifications_Fragment"
+                    android:id="@+id/containerFragment"
                     android:icon="@drawable/champion_icon"
                     android:checkable="true"
                     android:title="@string/clasificacion_de_contribuidores"

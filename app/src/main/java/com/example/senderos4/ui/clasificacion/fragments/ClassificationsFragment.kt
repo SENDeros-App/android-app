@@ -28,7 +28,6 @@ class ClassificationsFragment : HiddenMenuFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
             submitData(viewModel.getHeaders(), viewModel.getTop())
         }
