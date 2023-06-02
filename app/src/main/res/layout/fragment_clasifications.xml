@@ -13,9 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/text_liga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="liga de oro"
+            android:text=""
             android:textSize="40dp"
             android:gravity="center" />
     </androidx.cardview.widget.CardView>
