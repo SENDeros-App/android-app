@@ -1,5 +1,3 @@
-
-
 package com.example.senderos4.ui.clasificacion.fragments
 
 import android.os.Bundle
@@ -7,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.senderos4.R
@@ -20,6 +19,9 @@ class ContainerFragment : HiddenMenuFragment() {
     private lateinit var demoCollectionAdapter: DemoCollectionAdapter
     private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
+    //private lateinit var tabLayout: TabLayout
+    //private lateinit var preButton: ImageView
+    //private lateinit var nexButton:ImageView
 
 
     override fun onCreateView(
@@ -43,10 +45,13 @@ class ContainerFragment : HiddenMenuFragment() {
             when (position) {
                 0 -> {
                     tab.setIcon(R.drawable.icon_bronce_division)
-                }1->{
+                }
+
+                1 -> {
                     tab.setIcon(R.drawable.icon_oro_division)
                 }
-                2->{
+
+                2 -> {
                     tab.setIcon(R.drawable.icon_rubi_division)
                 }
             }
@@ -55,7 +60,12 @@ class ContainerFragment : HiddenMenuFragment() {
     }
 
 
-    fun bind(){
+    companion object {
+        private const val ARG_OBJECT = "object"
+    }
+
+
+    fun bind() {
         viewPager2 = requireView().findViewById(R.id.viewPager_Ranking)
         tabLayout = requireView().findViewById(R.id.motion_viewPager)
         //nexButton = requireView().findViewById(R.id.nextButton)
@@ -65,11 +75,7 @@ class ContainerFragment : HiddenMenuFragment() {
         viewPager2.adapter = demoCollectionAdapter
     }
 
-    companion object{
-        private const val ARG_OBJECT = "object"
-    }
-
-    class DemoCollectionAdapter(fragment: Fragment):FragmentStateAdapter(fragment){
+    class DemoCollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         override fun getItemCount(): Int = 3
 
         override fun createFragment(position: Int): Fragment {
@@ -82,5 +88,4 @@ class ContainerFragment : HiddenMenuFragment() {
 
 
     }
-
 }

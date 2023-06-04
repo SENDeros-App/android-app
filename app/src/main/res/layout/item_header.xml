@@ -17,6 +17,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+
             <ImageView
                 android:id="@+id/ascentIcon"
                 android:layout_width="wrap_content"
