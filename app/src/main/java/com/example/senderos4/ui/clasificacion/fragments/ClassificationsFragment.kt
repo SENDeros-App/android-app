@@ -40,19 +40,20 @@ class ClassificationsFragment : HiddenMenuFragment() {
             when(getInt(ARG_OBJECT)){
                 0->{
                     view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
-                        submitData(viewModel.getHeaders(), viewModel.getTop())
+                        submitData(viewModel.getHeaders(), viewModel.getTopUsersByDivision("bronce", 17))
                         view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_bronce)
                     }
+
                 }
                 1->{
                     view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
-                        submitData(viewModel.getHeaders(), viewModel.getTop())
+                        submitData(viewModel.getHeaders(), viewModel.getTopUsersByDivision("oro", 17))
                         view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_oro)
                     }
                 }
                 2->{
                     view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
-                        submitData(viewModel.getHeaders(), viewModel.getTop())
+                        submitData(viewModel.getHeaders(), viewModel.getTopUsersByDivision("rubi", 17))
                         view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_rubi)
                     }
                 }
