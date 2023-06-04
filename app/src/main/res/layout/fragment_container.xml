@@ -3,20 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.clasificacion.fragments.ContainerFragment"
     android:layout_marginTop="?android:attr/actionBarSize"
     android:orientation="vertical"
-    >
+    tools:context=".ui.clasificacion.fragments.ContainerFragment">
 
-    <com.google.android.material.tabs.TabLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/prevButton"
+            android:layout_width="92dp"
+            android:layout_height="48dp"
+            android:src="@drawable/prevview" />
+
+        <ImageView
+            android:id="@+id/nextButton"
+            android:layout_width="92dp"
+            android:layout_height="48dp"
+            android:src="@drawable/nextview" />
+    </LinearLayout>
+
+    <!--<com.google.android.material.tabs.TabLayout
         android:id="@+id/movimiento"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content" />-->
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pager"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
