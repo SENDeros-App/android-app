@@ -1,12 +1,15 @@
-package com.example.senderos4.Fragment.Map
+package com.example.senderos4.fragment.Map
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -27,6 +31,8 @@ import com.google.android.gms.tasks.Task
 
 class MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
+
+    private lateinit var buttonAlert:Button
 
     private lateinit var map: GoogleMap
 
@@ -46,6 +52,52 @@ class MapFragment : Fragment(), OnMapReadyCallback,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         createFragment()
+        bind()
+    }
+
+    private fun bind(){
+        buttonAlert = requireView().findViewById(R.id.buttonAlert)
+    }
+
+    private fun addListener(/*location: Location*/) {
+
+        buttonAlert.setOnClickListener{
+
+            addedMarker()
+
+        }
+    }
+
+    fun addedMarker(/*location: Location*/) {
+
+        getCurrentLocation { location ->
+            val latitude = location.latitude
+            val longitude = location.longitude
+
+            val local = LatLng(latitude, longitude)
+
+            fun bitMapFromVector(vectorResID:Int): BitmapDescriptor {
+                val vectorDrawable=ContextCompat.getDrawable(requireContext(),vectorResID)
+                vectorDrawable!!.setBounds(0,0,vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight)
+                val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight,Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bitmap)
+                vectorDrawable.draw(canvas)
+                return BitmapDescriptorFactory.fromBitmap(bitmap)
+            }
+
+            println(currentLocation)
+
+
+            map.addMarker(
+                MarkerOptions()
+                    .position(local)
+                    .title("Prueba")
+                    .snippet("Descripción del marcador")
+                    .anchor(0.0f, 1.5f)
+                    .icon(bitMapFromVector(R.drawable.flame))
+            )
+        }
+
     }
 
     private fun createFragment() {
@@ -54,62 +106,81 @@ class MapFragment : Fragment(), OnMapReadyCallback,
         mapFragment.getMapAsync(this)
     }
 
+    /*val mapFragment = MapFragment.newInstance(
+        GoogleMapOptions()
+            .mapId(resources.getString(R.string.map_id))
+    )*/
+
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+
         enableLocation()
         map.setOnMyLocationClickListener(this)
+
         getCurrentLocation {
             moveCamera(it)
         }
-        map.setPadding(0,1200,0,0)
-        addingMarker()
 
+
+
+        addListener()
+        map.setPadding(0, 1200, 0, 0)
     }
 
-    private fun addingMarker() {
 
-        val bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)
+
+     /*private fun addingMarker() {
+
+        fun bitMapFromVector(vectorResID:Int): BitmapDescriptor {
+            val vectorDrawable=ContextCompat.getDrawable(requireContext(),vectorResID)
+            vectorDrawable!!.setBounds(0,0,vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight)
+            val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight,Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            vectorDrawable.draw(canvas)
+            return BitmapDescriptorFactory.fromBitmap(bitmap)
+        }
 
         map.setOnMapClickListener { latLng ->
             // Agrega un marcador en la posición donde el usuario ha hecho clic.
-
-            //map.addMarker(MarkerOptions().position(latLng))
-
-            map.addMarker(MarkerOptions()
-                //.icon(bitmapDescriptor)
-                .title("Prueba Imagen")
-                .snippet("Descrpción del marcador")
-                .position(latLng)
+            map.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title("Prueba Imagen")
+                    .snippet("Descripción del marcador")
+                    .icon(bitMapFromVector(R.drawable.alert_circle_filled))
+                    .anchor(0.5f, 0.5f)
             )
-
-            /*map.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))
-                .anchor(0.0f,1.0f).position(latLng))*/
         }
-    }
+    }*/
 
-    private fun getCurrentLocation(onComplete: (Location) -> Unit) {
-        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+    private var currentLocation: Location? = null
+
+    @SuppressWarnings
+     private fun getCurrentLocation(onComplete: (Location) -> Unit) {
+        val fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
         val locationTask: Task<Location> =
             fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
-        locationTask.addOnSuccessListener { currentLocation ->
-            onComplete(currentLocation)
+        locationTask.addOnSuccessListener { location ->
+            currentLocation = location
+            onComplete(location)
         }
     }
-
     private fun moveCamera(location: Location) {
         val ubi = LatLng(location.latitude, location.longitude)
         map.moveCamera(CameraUpdateFactory.newLatLng(ubi))
         val cameraPosition = CameraPosition.builder()
             .target(ubi)
             .zoom(18f)
-            .bearing(90f)
+            .bearing(0f)
             .tilt(45f)
             .build()
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
     private fun isLocationPermissionGranted() =
-        ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION
+        ContextCompat.checkSelfPermission(
+            requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
     private fun enableLocation() {
@@ -139,13 +210,19 @@ class MapFragment : Fragment(), OnMapReadyCallback,
     }
 
     private fun requestLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity()   ,
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         ) {
-            Toast.makeText(requireContext(), "Va a ajustes y acepta los permisos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Va a ajustes y acepta los permisos",
+                Toast.LENGTH_SHORT
+            ).show()
         } else {
-            ActivityCompat.requestPermissions(requireActivity(),
+            ActivityCompat.requestPermissions(
+                requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 REQUEST_CODE_LOCATION
             )
@@ -185,6 +262,7 @@ class MapFragment : Fragment(), OnMapReadyCallback,
                     Toast.LENGTH_SHORT
                 ).show()
             }
+
             else -> {}
         }
     }
@@ -221,11 +299,15 @@ class MapFragment : Fragment(), OnMapReadyCallback,
 
     override fun onMyLocationButtonClick(): Boolean {
         Toast.makeText(requireContext(), "Boton pulsado", Toast.LENGTH_LONG).show()
-        return false
+        return true
     }
 
     override fun onMyLocationClick(p0: Location) {
-        Toast.makeText(requireContext(), "Estás en ${p0.latitude}, ${p0.altitude}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            "Estás en ${p0.latitude}, ${p0.longitude}",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 }

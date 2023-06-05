@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.record.HistoryFragment"
+    tools:context=".fragment.record.HistoryFragment"
     android:layout_marginTop="?android:attr/actionBarSize">
 
     <!-- TODO: Update blank fragment layout -->
