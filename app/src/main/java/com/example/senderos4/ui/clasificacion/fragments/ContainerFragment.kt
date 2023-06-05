@@ -29,9 +29,9 @@ class ContainerFragment : HiddenMenuFragment() {
 
     private lateinit var demoCollectionAdapter: DemoCollectionAdapter
     private lateinit var viewPager2: ViewPager2
-    //private lateinit var tabLayout: TabLayout
-    private lateinit var preButton: ImageView
-    private lateinit var nexButton:ImageView
+    private lateinit var tabLayout: TabLayout
+    //private lateinit var preButton: ImageView
+    //private lateinit var nexButton:ImageView
 
 
     override fun onCreateView(
@@ -47,9 +47,9 @@ class ContainerFragment : HiddenMenuFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bind()
-        addListener()
+        //addListener()
 
-        /*TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
                 0 -> {
                     tab.setIcon(R.drawable.liga_senderos)
@@ -60,21 +60,21 @@ class ContainerFragment : HiddenMenuFragment() {
                     tab.setIcon(R.drawable.info_settings)
                 }
             }
-        }.attach()*/
+        }.attach()
     }
 
 
     fun bind(){
         viewPager2 = requireView().findViewById(R.id.pager)
-        //tabLayout = requireView().findViewById(R.id.movimiento)
-        nexButton = requireView().findViewById(R.id.nextButton)
-        preButton = requireView().findViewById(R.id.prevButton)
+        tabLayout = requireView().findViewById(R.id.movimiento)
+        //nexButton = requireView().findViewById(R.id.nextButton)
+        //preButton = requireView().findViewById(R.id.prevButton)
 
         demoCollectionAdapter = DemoCollectionAdapter(this)
         viewPager2.adapter = demoCollectionAdapter
     }
 
-    fun addListener(){
+    /*fun addListener(){
         preButton.setOnClickListener {
             viewPager2.setCurrentItem(viewPager2.currentItem - 1, true)
         }
@@ -101,7 +101,7 @@ class ContainerFragment : HiddenMenuFragment() {
                 }
             }
         })
-    }
+    }*/
 
     companion object{
         private const val ARG_OBJECT = "object"
