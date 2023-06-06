@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.senderos4.hiddenMenu.HiddenMenuFragment
@@ -41,20 +42,29 @@ class ClassificationsFragment : HiddenMenuFragment() {
                 0->{
                     view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
                         submitData(viewModel.getHeaders(), viewModel.getTopUsersByDivision("bronce", 17))
-                        view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_bronce)
+                        //view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_bronce)
+                        view.findViewById<ImageView>(R.id.imageDivision).setImageResource(R.drawable.broceliga)
+                        view.findViewById<TextView>(R.id.textTitleDivision).text = getString(R.string.division_bronce)
+                        view.findViewById<TextView>(R.id.TextDescriptionDivision).text = getString(R.string.division_bronce_description)
                     }
 
                 }
                 1->{
                     view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
                         submitData(viewModel.getHeaders(), viewModel.getTopUsersByDivision("oro", 17))
-                        view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_oro)
+                        //view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_oro)
+                        view.findViewById<ImageView>(R.id.imageDivision).setImageResource(R.drawable.oroliga)
+                        view.findViewById<TextView>(R.id.textTitleDivision).text = getString(R.string.division_oro)
+                        view.findViewById<TextView>(R.id.TextDescriptionDivision).text = getString(R.string.division_oro_description)
                     }
                 }
                 2->{
                     view.findViewById<RecyclerView>(R.id.recyclerView).adapter = ClassificationAdapter().apply {
                         submitData(viewModel.getHeaders(), viewModel.getTopUsersByDivision("rubi", 17))
-                        view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_rubi)
+                        //view.findViewById<ImageView>(R.id.division).setImageResource(R.drawable.division_rubi)
+                        view.findViewById<ImageView>(R.id.imageDivision).setImageResource(R.drawable.rubiliga)
+                        view.findViewById<TextView>(R.id.textTitleDivision).text = getString(R.string.division_rubi)
+                        view.findViewById<TextView>(R.id.TextDescriptionDivision).text = getString(R.string.division_rubi_description)
                     }
                 }
             }

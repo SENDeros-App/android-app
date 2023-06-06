@@ -18,4 +18,10 @@
     <string name="languaje_text">Idioma</string>
     <string name="DarkMode">Modo Oscuro</string>
     <string name="ModeState">Desactivado</string>
+    <string name="division_bronce">Division bronce</string>
+    <string name="division_bronce_description">los primeros 5 avanzan a la siguiente división</string>
+    <string name="division_oro">Division oro</string>
+    <string name="division_oro_description">los primeros 5 avanzan a la siguiente división</string>
+    <string name="division_rubi">Division rubi</string>
+    <string name="division_rubi_description">¡Felicidades por llegar a la última liga! !Sigue adelante, y mantente entre los mejores caminantes!"</string>
 </resources>
