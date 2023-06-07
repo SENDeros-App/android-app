@@ -30,9 +30,10 @@
                         android:layout_margin="8dp"
                         android:textSize="@dimen/text_size_item_"
                         tools:text="1"
-                        android:text="0"
                         android:textStyle="bold"
                         android:layout_gravity="center"
+                        android:paddingLeft="@dimen/little_padding_8"
+                        android:paddingRight="@dimen/little_padding_8"
                         />
 
                     <ImageView
@@ -49,7 +50,9 @@
                         android:textSize="@dimen/text_size_item_"
                         android:layout_gravity="center"
                         tools:text="name user"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:paddingRight="@dimen/little_padding_8"
+                        android:paddingLeft="@dimen/little_padding_8"/>
 
                 </LinearLayout>
 

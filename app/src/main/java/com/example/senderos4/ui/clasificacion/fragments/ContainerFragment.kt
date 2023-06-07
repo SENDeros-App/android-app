@@ -7,20 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TableLayout
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.senderos4.R
 import com.example.senderos4.hiddenMenu.HiddenMenuFragment
-import com.example.senderos4.ui.clasificacion.adapter.ClassificationAdapter
-import com.example.senderos4.ui.clasificacion.viewmodels.ClassificationViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -49,18 +39,21 @@ class ContainerFragment : HiddenMenuFragment() {
         bind()
         //addListener()
 
+
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            tabLayout.tabIconTint = null
             when (position) {
                 0 -> {
-                    tab.setIcon(R.drawable.liga_senderos)
+                    tab.setIcon(R.drawable.icon_bronce_division)
                 }1->{
-                    tab.setIcon(R.drawable.icon_user_item)
+                    tab.setIcon(R.drawable.icon_oro_division)
                 }
                 2->{
-                    tab.setIcon(R.drawable.info_settings)
+                    tab.setIcon(R.drawable.icon_rubi_division)
                 }
             }
         }.attach()
+
     }
 
 

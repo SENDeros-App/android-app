@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/medium_padding_16"
-    tools:context=".ui.clasificacion.fragments.ClassificationsFragment">
-
-    <!--<ImageView
-        android:id="@+id/division"
-        android:layout_width="match_parent"
-        android:layout_height="123dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/medium_padding_16"
-        android:layout_marginTop="@dimen/little_padding_8"
-        android:layout_marginEnd="@dimen/medium_padding_16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/division_bronce"
-        android:contentDescription="division pertenence" />-->
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/divisionCardview"
-        android:layout_width="0dp"
-        android:layout_height="155dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/radius_division"
-        android:orientation="horizontal"
-        android:padding="@dimen/medium_padding_16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/medium_padding_16">
 
-        <!--icono-->
+
+        <!--<ImageView
+            android:id="@+id/division"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/medium_padding_16"
+            android:layout_marginTop="@dimen/little_padding_8"
+            android:layout_marginEnd="@dimen/medium_padding_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/division_bronce"
+            android:contentDescription="division pertenence" />-->
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:id="@+id/divisionCardview"
+            android:layout_width="match_parent"
+            android:layout_height="155dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/radius_division"
+            android:orientation="horizontal"
+            android:padding="@dimen/medium_padding_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageDivision"
+            <!--icono-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/radius_division_icons">
+
+                <ImageView
+                    android:id="@+id/imageDivision"
+                    android:layout_width="102dp"
+                    android:layout_height="102dp"
+                    android:contentDescription="Liga de bronce"
+                    tools:src="@drawable/icon_bronce_division"/>
+            </LinearLayout>
+
+            <!--texto-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="102dp"
-                android:contentDescription="Liga de bronce"
-                android:paddingLeft="@dimen/little_padding_8"
-                android:paddingRight="@dimen/little_padding_8"
-                tools:src="@drawable/broceliga" />
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/little_padding_8">
+
+                <TextView
+                    android:id="@+id/textTitleDivision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    android:textStyle="bold"
+                    tools:text="Division bronce" />
+
+                <TextView
+                    android:id="@+id/TextDescriptionDivision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    tools:text="¡Felicidades por llegar a la última liga! !Sigue adelante, y mantente entre los mejores caminantes!" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <!--texto-->
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textTitleDivision"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="23sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                tools:text="Division bronce" />
-
-            <TextView
-                android:id="@+id/TextDescriptionDivision"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="15dp"
-                android:gravity="center"
-                tools:text=" entre los mejores caminantes!" />
-        </LinearLayout>
+            android:layout_marginTop="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_user" />
 
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divisionCardview"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_user" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

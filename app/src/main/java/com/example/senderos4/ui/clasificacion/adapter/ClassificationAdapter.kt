@@ -29,7 +29,13 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             itemView.findViewById<TextView>(R.id.nameUser).text = user.name
             itemView.findViewById<TextView>(R.id.pxUser).text = user.px
 
-                itemView.findViewById<TextView>(R.id.numPosition).text="${position+1}"
+            when {
+                position+1 > 15 -> itemView.findViewById<TextView>(R.id.numPosition).text="${position-1}"
+                position+1 > 5 -> itemView.findViewById<TextView>(R.id.numPosition).text="${position}"
+                else -> itemView.findViewById<TextView>(R.id.numPosition).text="${position+1}"
+            }
+
+
 
         }
     }
@@ -99,7 +105,11 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private fun getUserPosition(position: Int): Int {
         // Obtener la posición del usuario correspondiente para la posición dada
-        return if (position > 5) (position - 2) else position
+        return when {
+            position > 15 -> position - 2
+            position > 5 -> position - 1
+            else -> position
+        }
     }
 
 }
