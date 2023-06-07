@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/color_ranking_fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -93,7 +94,8 @@
             android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="5"
-            tools:listitem="@layout/item_user" />
+            tools:listitem="@layout/item_user"
+            />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

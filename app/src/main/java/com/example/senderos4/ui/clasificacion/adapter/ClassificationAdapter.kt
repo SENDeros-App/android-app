@@ -3,6 +3,7 @@ package com.example.senderos4.ui.clasificacion.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.senderos4.R
@@ -20,7 +21,21 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(header:Header) {
-            itemView.findViewById<TextView>(R.id.header_title).text = header.tittle
+
+            when(getHeaderPosition(position)){
+                0->{
+                    itemView.findViewById<TextView>(R.id.header_title).text= header.tittle
+                    itemView.findViewById<ImageView>(R.id.ascentIcon).setImageResource(R.drawable.icon_ascent_division)
+                    itemView.findViewById<ImageView>(R.id.ascentIcon2).setImageResource(R.drawable.icon_ascent_division)
+                }
+                1->{
+                    itemView.findViewById<TextView>(R.id.header_title).text = header.tittle
+                    itemView.findViewById<ImageView>(R.id.ascentIcon).setImageResource(R.drawable.icon_decline_division)
+                    itemView.findViewById<ImageView>(R.id.ascentIcon2).setImageResource(R.drawable.icon_decline_division)
+                }
+            }
+
+
         }
     }
 

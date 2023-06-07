@@ -10,7 +10,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/little_padding_8">
+            android:padding="@dimen/little_padding_8"
+            android:backgroundTint="@color/color_ranking_fragment">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,7 +51,7 @@
                         android:textSize="@dimen/text_size_item_"
                         android:layout_gravity="center"
                         tools:text="name user"
-                        android:textStyle="bold"
+
                         android:paddingRight="@dimen/little_padding_8"
                         android:paddingLeft="@dimen/little_padding_8"/>
 
@@ -70,14 +71,14 @@
                         android:layout_margin="8dp"
                         android:textSize="@dimen/text_size_item_"
                         tools:text="500"
-                        android:textStyle="bold"/>
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="px"
                         android:textSize="@dimen/text_size_item_"
                         android:layout_margin="8dp"
-                        android:textStyle="bold"/>
+                        />
 
                 </LinearLayout>
 
