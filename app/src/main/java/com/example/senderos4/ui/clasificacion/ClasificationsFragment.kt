@@ -1,10 +1,10 @@
-package com.example.senderos4.Fragment.clasificacion
+package com.example.senderos4.ui.clasificacion
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.senderos4.Fragment.hiddenMenu.HiddenMenuFragment
+import com.example.senderos4.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.R
 
 class ClasificationsFragment : HiddenMenuFragment() {
