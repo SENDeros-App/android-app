@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Actualiza el mapa"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ImageView
+        android:id="@+id/without_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        app:layout_constraintEnd_toStartOf="@+id/fire"
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toEndOf="@+id/water"
+        app:srcCompat="@drawable/without_ligth"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="92dp" />
+
+    <ImageView
+        android:id="@+id/water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:contentDescription="agua"
+        android:onClick="btnWater"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/without_water"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="92dp" />
+
+    <ImageView
+        android:id="@+id/fire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/fire_"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="92dp"
+        android:onClick="fire"/>
+
+    <ImageView
+        android:id="@+id/leak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toEndOf="@+id/sewer"
+        app:layout_constraintTop_toBottomOf="@+id/fire"
+        app:srcCompat="@drawable/leak"
+        android:onClick="leak"/>
+
+    <ImageView
+        android:id="@+id/sewer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintStart_toEndOf="@+id/walkaway"
+        app:layout_constraintTop_toBottomOf="@+id/without_light"
+        app:srcCompat="@drawable/sewer"
+        android:onClick="sewer"/>
+
+    <ImageView
+        android:id="@+id/walkaway"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/water"
+        app:srcCompat="@drawable/walkaway"
+        tools:ignore="MissingConstraints"
+        android:onClick="walkaway"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
