@@ -23,13 +23,13 @@
 
     </fragment>
 
-    <Button
-        android:id="@+id/buttonAlert"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="212dp"
-        android:text="Alerta"
+    <ImageView
+        android:id="@+id/btn_alert"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="215dp"
+        android:src="@drawable/btn_alert"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />

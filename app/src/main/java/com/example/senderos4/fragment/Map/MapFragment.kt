@@ -2,6 +2,7 @@ package com.example.senderos4.fragment.Map
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -10,9 +11,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -34,14 +36,8 @@ import com.google.android.gms.tasks.Task
 class MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
 
-    private lateinit var buttonAlert:Button
-
+    private lateinit var btn_alert:ImageView
     private lateinit var map: GoogleMap
-
-    companion object {
-        const val REQUEST_CODE_LOCATION = 0
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,106 +46,155 @@ class MapFragment : Fragment(), OnMapReadyCallback,
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createFragment()
+        getMapFragment()
         bind()
     }
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        enableLocation()
+        map.setOnMyLocationClickListener(this)
+        getCurrentLocation {
+            moveCamera(it)
+        }
+        setAddAlertListener()
+        map.setPadding(0, 1200, 20, 0)
+    }
+
     private fun bind(){
-        buttonAlert = requireView().findViewById(R.id.buttonAlert)
+        btn_alert = requireView().findViewById(R.id.btn_alert)
     }
 
     @SuppressLint("InflateParams")
-    private fun addListener(/*location: Location*/) {
+    private fun setAddAlertListener() {
+        btn_alert.setOnClickListener{
+            // Función que cree el dialogo
+            val dialog = Dialog(requireContext())
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(true)
+            dialog.setContentView(R.layout.dialog_alerts)
+            dialog.setTitle("Actualiza el mapa")
 
-        buttonAlert.setOnClickListener{
+            val without_light : ImageView = dialog.findViewById(R.id.without_light)
+            val leak : ImageView = dialog.findViewById(R.id.leak)
+            val water : ImageView = dialog.findViewById(R.id.water)
+            val fire : ImageView = dialog.findViewById(R.id.fire)
+            val sewer : ImageView = dialog.findViewById(R.id.sewer)
+            val walkaway : ImageView = dialog.findViewById(R.id.walkaway)
 
-            addedMarker()
+            dialog.show()
 
-            /*val builder = AlertDialog.Builder(requireContext())
-            val view = layoutInflater.inflate(R.layout.dialog_alerts, null)
+            leak.setOnClickListener{
+                addedMarker(MarkerType.LEAK_WATER)
+                dialog.dismiss()
+            }
 
-            builder.setView(view)
+            without_light.setOnClickListener{
+                addedMarker(MarkerType.LIGHT)
+                dialog.dismiss()
+            }
 
-            val dialog = builder.create()
-            dialog.show()*/
+             water.setOnClickListener{
+                 addedMarker(MarkerType.WATER)
+                 dialog.dismiss()
+             }
 
+            fire.setOnClickListener{
+                addedMarker(MarkerType.FIRE)
+                dialog.dismiss()
+            }
+
+            sewer.setOnClickListener{
+                addedMarker(MarkerType.SEWER)
+                dialog.dismiss()
+            }
+
+            walkaway.setOnClickListener{
+                addedMarker(MarkerType.WALKAWAY)
+                dialog.dismiss()
+            }
         }
 
     }
-
-    fun addedMarker(/*location: Location*/) {
+    private fun addedMarker(type:MarkerType) {
 
         getCurrentLocation { location ->
             val latitude = location.latitude
             val longitude = location.longitude
-
             val local = LatLng(latitude, longitude)
 
-            fun bitMapFromVector(vectorResID:Int): BitmapDescriptor {
-                val vectorDrawable=ContextCompat.getDrawable(requireContext(),vectorResID)
-                vectorDrawable!!.setBounds(0,0,vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight)
-                val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight,Bitmap.Config.ARGB_8888)
-                val canvas = Canvas(bitmap)
-                vectorDrawable.draw(canvas)
-                return BitmapDescriptorFactory.fromBitmap(bitmap)
+            var title = ""
+            var description = ""
+            var icon = 0
+
+            when(type) {
+                MarkerType.LIGHT -> {
+                    title = "Sin Luz"
+                    description = "No hay luz"
+                    icon =  R.drawable.incident_without_ligth
+                }
+                MarkerType.WATER -> {
+                    title = "Sin Agua"
+                    description = "No hay agua"
+                    icon = R.drawable.incident_water
+                }
+                MarkerType.WALKAWAY -> {
+                    title = "Psarela Dañada"
+                    description = "Pasarela tiene daños precaución"
+                    icon = R.drawable.incident_walkaway
+                }
+                MarkerType.LEAK_WATER -> {
+                    title = "Fuja de agua"
+                    description = "Aqui hay una fuja de agua"
+                    icon = R.drawable.incident_leak
+                }
+                MarkerType.TREE -> TODO()
+                MarkerType.SEWER -> {
+                    title = "Alcantarilla sin tapa"
+                    description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
+                    icon = R.drawable.incident_sewer
+                }
+                MarkerType.FIRE -> {
+                    title = "Incendio"
+                    description = "Aqui hay un incendio"
+                    icon = R.drawable.incident_fire
+                }
             }
-
-            println(currentLocation)
-
-
             map.addMarker(
                 MarkerOptions()
                     .position(local)
-                    .title("Prueba")
-                    .snippet("Descripción del marcador")
-                    .anchor(0.0f, 1.5f)
-                    .icon(bitMapFromVector(R.drawable.incident_water))
+                    .title(title)
+                    .snippet(description)
+                    .anchor(0.0f, 1.0f)
+                    .icon(bitMapFromVector(icon))
             )
         }
 
     }
-
-    private fun createFragment() {
+    private fun bitMapFromVector(vectorResID:Int): BitmapDescriptor {
+        val vectorDrawable=ContextCompat.getDrawable(requireContext(),vectorResID)
+        vectorDrawable!!.setBounds(0,0,vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight)
+        val bitmap = Bitmap.createBitmap(vectorDrawable.intrinsicWidth,vectorDrawable.intrinsicHeight,Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+    private fun getMapFragment() {
         val mapFragment: SupportMapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
-    /*val mapFragment = MapFragment.newInstance(
-        GoogleMapOptions()
-            .mapId(resources.getString(R.string.map_id))
-    )*/
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-
-        enableLocation()
-        map.setOnMyLocationClickListener(this)
-
-        getCurrentLocation {
-            moveCamera(it)
-        }
-
-
-        addListener()
-        map.setPadding(0, 1200, 0, 0)
-    }
-
-
-    private var currentLocation: Location? = null
-
     @SuppressWarnings
-     private fun getCurrentLocation(onComplete: (Location) -> Unit) {
+    private fun getCurrentLocation(onComplete: (Location) -> Unit) {
         val fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
         val locationTask: Task<Location> =
             fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
-        locationTask.addOnSuccessListener { location ->
-            currentLocation = location
-            onComplete(location)
+        locationTask.addOnSuccessListener { currentLocation ->
+            onComplete(currentLocation)
         }
     }
     private fun moveCamera(location: Location) {
@@ -294,6 +339,10 @@ class MapFragment : Fragment(), OnMapReadyCallback,
             "Estás en ${p0.latitude}, ${p0.longitude}",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    companion object {
+        const val REQUEST_CODE_LOCATION = 0
     }
 
 }
