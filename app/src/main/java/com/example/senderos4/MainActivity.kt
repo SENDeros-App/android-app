@@ -8,6 +8,7 @@ import android.view.Menu
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -31,8 +32,11 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        splashScreen.setKeepOnScreenCondition{false}
 
         bind()
         addListeners()
@@ -42,13 +46,11 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, drawerLayout)
         navigationVIew.setupWithNavController(navController)
 
-       // toolbar.setTitleTextColor(Color.TRANSPARENT)
-
     }
 
     private fun addListeners() {
         loginBottom.setOnClickListener {
-            navController.navigate(R.id.action_map_fragment_to_loginFragment) //id del fragmento hacia donde nos va a mover
+            navController.navigate(R.id.action_map_fragment_to_loginFragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
@@ -78,7 +80,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -93,12 +94,5 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
     }
-
-
-    /*     drawerLayout.setOnClickListener {
-             drawerLayout.open()
-
-         }
-         drawerLayout.close() */
 
 }

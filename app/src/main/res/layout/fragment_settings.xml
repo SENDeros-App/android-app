@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +8,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="?android:attr/actionBarSize"
     android:background="#d9d9d9"
-    tools:context=".Fragment.Settings.SettingsFragment">
+    tools:context=".ui.Settings.SettingsFragment">
 
 
     <LinearLayout

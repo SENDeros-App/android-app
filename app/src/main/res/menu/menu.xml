@@ -8,10 +8,10 @@
 
 
                 <item
-                    android:id="@+id/clasifications_Fragment"
+                    android:id="@+id/containerFragment"
                     android:icon="@drawable/champion_icon"
                     android:checkable="true"
-                    android:title="@string/historial_de_accidentes_activos"
+                    android:title="@string/clasificacion_de_contribuidores"
                     />
         </group>
 
@@ -22,7 +22,7 @@
                     android:id="@+id/history_Fragment"
                     android:icon="@drawable/clock_history_report_icon"
                     android:checkable="true"
-                    android:title="@string/clasificacion_de_contribuidores"
+                    android:title="@string/historial_de_accidentes_activos"
 
                     />
         </group>
