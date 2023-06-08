@@ -90,6 +90,7 @@ class ClassificationsFragment : HiddenMenuFragment() {
         RecyclerViewRanking = requireView().findViewById(R.id.recyclerView)
         nestedScrollView = requireView().findViewById(R.id.scrollView)
     }
+
     private fun displayLeague(view: View, league: League) {
         bind()
         with(view) {
