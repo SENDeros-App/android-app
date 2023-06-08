@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="backgroundSettings">#d9d9d9</color>
+    <color name="green_headers">#43B76A</color>
+    <color name="red_headers">#FF2500</color>
+    <color name="color_ranking_fragment">#d9d9d9</color>
 </resources>

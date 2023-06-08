@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, drawerLayout)
         navigationVIew.setupWithNavController(navController)
 
-       // toolbar.setTitleTextColor(Color.TRANSPARENT)
-
     }
 
     private fun addListeners() {
         loginBottom.setOnClickListener {
-            navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment) //id del fragmento hacia donde nos va a mover
+
+            //id del fragmento hacia donde nos va a mover
+            //navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-  
     }
 
     fun bind() {
@@ -81,7 +80,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -96,12 +94,5 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
     }
-
-
-    /*     drawerLayout.setOnClickListener {
-             drawerLayout.open()
-
-         }
-         drawerLayout.close() */
 
 }

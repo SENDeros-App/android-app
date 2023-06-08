@@ -7,32 +7,23 @@
 
     <fragment
         android:id="@+id/map_fragment"
-        android:name="com.example.senderos4.Fragment.Map.MapFragment"
+        android:name="com.example.senderos4.ui.Map.MapFragment"
         android:label=""
         tools:layout="@layout/fragment_map" >
-        <action
-            android:id="@+id/action_home_Fragment_to_clasifications_Fragment"
-            app:destination="@id/clasifications_Fragment" />
         <action
             android:id="@+id/action_home_Fragment_to_history_Fragment"
             app:destination="@id/history_Fragment" />
         <action
             android:id="@+id/action_map_fragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_map_fragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/clasifications_Fragment"
-        android:name="com.example.senderos4.Fragment.clasificacion.ClasificationsFragment"
-        android:label="clasifications"
-        tools:layout="@layout/fragment_clasifications" >
-        <action
-            android:id="@+id/action_clasifications_Fragment_to_home_Fragment"
-            app:destination="@id/map_fragment" />
-    </fragment>
-    <fragment
         android:id="@+id/history_Fragment"
-        android:name="com.example.senderos4.Fragment.record.HistoryFragment"
+        android:name="com.example.senderos4.ui.record.HistoryFragment"
         android:label="history"
         tools:layout="@layout/fragment_history" >
         <action
@@ -41,11 +32,20 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.senderos4.Fragment.Settings.SettingsFragment"
+        android:name="com.example.senderos4.ui.Settings.SettingsFragment"
         android:label="settings"
         tools:layout="@layout/fragment_settings">
         <action
             android:id="@+id/action_settingsFragment_to_map_fragment"
+            app:destination="@id/map_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.example.senderos4.ui.clasificacion.fragments.ContainerFragment"
+        android:label="fragment_container"
+        tools:layout="@layout/fragment_container" >
+        <action
+            android:id="@+id/action_containerFragment_to_map_fragment"
             app:destination="@id/map_fragment" />
     </fragment>
 
