@@ -42,7 +42,6 @@
     <fragment
         android:id="@+id/containerFragment"
         android:name="com.example.senderos4.ui.clasificacion.fragments.ContainerFragment"
-        android:label="fragment_container"
         tools:layout="@layout/fragment_container" >
         <action
             android:id="@+id/action_containerFragment_to_map_fragment"
