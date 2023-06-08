@@ -1,5 +1,7 @@
 package com.example.senderos4.ui.clasificacion.adapter
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,46 +12,64 @@ import com.example.senderos4.R
 import com.example.senderos4.data.Header
 import com.example.senderos4.data.User
 
-class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class ClassificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     private val VIEW_TYPE_HEADER = 0
     private val VIEW_TYPE_USER = 1
 
-    private var headers: List<Header>?=null
-    private var users: List<User>?=null
+    private var headers: List<Header>? = null
+    private var users: List<User>? = null
 
     inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(header:Header) {
 
-            when(getHeaderPosition(position)){
-                0->{
-                    itemView.findViewById<TextView>(R.id.header_title).text= header.tittle
-                    itemView.findViewById<ImageView>(R.id.ascentIcon).setImageResource(R.drawable.icon_ascent_division)
-                    itemView.findViewById<ImageView>(R.id.ascentIcon2).setImageResource(R.drawable.icon_ascent_division)
+        private val headerTitleTextView: TextView = itemView.findViewById(R.id.header_title)
+        private val declineIcon: ImageView = itemView.findViewById(R.id.ascentIcon)
+        private val declineIcon2: ImageView = itemView.findViewById(R.id.ascentIcon2)
+        private val ascentIcon: ImageView = itemView.findViewById(R.id.ascentIcon)
+        private val ascentIcon2: ImageView = itemView.findViewById(R.id.ascentIcon2)
+        private val GREEN_COLOR = itemView.context.getColor(R.color.green_headers)
+        private val RED_COLOR = itemView.context.getColor(R.color.red_headers)
+
+        fun bind(header: Header, position: Int) {
+
+            headerTitleTextView.text = header.tittle
+
+            when (getHeaderPosition(position)) {
+                0 -> {
+                    headerTitleTextView.setTextColor(GREEN_COLOR)
+                    ascentIcon.setImageResource(R.drawable.icon_ascent_division)
+                    ascentIcon2.setImageResource(R.drawable.icon_ascent_division)
                 }
-                1->{
-                    itemView.findViewById<TextView>(R.id.header_title).text = header.tittle
-                    itemView.findViewById<ImageView>(R.id.ascentIcon).setImageResource(R.drawable.icon_decline_division)
-                    itemView.findViewById<ImageView>(R.id.ascentIcon2).setImageResource(R.drawable.icon_decline_division)
+
+                1 -> {
+                    headerTitleTextView.setTextColor(RED_COLOR)
+                    declineIcon.setImageResource(R.drawable.icon_decline_division)
+                    declineIcon2.setImageResource(R.drawable.icon_decline_division)
                 }
             }
 
-
         }
+
     }
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(user: User) {
-            itemView.findViewById<TextView>(R.id.nameUser).text = user.name
-            itemView.findViewById<TextView>(R.id.pxUser).text = user.px
+
+        private val nameUser: TextView = itemView.findViewById(R.id.nameUser)
+        private val pxUser: TextView = itemView.findViewById(R.id.pxUser)
+        private val numPosition: TextView = itemView.findViewById(R.id.numPosition)
+        fun bind(user: User, position: Int) {
+            nameUser.text = user.name
+            pxUser.text = user.px
 
             when {
-                position+1 > 15 -> itemView.findViewById<TextView>(R.id.numPosition).text="${position-1}"
-                position+1 > 5 -> itemView.findViewById<TextView>(R.id.numPosition).text="${position}"
-                else -> itemView.findViewById<TextView>(R.id.numPosition).text="${position+1}"
-            }
+                position + 1 > 15 -> numPosition.text = "${position - 1}"
 
+                position + 1 > 5 -> numPosition.text =
+                    "$position"
+
+                else -> numPosition.text = "${position + 1}"
+            }
 
 
         }
@@ -58,13 +78,17 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_HEADER -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_header, parent, false)
+                val view =
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_header, parent, false)
                 HeaderViewHolder(view)
             }
+
             VIEW_TYPE_USER -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
+                val view =
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
                 UserViewHolder(view)
             }
+
             else -> throw IllegalArgumentException("ViewType desconocido")
         }
     }
@@ -74,12 +98,13 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             VIEW_TYPE_HEADER -> {
                 val headerHolder = holder as HeaderViewHolder
                 val headerPosition = getHeaderPosition(position)
-                headerHolder.bind(headers?.get(headerPosition) ?: Header("") )
+                headerHolder.bind(headers?.get(headerPosition) ?: Header(""), position)
             }
+
             VIEW_TYPE_USER -> {
                 val userHolder = holder as UserViewHolder
                 val userPosition = getUserPosition(position)
-                userHolder.bind(users?.get(userPosition) ?: User("", "",""))
+                userHolder.bind(users?.get(userPosition) ?: User("", "", ""), position)
             }
         }
     }
@@ -128,101 +153,3 @@ class ClassificationAdapter:RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
 }
-
-
-
-    /*private val VIEW_TYPE_HEADER = 0
-    private val VIEW_TYPE_USER = 1
-
-    private var header: List<Header>? = null
-    private var users: List<User> = emptyList()
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            VIEW_TYPE_HEADER -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_header, parent, false)
-                HeaderViewHolder(view)
-            }
-            VIEW_TYPE_USER -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
-                UserViewHolder(view)
-            }
-            else -> throw IllegalArgumentException("ViewType desconocido")
-        }
-    }
-
-    override fun getItemCount(): Int {
-        return users.size
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return if(position == 0){
-            VIEW_TYPE_HEADER
-        }else{
-            VIEW_TYPE_USER
-        }
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder.itemViewType) {
-            VIEW_TYPE_HEADER -> {
-                val headerHolder = holder as HeaderViewHolder
-                headerHolder.bind(headers[position])
-            }
-            VIEW_TYPE_USER -> {
-                val userHolder = holder as UserViewHolder
-                userHolder.bind(users[position])
-            }
-        }
-    }
-
-    fun submitData(header: List<Header>, users: List<User>) {
-        this.header = header
-        this.users = users
-        notifyDataSetChanged()
-    }
-
-    inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(header:Header) {
-            itemView.findViewById<TextView>(R.id.header_title).text = header.tittle
-        }
-    }
-
-    inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(user: User) {
-            itemView.findViewById<TextView>(R.id.nameUser).text=user.name
-        }
-    }*/
-
-
-
-
-
-
-
-
-    /*class ViewHolderUser(itemView: View):RecyclerView.ViewHolder(itemView) {
-        fun bind(user:User){
-            itemView.findViewById<TextView>(R.id.nameUser).text = user.name
-            itemView.findViewById<TextView>(R.id.pxUser).text = user.px
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderUser {
-        val inflater  = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_user, parent, false)
-        return ViewHolderUser(view)
-    }
-
-    override fun getItemCount(): Int = users?.size ?: 0
-
-    override fun onBindViewHolder(holder: ViewHolderUser, position: Int) {
-        users?.let {
-            holder.bind(it[position])
-        }
-    }
-
-    fun submitData(users:List<User>){
-        this.users = users
-        notifyDataSetChanged()
-    }*/
