@@ -20,8 +20,6 @@ class ContainerFragment : HiddenMenuFragment() {
     private lateinit var demoCollectionAdapter: DemoCollectionAdapter
     private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
-    //private lateinit var preButton: ImageView
-    //private lateinit var nexButton:ImageView
 
 
     override fun onCreateView(
@@ -57,8 +55,8 @@ class ContainerFragment : HiddenMenuFragment() {
 
 
     fun bind(){
-        viewPager2 = requireView().findViewById(R.id.pager)
-        tabLayout = requireView().findViewById(R.id.movimiento)
+        viewPager2 = requireView().findViewById(R.id.viewPager_Ranking)
+        tabLayout = requireView().findViewById(R.id.motion_viewPager)
         //nexButton = requireView().findViewById(R.id.nextButton)
         //preButton = requireView().findViewById(R.id.prevButton)
 

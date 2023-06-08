@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="13dp"
+            android:padding="@dimen/padding_item_13dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -22,8 +22,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:src="@drawable/icon_ascent_division"
-                android:paddingRight="@dimen/medium_padding_16"
-                />
+                android:paddingEnd="@dimen/medium_padding_16"
+                android:contentDescription="@string/climb_indicator"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/header_title"
@@ -39,8 +40,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:src="@drawable/icon_ascent_division"
-                android:paddingLeft="@dimen/medium_padding_16"
-                />
+                android:paddingStart="@dimen/medium_padding_16"
+                android:contentDescription="@string/climb_indicator"
+                tools:ignore="RtlSymmetry" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

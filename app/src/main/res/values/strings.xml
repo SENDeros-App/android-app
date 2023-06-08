@@ -24,4 +24,7 @@
     <string name="division_oro_description">los primeros 5 avanzan a la siguiente división</string>
     <string name="division_rubi">Division rubi</string>
     <string name="division_rubi_description">¡Felicidades por llegar a la última liga! !Sigue adelante, y mantente entre los mejores caminantes!"</string>
+    <string name="px">px</string>
+    <string name="climb_indicator">Flechas que indican ascenso</string>
+    <string name="Divisio">Division de pertenencia</string>
 </resources>

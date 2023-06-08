@@ -40,8 +40,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, drawerLayout)
         navigationVIew.setupWithNavController(navController)
 
-       // toolbar.setTitleTextColor(Color.TRANSPARENT)
-
     }
 
     private fun addListeners() {
@@ -78,7 +76,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -93,12 +90,5 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
     }
-
-
-    /*     drawerLayout.setOnClickListener {
-             drawerLayout.open()
-
-         }
-         drawerLayout.close() */
 
 }

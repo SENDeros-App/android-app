@@ -58,6 +58,7 @@ class ClassificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val nameUser: TextView = itemView.findViewById(R.id.nameUser)
         private val pxUser: TextView = itemView.findViewById(R.id.pxUser)
         private val numPosition: TextView = itemView.findViewById(R.id.numPosition)
+
         fun bind(user: User, position: Int) {
             nameUser.text = user.name
             pxUser.text = user.px

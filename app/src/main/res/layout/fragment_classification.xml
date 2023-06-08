@@ -14,34 +14,17 @@
         android:orientation="vertical"
         android:padding="@dimen/medium_padding_16">
 
-
-        <!--<ImageView
-            android:id="@+id/division"
-            android:layout_width="match_parent"
-            android:layout_height="123dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/medium_padding_16"
-            android:layout_marginTop="@dimen/little_padding_8"
-            android:layout_marginEnd="@dimen/medium_padding_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/division_bronce"
-            android:contentDescription="division pertenence" />-->
-
         <LinearLayout
-            android:id="@+id/divisionCardview"
+            android:id="@+id/divisionLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="155dp"
+            android:layout_height="@dimen/height_linear_division"
             android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/margin_cardview_division_20dp"
+            android:layout_marginEnd="@dimen/margin_cardview_division_20dp"
             android:background="@drawable/radius_division"
             android:orientation="horizontal"
             android:padding="@dimen/medium_padding_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            >
 
             <!--icono-->
             <LinearLayout
@@ -52,9 +35,9 @@
 
                 <ImageView
                     android:id="@+id/imageDivision"
-                    android:layout_width="102dp"
-                    android:layout_height="102dp"
-                    android:contentDescription="Liga de bronce"
+                    android:layout_width="@dimen/icon_ranking_division"
+                    android:layout_height="@dimen/icon_ranking_division"
+                    android:contentDescription="@string/Divisio"
                     tools:src="@drawable/icon_bronce_division"/>
             </LinearLayout>
 
@@ -64,7 +47,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/little_padding_8">
+                android:paddingStart="@dimen/little_padding_8"
+                tools:ignore="RtlSymmetry">
 
                 <TextView
                     android:id="@+id/textTitleDivision"
@@ -72,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="23sp"
+                    android:textSize="@dimen/Tittle_division"
                     android:textStyle="bold"
                     tools:text="Division bronce" />
 
@@ -82,7 +66,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="@color/white"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/description_division"
                     tools:text="¡Felicidades por llegar a la última liga! !Sigue adelante, y mantente entre los mejores caminantes!" />
             </LinearLayout>
 
@@ -92,7 +76,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_recyclerview_division"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="5"
             tools:listitem="@layout/item_user"

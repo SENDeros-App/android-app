@@ -5,4 +5,12 @@
     <dimen name="medium_padding_16">16dp</dimen>
     <dimen name="margincard">5dp</dimen>
     <dimen name="text_size_item_">20sp</dimen>
+    <dimen name="padding_item_13dp">13dp</dimen>
+    <dimen name="margin_px_icon_8dp">8dp</dimen>
+    <dimen name="margin_cardview_division_20dp">20dp</dimen>
+    <dimen name="icon_ranking_division">102dp</dimen>
+    <dimen name="Tittle_division">23sp</dimen>
+    <dimen name="description_division">15sp</dimen>
+    <dimen name="margin_recyclerview_division">8dp</dimen>
+    <dimen name="height_linear_division">155dp</dimen>
 </resources>
