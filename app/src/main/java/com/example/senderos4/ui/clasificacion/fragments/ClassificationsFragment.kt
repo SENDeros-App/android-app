@@ -47,8 +47,8 @@ class ClassificationsFragment : HiddenMenuFragment() {
             val league = when (getInt(ARG_OBJECT)) {
                 0 -> {
                     League(
-                        R.string.division_bronce,
-                        R.string.division_bronce_description,
+                        R.string.division_bronze,
+                        R.string.division_bronze_description,
                         R.drawable.icon_bronce_division,
                         viewModel.getHeaders(),
                         viewModel.getTopUsersByDivision("bronce", 17)
