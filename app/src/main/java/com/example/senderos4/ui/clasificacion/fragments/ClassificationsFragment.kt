@@ -22,7 +22,7 @@ class ClassificationsFragment : HiddenMenuFragment() {
     private lateinit var textTittleDivision:TextView
     private lateinit var texDescriptionDivision:TextView
     private lateinit var RecyclerViewRanking: RecyclerView
-    private lateinit var NestedScrollViewA:NestedScrollView
+    private lateinit var nestedScrollView:NestedScrollView
 
     private val viewModel: ClassificationViewModel by viewModels {
         ClassificationViewModel.Factory
@@ -44,8 +44,10 @@ class ClassificationsFragment : HiddenMenuFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
+
             val league = when (getInt(ARG_OBJECT)) {
                 0 -> {
+
                     League(
                         R.string.division_bronze,
                         R.string.division_bronze_description,
@@ -53,7 +55,6 @@ class ClassificationsFragment : HiddenMenuFragment() {
                         viewModel.getHeaders(),
                         viewModel.getTopUsersByDivision("bronce", 17)
                     )
-
                 }
                 1 -> {
                     League(
@@ -79,6 +80,7 @@ class ClassificationsFragment : HiddenMenuFragment() {
             }
             displayLeague(view, league)
         }
+
     }
 
     fun bind(){
@@ -86,7 +88,7 @@ class ClassificationsFragment : HiddenMenuFragment() {
         textTittleDivision = requireView().findViewById(R.id.textTitleDivision)
         texDescriptionDivision = requireView().findViewById(R.id.TextDescriptionDivision)
         RecyclerViewRanking = requireView().findViewById(R.id.recyclerView)
-        NestedScrollViewA = requireView().findViewById(R.id.scrollView)
+        nestedScrollView = requireView().findViewById(R.id.scrollView)
     }
     private fun displayLeague(view: View, league: League) {
         bind()
@@ -108,4 +110,11 @@ class ClassificationsFragment : HiddenMenuFragment() {
         val header: List<Header>,
         val user: List<User>
     )
+
+    override fun onResume() {
+        super.onResume()
+        nestedScrollView.post {
+            nestedScrollView.smoothScrollTo(0,0)
+        }
+    }
 }
