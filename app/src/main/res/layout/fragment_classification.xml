@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:id="@+id/divisionLinearLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/height_linear_division"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_cardview_division_20dp"
