@@ -13,7 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -46,9 +46,11 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        splashScreen.setKeepOnScreenCondition{false}
         bind()
         addListeners()
 
@@ -57,13 +59,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, drawerLayout)
         navigationVIew.setupWithNavController(navController)
 
-       // toolbar.setTitleTextColor(Color.TRANSPARENT)
-
     }
 
     private fun addListeners() {
         loginBottom.setOnClickListener {
-            navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment) //id del fragmento hacia donde nos va a mover
+
+            //id del fragmento hacia donde nos va a mover
+            //navController.navigate(R.id.action_home_Fragment_to_clasifications_Fragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
@@ -72,7 +74,6 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
 
-  
     }
 
     fun bind() {
@@ -93,8 +94,6 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-
-    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -103,21 +102,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
     }
-
-
-
-
-
-    /*     drawerLayout.setOnClickListener {
-             drawerLayout.open()
-
-         }
-         drawerLayout.close() */
-
 }

@@ -9,7 +9,11 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
+<<<<<<< HEAD
         <option name="scale" value="0.16" />
+=======
+        <option name="scale" value="0.09" />
+>>>>>>> develop
       </ProjectState>
     </option>
   </component>
