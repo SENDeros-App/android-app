@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.senderos4.R
+import com.example.senderos4.ui.login.viewmodels.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -16,6 +18,10 @@ class LoginFragment : Fragment() {
     private lateinit var userName: TextInputEditText
     private lateinit var userPassword:TextInputEditText
     private lateinit var buttonLogin:Button
+
+    private val viewModel: LoginViewModel by viewModels{
+        LoginViewModel.Factory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +47,19 @@ class LoginFragment : Fragment() {
     fun click(){
 
         buttonLogin.setOnClickListener {
+            val name = userName.text.toString().trim()
+            val password = userPassword.text.toString().trim()
+            val Logeado = viewModel.loginUser(name, password)
+
+            if(Logeado){
+                Toast.makeText(requireContext(), "exitoso",Toast.LENGTH_SHORT).show()
+
+            }else{
+                Toast.makeText(requireContext(), "invalido",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+       /* buttonLogin.setOnClickListener {
             val nameUser = userName.text.toString()
             val passwordUser = userPassword.text.toString()
 
@@ -51,7 +70,7 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "invalido",Toast.LENGTH_SHORT).show()
 
             }
-        }
+        }*/
     }
 
 

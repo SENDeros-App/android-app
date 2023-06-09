@@ -105,7 +105,7 @@ class ClassificationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             VIEW_TYPE_USER -> {
                 val userHolder = holder as UserViewHolder
                 val userPosition = getUserPosition(position)
-                userHolder.bind(users?.get(userPosition) ?: User("", "", ""), position)
+                userHolder.bind(users?.get(userPosition) ?: User("", "", "", ""), position)
             }
         }
     }
