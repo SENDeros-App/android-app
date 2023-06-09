@@ -29,6 +29,13 @@
             android:layout_marginTop="40dp"
             />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAlert"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="90dp"
+            />
+
     </FrameLayout>
 
 
