@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 
 
-class MapFragment : Fragment(), OnMapReadyCallback,
+class  MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
 
     private lateinit var btn_alert:ImageView
@@ -83,6 +83,9 @@ class MapFragment : Fragment(), OnMapReadyCallback,
             val fire : ImageView = dialog.findViewById(R.id.fire)
             val sewer : ImageView = dialog.findViewById(R.id.sewer)
             val walkaway : ImageView = dialog.findViewById(R.id.walkaway)
+            val pothole : ImageView = dialog.findViewById(R.id.pothole)
+            val tree : ImageView =  dialog.findViewById(R.id.tree)
+            val crash : ImageView = dialog.findViewById(R.id.crash)
 
             dialog.show()
 
@@ -113,6 +116,21 @@ class MapFragment : Fragment(), OnMapReadyCallback,
 
             walkaway.setOnClickListener{
                 addedMarker(MarkerType.WALKAWAY)
+                dialog.dismiss()
+            }
+
+            pothole.setOnClickListener{
+                addedMarker(MarkerType.POTHOLE)
+                dialog.dismiss()
+            }
+
+            tree.setOnClickListener{
+                addedMarker(MarkerType.TREE)
+                dialog.dismiss()
+            }
+
+            crash.setOnClickListener{
+                addedMarker(MarkerType.CRASH_CAR)
                 dialog.dismiss()
             }
         }
@@ -150,7 +168,11 @@ class MapFragment : Fragment(), OnMapReadyCallback,
                     description = "Aqui hay una fuja de agua"
                     icon = R.drawable.incident_leak
                 }
-                MarkerType.TREE -> TODO()
+                MarkerType.TREE -> {
+                    title = "Árbol caído"
+                    description = "El árbol se encuentra obstaculizando el paso"
+                    icon = R.drawable.incident_tree
+                }
                 MarkerType.SEWER -> {
                     title = "Alcantarilla sin tapa"
                     description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
@@ -160,6 +182,16 @@ class MapFragment : Fragment(), OnMapReadyCallback,
                     title = "Incendio"
                     description = "Aqui hay un incendio"
                     icon = R.drawable.incident_fire
+                }
+                MarkerType.POTHOLE -> {
+                    title = "Bache Peligroso"
+                    description = "Hay un bache muy peligroso que puede ocasionar un accidente"
+                    icon = R.drawable.incident_bump
+                }
+                MarkerType.CRASH_CAR -> {
+                    title = "Accidente automovilístico"
+                    description = "Hay una accidente de carros por la zona"
+                    icon = R.drawable.incident_crash
                 }
             }
             map.addMarker(

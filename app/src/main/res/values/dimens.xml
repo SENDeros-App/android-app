@@ -4,4 +4,9 @@
     <dimen name="little_padding_8">8dp</dimen>
     <dimen name="medium_padding_16">16dp</dimen>
     <dimen name="margincard">5dp</dimen>
+    <dimen name="letter_18sp">18sp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="width_300dp">300dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
 </resources>
