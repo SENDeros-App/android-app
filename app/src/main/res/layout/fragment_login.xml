@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.LoginFragment">
+    tools:context=".ui.login.LoginFragment">
 
 
     <ImageView
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.304">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditUser"
+            android:id="@+id/textUserName"
             android:layout_width="@dimen/textInputEditUser_width"
             android:layout_height="@dimen/textInputEditUser_height"
             android:hint="@string/userName"
@@ -76,11 +76,12 @@
         app:layout_constraintVertical_bias="0.06999999">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditPassword"
+            android:id="@+id/textUserPassword"
             android:layout_width="@dimen/textInputEditPassword_width"
             android:layout_height="@dimen/textInputEditPassword_height"
             android:hint="@string/passwordText"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="8"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

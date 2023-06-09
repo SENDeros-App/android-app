@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.senderos4.Fragment.LoginFragment"
+        android:name="com.example.senderos4.ui.login.LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_map_fragment"
