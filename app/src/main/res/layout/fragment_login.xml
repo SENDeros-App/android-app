@@ -60,7 +60,9 @@
             android:layout_height="@dimen/textInputEditUser_height"
             android:hint="@string/userName"
             tools:layout_editor_absoluteX="74dp"
-            tools:layout_editor_absoluteY="171dp" />
+            tools:layout_editor_absoluteY="171dp"
+            app:errorEnabled="true"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +83,8 @@
             android:layout_height="@dimen/textInputEditPassword_height"
             android:hint="@string/passwordText"
             android:inputType="textPassword"
-            android:maxLength="8"/>
+            android:maxLength="8"
+            app:errorEnabled="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

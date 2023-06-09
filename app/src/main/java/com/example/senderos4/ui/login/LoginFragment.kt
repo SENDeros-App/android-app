@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind()
-        click()
+        handleLogin()
     }
 
     private fun bind() {
@@ -44,34 +44,27 @@ class LoginFragment : Fragment() {
         buttonLogin = requireView().findViewById(R.id.loginButton)
     }
 
-    fun click(){
+    private fun handleLogin(){
 
         buttonLogin.setOnClickListener {
+
             val name = userName.text.toString().trim()
             val password = userPassword.text.toString().trim()
-            val Logeado = viewModel.loginUser(name, password)
+            val initiated = viewModel.loginUser(name, password)
 
-            if(Logeado){
+            if(initiated){
                 Toast.makeText(requireContext(), "exitoso",Toast.LENGTH_SHORT).show()
-
+                userName.error  = null
+                userPassword.error = null
             }else{
                 Toast.makeText(requireContext(), "invalido",Toast.LENGTH_SHORT).show()
+                userName.error  = "el nombre es invalido"
+                userPassword.error = "la contraseña es invalida"
             }
         }
 
-       /* buttonLogin.setOnClickListener {
-            val nameUser = userName.text.toString()
-            val passwordUser = userPassword.text.toString()
-
-            if(nameUser == "user" && passwordUser == "password"){
-                Toast.makeText(requireContext(), "exitoso",Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(requireContext(), "invalido",Toast.LENGTH_SHORT).show()
-
-            }
-        }*/
     }
+
 
 
 }

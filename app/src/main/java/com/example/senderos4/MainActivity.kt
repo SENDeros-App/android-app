@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationVIew: NavigationView
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var loginBottom: ImageView
+    private lateinit var modGuestImage: LinearLayout
     private lateinit var settingBottom: ImageView
 
 
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addListeners() {
-        loginBottom.setOnClickListener {
+        modGuestImage.setOnClickListener {
             navController.navigate(R.id.action_map_fragment_to_loginFragment)
             drawerLayout.closeDrawer(GravityCompat.START)
         }
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         val headerView = navigationVIew.getHeaderView(0)
 
-        loginBottom = headerView.findViewById(R.id.login)
+        modGuestImage = headerView.findViewById(R.id.linearLogin)
         settingBottom = headerView.findViewById(R.id.setting_options)
 
     }
