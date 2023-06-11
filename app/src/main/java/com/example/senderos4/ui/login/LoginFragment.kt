@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.senderos4.R
 import com.example.senderos4.ui.login.viewmodels.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
