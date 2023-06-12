@@ -9,6 +9,12 @@
         <item name="android:statusBarColor">@color/black</item>
     </style>
 
+    <style name="CircularShadow">
+        <item name="android:shadowColor">#80000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
 
     <!--estilo de toolbar-->
     <style name="ToolbarTheme" >

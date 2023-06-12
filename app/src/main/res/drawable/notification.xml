@@ -1,10 +1,10 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="85dp"
-    android:height="85dp"
-    android:viewportWidth="100"
-    android:viewportHeight="100">
+    android:width="83dp"
+    android:height="83dp"
+    android:viewportWidth="83"
+    android:viewportHeight="83">
   <path
-      android:pathData="M41.5,37.5m-36,0a36,36 0,1 1,72 0a36,36 0,1 1,-72 0"
+      android:pathData="M41.5,37.5m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0"
       android:strokeWidth="7"
       android:fillColor="#E67F46"
       android:strokeColor="#ffffff"/>
@@ -19,14 +19,14 @@
         android:strokeColor="#ffffff"
         android:strokeLineCap="round"/>
     <path
-        android:pathData="M36.792,44.25C37.56,44.988 38.477,45.554 39.481,45.909C40.486,46.264 41.555,46.4 42.617,46.308"
+        android:pathData="M36.792,44.25C37.56,44.988 38.477,45.554 39.482,45.909C40.486,46.264 41.555,46.4 42.617,46.308"
         android:strokeLineJoin="round"
         android:strokeWidth="3"
         android:fillColor="#00000000"
         android:strokeColor="#ffffff"
         android:strokeLineCap="round"/>
     <path
-        android:pathData="M61.002,54.919C61.876,54.045 62.472,52.931 62.713,51.719C62.955,50.506 62.831,49.25 62.358,48.107C61.885,46.965 61.084,45.989 60.056,45.302C59.028,44.615 57.82,44.249 56.583,44.249C55.347,44.249 54.139,44.615 53.111,45.302C52.083,45.989 51.282,46.965 50.809,48.107C50.336,49.25 50.212,50.506 50.454,51.719C50.695,52.931 51.291,54.045 52.165,54.919L56.583,59.34L61.002,54.919Z"
+        android:pathData="M61.002,54.919C61.876,54.045 62.472,52.931 62.713,51.719C62.954,50.506 62.831,49.25 62.358,48.107C61.885,46.965 61.084,45.989 60.056,45.302C59.028,44.615 57.82,44.249 56.583,44.249C55.347,44.249 54.139,44.615 53.111,45.302C52.083,45.989 51.282,46.965 50.809,48.107C50.336,49.25 50.212,50.506 50.454,51.719C50.695,52.931 51.29,54.045 52.165,54.919L56.583,59.34L61.002,54.919Z"
         android:strokeLineJoin="round"
         android:strokeWidth="3"
         android:fillColor="#00000000"
