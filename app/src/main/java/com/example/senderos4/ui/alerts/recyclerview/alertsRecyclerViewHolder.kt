@@ -1,16 +1,19 @@
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.app.databinding.ItemAlertaBinding
+import com.example.senderos4.databinding.ItemAlertBinding
+import com.example.senderos4.ui.alerts.model.Alerta
 
-class AlertsRecyclerViewHolder(private val binding: ItemAlertaBinding) : RecyclerView.ViewHolder(binding.root) {
+class AlertsRecyclerViewHolder(private val binding: ItemAlertBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(alerta: Alerta) {
-        binding.alerta = alerta
+    fun bind(alerta: Alerta){
+        binding.aler = alerta.
         binding.executePendingBindings()
     }
 
     companion object {
         fun create(parent: ViewGroup): AlertsRecyclerViewHolder {
-            val binding = ItemAlertaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val binding = ItemAlertBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return AlertsRecyclerViewHolder(binding)
         }
     }

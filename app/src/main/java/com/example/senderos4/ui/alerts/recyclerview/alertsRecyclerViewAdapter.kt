@@ -7,10 +7,11 @@ import com.example.app.databinding.ItemAlertaBinding
 import com.example.senderos4.ui.alerts.model.Alerta
 
 class alertsRecyclerViewAdapter : RecyclerView.Adapter<alertsRecyclerViewAdapter.AlertViewHolder>() {
+
     private var alertas: List<Alerta> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlertViewHolder {
-        val binding = itemAlertBiding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = .inflate(LayoutInflater.from(parent.context), parent, false)
         return AlertViewHolder(binding)
     }
 
