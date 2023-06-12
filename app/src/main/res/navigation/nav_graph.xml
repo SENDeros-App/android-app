@@ -22,6 +22,15 @@
     </fragment>
 
     <fragment
+        android:id="@+id/clasifications_Fragment"
+        android:name="com.example.senderos4.fragment.clasificacion.ClasificationsFragment"
+        android:label="clasifications"
+        tools:layout="@layout/fragment_clasifications" >
+        <action
+            android:id="@+id/action_clasifications_Fragment_to_home_Fragment"
+            app:destination="@id/map_fragment" />
+    </fragment>
+    <fragment
         android:id="@+id/history_Fragment"
         android:name="com.example.senderos4.ui.record.HistoryFragment"
         android:label="history"
