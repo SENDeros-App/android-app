@@ -39,4 +39,6 @@
     <string name="px">px</string>
     <string name="climb_indicator">Flechas que indican ascenso</string>
     <string name="division">Division de pertenencia</string>
+    <string name="add_photo">Agregar foto</string>
+    <string name="send">Enviar</string>
 </resources>

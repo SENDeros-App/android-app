@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.senderos4.R
-import com.example.senderos4.ui.Map.MarkerType
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -37,7 +36,8 @@ import com.google.android.gms.tasks.Task
 class  MapFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
 
-    private lateinit var btn_alert:ImageView
+    private lateinit var btn_select_alert:ImageView
+    private lateinit var btn_alert:Button
     private lateinit var map: GoogleMap
 
     override fun onCreateView(
@@ -65,12 +65,13 @@ class  MapFragment : Fragment(), OnMapReadyCallback,
     }
 
     private fun bind(){
-        btn_alert = requireView().findViewById(R.id.btn_alert)
+        btn_select_alert = requireView().findViewById(R.id.btn_alert)
+        btn_alert = requireView().findViewById(R.id.send_alert)
     }
 
     @SuppressLint("InflateParams")
     private fun setAddAlertListener() {
-        btn_alert.setOnClickListener{
+        btn_select_alert.setOnClickListener{
             // Función que cree el dialogo
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -91,52 +92,89 @@ class  MapFragment : Fragment(), OnMapReadyCallback,
             dialog.show()
 
             leak.setOnClickListener{
-                addedMarker(MarkerType.LEAK_WATER)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.LEAK_WATER)
             }
 
             without_light.setOnClickListener{
-                addedMarker(MarkerType.LIGHT)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.LIGHT)
             }
 
              water.setOnClickListener{
-                 addedMarker(MarkerType.WATER)
-                 dialog.dismiss()
+                 addedImageDialog(MarkerType.WATER)
              }
 
             fire.setOnClickListener{
-                addedMarker(MarkerType.FIRE)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.FIRE)
             }
 
             sewer.setOnClickListener{
-                addedMarker(MarkerType.SEWER)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.SEWER)
             }
 
             walkaway.setOnClickListener{
-                addedMarker(MarkerType.WALKAWAY)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.WALKAWAY)
             }
 
             pothole.setOnClickListener{
-                addedMarker(MarkerType.POTHOLE)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.POTHOLE)
             }
 
             tree.setOnClickListener{
-                addedMarker(MarkerType.TREE)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.TREE)
             }
 
             crash.setOnClickListener{
-                addedMarker(MarkerType.CRASH_CAR)
-                dialog.dismiss()
+                addedImageDialog(MarkerType.CRASH_CAR)
             }
         }
 
     }
+    private fun addedImageDialog(type: MarkerType) {
+        var image = 0
+
+            when(type){
+                MarkerType.LIGHT -> {
+                    image = R.drawable.without_ligth
+                }
+                MarkerType.WATER -> {
+                    image = R.drawable.without_water
+                }
+                MarkerType.WALKAWAY -> {
+                    image = R.drawable.walkaway
+                }
+                MarkerType.LEAK_WATER -> {
+                    image = R.drawable.leak
+                }
+                MarkerType.TREE -> {
+                    image = R.drawable.tree
+                }
+                MarkerType.SEWER -> {
+                    image = R.drawable.sewer
+                }
+                MarkerType.FIRE -> {
+                    image = R.drawable.fire_
+                }
+                MarkerType.POTHOLE -> {
+                    image = R.drawable.pothole
+                }
+                MarkerType.CRASH_CAR -> {
+                    image = R.drawable.crash_car
+                }
+        }
+
+        val dialog = Dialog(requireContext())
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_by_alert)
+        dialog.setTitle("Titulo")
+        val imageView:ImageView = dialog.findViewById(R.id.icon_dialog_alert)
+        imageView.setImageResource(image)
+        dialog.show()
+    }
+
+    private fun sendMarker(){
+
+    }
+
     private fun addedMarker(type:MarkerType) {
 
         getCurrentLocation { location ->
