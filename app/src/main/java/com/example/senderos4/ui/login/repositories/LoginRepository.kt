@@ -1,10 +1,31 @@
 package com.example.senderos4.ui.login.repositories
 
+import android.util.Log
 import com.example.senderos4.data.User
+import com.example.senderos4.network.ApiResponse
+import com.example.senderos4.network.dto.login.LoginRequest
+import com.example.senderos4.network.dto.register.RegisterRequest
+import com.example.senderos4.network.service.AuthService
+import retrofit2.HttpException
+import java.io.IOException
 
-class LoginRepository(private val users:List<User>) {
+class LoginRepository(private val api: AuthService) {
 
-    fun validateData(userName:String, userPassword:String):User?{
-        return users.find { it.name ==userName && it.password == userPassword }
+    suspend fun login(user: String, password: String): ApiResponse<String>{
+        try {
+            val response = api.login(LoginRequest(user, password))
+            return ApiResponse.Success(response.token)
+
+        } catch (e: HttpException){
+            if(e.code() === 400) {
+
+                return ApiResponse.ErrorWithMessage("Invalid email or password")
+            }
+
+            return ApiResponse.Error(e)
+        }catch (e: IOException){
+            return ApiResponse.Error(e)
+        }
     }
+
 }
