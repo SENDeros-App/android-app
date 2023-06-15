@@ -69,7 +69,7 @@
                 android:hint="@string/userName"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
-                android:text="@={viewmodel.user}"
+                android:text="@={viewmodel.name}"
                 tools:layout_editor_absoluteY="171dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -92,7 +92,6 @@
                 android:hint="@string/passwordText"
                 android:inputType="textPassword"
                 android:text="@={viewmodel.password}"
-                android:maxLength="9"
                 app:errorEnabled="true" />
 
         </com.google.android.material.textfield.TextInputLayout>

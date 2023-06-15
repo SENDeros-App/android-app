@@ -1,6 +1,6 @@
 package com.example.senderos4.network.dto.login
 
 data class LoginRequest (
-    val user:String,
+    val email:String,
     val password:String
     )

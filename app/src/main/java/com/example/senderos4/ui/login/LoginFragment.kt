@@ -78,6 +78,7 @@ class LoginFragment : Fragment() {
                 loginViewModel.clearData()
                 app.saveAuthToken(status.token)
                 Toast.makeText(requireContext(), "Logueado", Toast.LENGTH_LONG).show()
+                findNavController().navigate(R.id.action_loginFragment_to_map_fragment)
             }
 
             else -> {}

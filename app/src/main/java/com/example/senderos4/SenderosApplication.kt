@@ -11,9 +11,16 @@ import com.example.senderos4.ui.login.repositories.LoginRepository
 
 class SenderosApplication:Application() {
 
-    val classificationRepository: ClassificationRepository by lazy {
-        ClassificationRepository(users, headers)
-    }
+    /*fun clearAuthToken() {
+        val editor = prefs.edit()
+        editor.remove(USER_TOKEN)
+        editor.apply()
+    }*/
+
+    /*val senderosApplication = application as SenderosApplication
+    senderosApplication.clearAuthToken()*/
+
+
 
     private val prefs: SharedPreferences by lazy {
         getSharedPreferences("Retrofit", Context.MODE_PRIVATE)
@@ -38,5 +45,9 @@ class SenderosApplication:Application() {
 
     companion object {
         const val USER_TOKEN = "user_token"
+    }
+
+    val classificationRepository: ClassificationRepository by lazy {
+        ClassificationRepository(users, headers)
     }
 }

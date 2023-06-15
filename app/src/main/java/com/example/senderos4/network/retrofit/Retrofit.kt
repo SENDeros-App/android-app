@@ -4,7 +4,7 @@ import com.example.senderos4.network.service.AuthService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val URL = "https://retrofit.up.railway.app/"
+const val BASE_URL = "https://retrofit.up.railway.app/"
 
 object RetrofitInstance {
 
@@ -15,7 +15,7 @@ object RetrofitInstance {
     }
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl(URL)
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
