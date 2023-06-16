@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -31,12 +32,15 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
+import org.w3c.dom.Text
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener {
 
     private lateinit var btn_select_alert: ImageView
+
+    //private lateinit var send_alert: Button
     private lateinit var map: GoogleMap
 
     override fun onCreateView(
@@ -65,6 +69,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     private fun bind() {
         btn_select_alert = requireView().findViewById(R.id.btn_alert)
+        //send_alert = requireView().findViewById(R.id.send_alert)
     }
 
     @SuppressLint("InflateParams")
@@ -76,6 +81,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             dialog.setCancelable(true)
             dialog.setContentView(R.layout.dialog_alerts)
             dialog.setTitle("Actualiza el mapa")
+
 
             val without_light: ImageView = dialog.findViewById(R.id.without_light)
             val leak: ImageView = dialog.findViewById(R.id.leak)
@@ -91,94 +97,125 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
             leak.setOnClickListener {
                 addedImageDialog(MarkerType.LEAK_WATER)
+                dialog.dismiss()
             }
 
             without_light.setOnClickListener {
                 addedImageDialog(MarkerType.LIGHT)
+                dialog.dismiss()
             }
 
             water.setOnClickListener {
                 addedImageDialog(MarkerType.WATER)
+                dialog.dismiss()
             }
 
             fire.setOnClickListener {
                 addedImageDialog(MarkerType.FIRE)
+                dialog.dismiss()
             }
 
             sewer.setOnClickListener {
                 addedImageDialog(MarkerType.SEWER)
+                dialog.dismiss()
             }
 
             walkaway.setOnClickListener {
                 addedImageDialog(MarkerType.WALKAWAY)
+                dialog.dismiss()
             }
 
             pothole.setOnClickListener {
                 addedImageDialog(MarkerType.POTHOLE)
+                dialog.dismiss()
             }
 
             tree.setOnClickListener {
                 addedImageDialog(MarkerType.TREE)
+                dialog.dismiss()
             }
 
             crash.setOnClickListener {
                 addedImageDialog(MarkerType.CRASH_CAR)
+                dialog.dismiss()
             }
+
         }
 
     }
 
     private fun addedImageDialog(type: MarkerType) {
         var image = 0
-
+        var text = ""
 
         when (type) {
             MarkerType.LIGHT -> {
                 image = R.drawable.without_ligth
+                text = "Sin Luz"
+
             }
 
             MarkerType.WATER -> {
                 image = R.drawable.without_water
+                text = "Sin agua"
             }
 
             MarkerType.WALKAWAY -> {
                 image = R.drawable.walkaway
+                text = "Pasarela Dañada"
             }
 
             MarkerType.LEAK_WATER -> {
                 image = R.drawable.leak
+                text = "Fuga de agua"
             }
 
             MarkerType.TREE -> {
                 image = R.drawable.tree
+                text = "Árbol caído"
             }
 
             MarkerType.SEWER -> {
                 image = R.drawable.sewer
+                text = "Alcantarilla sin tapa"
             }
 
             MarkerType.FIRE -> {
                 image = R.drawable.fire_
+                text = "Incendio"
             }
 
             MarkerType.POTHOLE -> {
                 image = R.drawable.pothole
+                text = "Bache peligroso"
             }
 
             MarkerType.CRASH_CAR -> {
                 image = R.drawable.crash_car
+                text = "Accidente automivilistico"
             }
-        }
 
-        val dialog = Dialog(requireContext())
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_by_alert)
-        dialog.setTitle("Titulo")
-        val imageView: ImageView = dialog.findViewById(R.id.icon_dialog_alert)
-        imageView.setImageResource(image)
-        dialog.show()
+        }
+        newDialog(image, text, type)
     }
 
+    private fun newDialog(image:Int, text:String, type: MarkerType){
+        val dialog_alert = Dialog(requireContext())
+        dialog_alert.setCancelable(true)
+        dialog_alert.setContentView(R.layout.dialog_by_alert)
+        dialog_alert.setTitle("Titulo")
+        val imageView: ImageView = dialog_alert.findViewById(R.id.icon_dialog_alert)
+        val textView: TextView = dialog_alert.findViewById(R.id.name_alert)
+        val btn: Button = dialog_alert.findViewById(R.id.send_alert)
+        textView.text = text
+        imageView.setImageResource(image)
+        dialog_alert.show()
+
+        btn.setOnClickListener {
+            addedMarker(type)
+            dialog_alert.dismiss()
+        }
+    }
     private fun addedMarker(type: MarkerType) {
 
         getCurrentLocation { location ->

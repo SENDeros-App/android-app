@@ -23,6 +23,7 @@
             tools:layout_editor_absoluteY="92dp" />
 
         <TextView
+            android:id="@+id/name_alert"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/regular_istok"
