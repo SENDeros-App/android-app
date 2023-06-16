@@ -4,6 +4,7 @@
     <dimen name="little_padding_8">8dp</dimen>
     <dimen name="medium_padding_16">16dp</dimen>
     <dimen name="margincard">5dp</dimen>
+
     <dimen name="logo_width">134dp</dimen>
     <dimen name="logo_height">157dp</dimen>
     <dimen name="background_width">362dp</dimen>
@@ -24,6 +25,13 @@
     <dimen name="InvitationTextView_width">169dp</dimen>
     <dimen name="InvitationTextView_height">65dp</dimen>
     <dimen name="RegisterTextView_margin">56dp</dimen>
+
+    <dimen name="letter_18sp">18sp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="width_300dp">300dp</dimen>
+    <dimen name="margin_15dp">15dp</dimen>
+
     <dimen name="marginCard">5dp</dimen>
     <dimen name="text_size_item_">20sp</dimen>
     <dimen name="padding_item_13dp">13dp</dimen>

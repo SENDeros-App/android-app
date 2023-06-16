@@ -1,32 +1,28 @@
 package com.example.senderos4
 
-import android.content.ClipData.Item
-import android.graphics.Color
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.senderos4.network.retrofit.RetrofitInstance
-import com.example.senderos4.ui.login.LoginFragment
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
+
+    val fragment = supportFragmentManager.findFragmentById(R.id.map_fragment)
+    private lateinit var map: GoogleMap
 
     private lateinit var toolbar: Toolbar
     private lateinit var drawerLayout: DrawerLayout
@@ -48,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         splashScreen.setKeepOnScreenCondition{false}
-
         bind()
         navSetting()
         setSupportActionBar(toolbar)
@@ -88,7 +83,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragmentContainerView)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
