@@ -1,10 +1,7 @@
 package com.example.senderos4.ui.login.repositories
 
-import android.util.Log
-import com.example.senderos4.data.User
 import com.example.senderos4.network.ApiResponse
 import com.example.senderos4.network.dto.login.LoginRequest
-import com.example.senderos4.network.dto.register.RegisterRequest
 import com.example.senderos4.network.service.AuthService
 import retrofit2.HttpException
 import java.io.IOException

@@ -14,6 +14,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -21,6 +22,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.senderos4.network.retrofit.RetrofitInstance
 import com.example.senderos4.ui.login.LoginFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -31,35 +33,36 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationVIew: NavigationView
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var modGuestImage: LinearLayout
+    //private lateinit var modGuestImage: LinearLayout
     private lateinit var settingBottom: ImageView
+    private lateinit var loginTextView: TextView
+
+
+    val app by lazy {
+        application as SenderosApplication
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         splashScreen.setKeepOnScreenCondition{false}
 
         bind()
-        addListeners()
-
+        navSetting()
         setSupportActionBar(toolbar)
         appBarConfiguration = AppBarConfiguration((navController.graph), drawerLayout)
         setupActionBarWithNavController(navController, drawerLayout)
         navigationVIew.setupWithNavController(navController)
 
-
-
+        //nuevo
+        updateNavigationViewHeader()
     }
 
 
-    private fun addListeners() {
-        modGuestImage.setOnClickListener {
-            navController.navigate(R.id.action_map_fragment_to_loginFragment)
-            drawerLayout.closeDrawer(GravityCompat.START)
-        }
+
+    private fun navSetting() {
 
         settingBottom.setOnClickListener {
             navController.navigate(R.id.action_map_fragment_to_settingsFragment)
@@ -74,12 +77,12 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.fragmentContainerView)
         navigationVIew = findViewById(R.id.navigationView)
 
+
         val headerView = navigationVIew.getHeaderView(0)
-
-        modGuestImage = headerView.findViewById(R.id.linearLogin)
         settingBottom = headerView.findViewById(R.id.setting_options)
-
+        loginTextView = headerView.findViewById(R.id.textHeader)
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.fragmentContainerView)
@@ -96,10 +99,29 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //eliminar boton inicio de sesion falta completar
+    // boton inicio de sesion falta completar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return true
     }
 
+    //new
+    fun updateNavigationViewHeader() {
+        if (app.isLoggedIn()) {
+            loginTextView.text = "Logout"
+            loginTextView.setOnClickListener {
+                app.clearAuthToken()
+                updateNavigationViewHeader()
+
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+        } else {
+            loginTextView.text = "Login"
+            loginTextView.setOnClickListener {
+                navController.navigate(R.id.action_map_fragment_to_loginFragment)
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+        }
+    }
 }
+

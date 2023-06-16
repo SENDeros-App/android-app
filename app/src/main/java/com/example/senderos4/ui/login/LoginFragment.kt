@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.senderos4.MainActivity
 import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.databinding.FragmentLoginBinding
@@ -77,10 +78,9 @@ class LoginFragment : Fragment() {
                 loginViewModel.clearStatus()
                 loginViewModel.clearData()
                 app.saveAuthToken(status.token)
-                Toast.makeText(requireContext(), "Logueado", Toast.LENGTH_LONG).show()
+                (requireActivity() as MainActivity).updateNavigationViewHeader()
                 findNavController().navigate(R.id.action_loginFragment_to_map_fragment)
             }
-
             else -> {}
         }
     }

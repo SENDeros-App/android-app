@@ -7,5 +7,4 @@ data class LoginResponse (
     @SerializedName("msg")val message:String,
     @SerializedName("token")val token:String
     //val user:User
-
 )
