@@ -7,7 +7,7 @@ import com.example.senderos4.ui.alerts.model.Alerta
 class AlertsRecyclerViewHolder(private val binding: ItemAlertBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(alerta: Alerta){
-        binding.aler = alerta.
+        binding.alert = alerta.
         binding.executePendingBindings()
     }
 
