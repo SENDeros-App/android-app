@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
@@ -56,8 +55,8 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'com.android.databinding:compiler:3.5.0'
     //viewpager2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
     implementation 'androidx.core:core-splashscreen:1.0.1'
 }
