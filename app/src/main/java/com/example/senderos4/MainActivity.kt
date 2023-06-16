@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         navigationVIew.setupWithNavController(navController)
 
         //nuevo
+        app.checkLoggedInStatus()
         updateNavigationViewHeader()
     }
 
@@ -100,22 +101,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     //new
-    fun updateNavigationViewHeader() {
-        if (app.isLoggedIn()) {
-            loginTextView.text = "Logout"
-            loginTextView.setOnClickListener {
-                app.clearAuthToken()
-                updateNavigationViewHeader()
-
-                drawerLayout.closeDrawer(GravityCompat.START)
-            }
-        } else {
-            loginTextView.text = "Login"
-            loginTextView.setOnClickListener {
-                navController.navigate(R.id.action_map_fragment_to_loginFragment)
-                drawerLayout.closeDrawer(GravityCompat.START)
+    private fun updateNavigationViewHeader() {
+        app.isLoggedIn.observe(this) { isLoggedIn ->
+            if (isLoggedIn) {
+                loginTextView.text = "Logout"
+                loginTextView.setOnClickListener {
+                    app.clearAuthToken()
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+            } else {
+                loginTextView.text = "Login"
+                loginTextView.setOnClickListener {
+                    navController.navigate(R.id.action_map_fragment_to_loginFragment)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
             }
         }
     }
+
 }
 

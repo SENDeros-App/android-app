@@ -14,17 +14,41 @@ import com.example.senderos4.ui.login.repositories.LoginRepository
 class SenderosApplication:Application() {
 
     //new
-    fun isLoggedIn(): Boolean {
-        val token = getTokent()
-        return token.isNotEmpty()
+
+    private val _isLoggedIn = MutableLiveData<Boolean>()
+    val isLoggedIn: LiveData<Boolean>
+        get() = _isLoggedIn
+
+    override fun onCreate() {
+        super.onCreate()
+        checkLoggedInStatus()
     }
-    //
+
+    fun saveAuthToken(token: String) {
+        val editor = prefs.edit()
+        editor.putString(USER_TOKEN, token)
+        editor.apply()
+        checkLoggedInStatus()
+    }
+
+    fun getTokent(): String {
+        return prefs.getString(USER_TOKEN, "") ?: ""
+    }
 
     fun clearAuthToken() {
         val editor = prefs.edit()
         editor.remove(USER_TOKEN)
         editor.apply()
+        checkLoggedInStatus()
     }
+
+    fun checkLoggedInStatus() {
+        val token = getTokent()
+        _isLoggedIn.value = token.isNotEmpty()
+    }
+
+    //
+
 
     /*val senderosApplication = application as SenderosApplication
     senderosApplication.clearAuthToken()*/
@@ -40,16 +64,9 @@ class SenderosApplication:Application() {
         getLoginService()
     }
 
-    fun getTokent(): String = prefs.getString(USER_TOKEN, "")!!
 
     val credentialsRepository: LoginRepository by lazy {
         LoginRepository(getAPIService())
-    }
-
-    fun saveAuthToken(token: String) {
-        val editor = prefs.edit()
-        editor.putString(USER_TOKEN, token)
-        editor.apply()
     }
 
 

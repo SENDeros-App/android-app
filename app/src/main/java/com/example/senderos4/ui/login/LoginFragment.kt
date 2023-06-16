@@ -78,7 +78,6 @@ class LoginFragment : Fragment() {
                 loginViewModel.clearStatus()
                 loginViewModel.clearData()
                 app.saveAuthToken(status.token)
-                (requireActivity() as MainActivity).updateNavigationViewHeader()
                 findNavController().navigate(R.id.action_loginFragment_to_map_fragment)
             }
             else -> {}
