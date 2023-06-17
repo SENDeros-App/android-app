@@ -109,7 +109,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_ingresed"
+                android:id="@+id/textUserPassword"
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Confirmar contraseña"

@@ -5,13 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.databinding.FragmentRegister2Binding
+import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
 
 
 class Register2Fragment : Fragment() {
 
-    private lateinit var binding:FragmentRegister2Binding
+    private lateinit var binding: FragmentRegister2Binding
+    private val registerViewModel: RegisterViewModel by activityViewModels {
+        RegisterViewModel.Factory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,5 +29,42 @@ class Register2Fragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        binding.confirmationRegister.setOnClickListener {
+            val user = binding.textUserIdentifier.text.toString()
+            val password = binding.textUserPassword.text.toString()
+
+            registerViewModel.user.value = user
+            registerViewModel.password.value = password
+
+            registerViewModel.orRegister()
+        }
+
+        observeStatus()
+    }
+
+    private fun observeStatus() {
+        registerViewModel.status.observe(viewLifecycleOwner) { status ->
+            handleUiStatus(status)
+        }
+    }
+
+    private fun handleUiStatus(status: RegisterUiStatus) {
+        when (status) {
+            is RegisterUiStatus.Error -> {
+                Toast.makeText(requireContext(), "An error has occurred", Toast.LENGTH_SHORT).show()
+            }
+            is RegisterUiStatus.ErrorWithMessage -> {
+                Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
+            }
+            is RegisterUiStatus.Success -> {
+                registerViewModel.clearStatus()
+                registerViewModel.clearData()
+                findNavController().navigate(R.id.action_register2Fragment_to_map_fragment)
+            }
+            else -> {}
+        }
+    }
 }

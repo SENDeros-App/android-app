@@ -16,11 +16,9 @@ import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
-
-    private val registerViewModel:RegisterViewModel by activityViewModels{
+    private val registerViewModel: RegisterViewModel by activityViewModels {
         RegisterViewModel.Factory
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,46 +32,39 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        click()
         setViewModel()
+        click()
+
+    }
+
+    private fun click() {
+
+        binding.confirmationInfo.setOnClickListener {
+            if (validarCampos()) {
+                val name = binding.textUserName.text.toString()
+                val email = binding.textUseremail.text.toString()
+                val phone = binding.textUserPhoneNumbre.text.toString()
+
+                registerViewModel.name.value = name
+                registerViewModel.email.value = email
+                registerViewModel.phone.value = phone
+
+                findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
+            } else {
+                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun setViewModel() {
         binding.viewmodelregister = registerViewModel
     }
 
-    private fun observerStatus(){
-        registerViewModel.status.observe(viewLifecycleOwner){
-            status -> handleUiStatus(status)
-        }
+    private fun validarCampos(): Boolean {
+        val name = binding.textUserName.text.toString()
+        val email = binding.textUseremail.toString()
+        val phone = binding.textUserPhoneNumbre.text.toString()
+
+        return name.isNotEmpty() && email.isNotEmpty() && phone.isNotEmpty()
     }
-
-    private fun handleUiStatus(status: RegisterUiStatus) {
-        when(status){
-            is RegisterUiStatus.Error -> {
-                Toast.makeText(requireContext(), "An error has occurred", Toast.LENGTH_SHORT).show()
-            }
-            is RegisterUiStatus.ErrorWithMessage ->{
-                Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
-            }
-            is RegisterUiStatus.Success -> {
-                registerViewModel.clearStatus()
-                registerViewModel.clearData()
-                findNavController().navigate(R.id.action_register2Fragment_to_map_fragment)
-            }
-            else->{}
-        }
-    }
-
-    private fun click() {
-        binding.initSesion.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-        }
-
-        binding.confirmationInfo.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
-        }
-    }
-
-
 }

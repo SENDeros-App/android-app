@@ -22,6 +22,8 @@ class RegisterViewModel(private val registerRepository:RegisterRepository):ViewM
     var phone = MutableLiveData("")
     var user = MutableLiveData("")
     var password = MutableLiveData("")
+    var passwordConfirmation = MutableLiveData("")
+    var passwordMatchError = MutableLiveData(false)
 
     private val _status = MutableLiveData<RegisterUiStatus>(RegisterUiStatus.Resume)
 
@@ -47,6 +49,7 @@ class RegisterViewModel(private val registerRepository:RegisterRepository):ViewM
             phone.value.isNullOrEmpty() -> return false
             user.value.isNullOrEmpty() -> return false
             password.value.isNullOrEmpty() -> return false
+            passwordConfirmation.value.isNullOrEmpty() -> return false
         }
         return true
     }
