@@ -16,6 +16,7 @@ import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
 class Register2Fragment : Fragment() {
 
     private lateinit var binding: FragmentRegister2Binding
+
     private val registerViewModel: RegisterViewModel by activityViewModels {
         RegisterViewModel.Factory
     }
@@ -32,23 +33,19 @@ class Register2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.confirmationRegister.setOnClickListener {
-            val user = binding.textUserIdentifier.text.toString()
-            val password = binding.textUserPassword.text.toString()
-
-            registerViewModel.user.value = user
-            registerViewModel.password.value = password
-
-            registerViewModel.orRegister()
-        }
-
         observeStatus()
+        setViewModel()
     }
+
 
     private fun observeStatus() {
         registerViewModel.status.observe(viewLifecycleOwner) { status ->
             handleUiStatus(status)
         }
+    }
+
+    private fun setViewModel(){
+        binding.viewmodelregister = registerViewModel
     }
 
     private fun handleUiStatus(status: RegisterUiStatus) {

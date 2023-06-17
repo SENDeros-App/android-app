@@ -15,9 +15,9 @@ import com.example.senderos4.ui.register.RegisterUiStatus
 import com.example.senderos4.ui.register.repositories.RegisterRepository
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val registerRepository:RegisterRepository):ViewModel() {
+class RegisterViewModel(private val registerRepository: RegisterRepository) : ViewModel() {
 
-    var name = MutableLiveData ("")
+    var name = MutableLiveData("")
     var email = MutableLiveData("")
     var phone = MutableLiveData("")
     var user = MutableLiveData("")
@@ -27,36 +27,24 @@ class RegisterViewModel(private val registerRepository:RegisterRepository):ViewM
 
     private val _status = MutableLiveData<RegisterUiStatus>(RegisterUiStatus.Resume)
 
-    val status :LiveData<RegisterUiStatus>
-        get()=_status
+    val status: LiveData<RegisterUiStatus>
+        get() = _status
 
-    private fun register(name:String,email:String, phone:String, user:String, password:String){
-        viewModelScope.launch {
-            _status.postValue(
-                when(val response =  registerRepository.register(name = name, email = email, phone = phone, user = user, password = password)){
-                    is ApiResponse.Error -> RegisterUiStatus.Error(response.exception)
-                    is ApiResponse.ErrorWithMessage -> RegisterUiStatus.ErrorWithMessage(response.message)
-                    is ApiResponse.Success -> RegisterUiStatus.Success
-                }
-            )
-        }
-    }
+   private fun register(name:String, email: String, phone:String, user:String, password:String){
+       viewModelScope.launch {
+           _status.postValue(
+               when(val response = registerRepository.register(name = name, email = email, phone = phone, user = user, password = password)){
+                   is ApiResponse.Error -> RegisterUiStatus.Error(response.exception)
+                   is ApiResponse.ErrorWithMessage -> RegisterUiStatus.ErrorWithMessage(response.message)
+                   is ApiResponse.Success -> RegisterUiStatus.Success
+               }
+           )
+       }
+   }
 
-    private fun validateData(): Boolean {
-        when{
-            name.value.isNullOrEmpty() -> return false
-            email.value.isNullOrEmpty() -> return false
-            phone.value.isNullOrEmpty() -> return false
-            user.value.isNullOrEmpty() -> return false
-            password.value.isNullOrEmpty() -> return false
-            passwordConfirmation.value.isNullOrEmpty() -> return false
-        }
-        return true
-    }
-
-    fun orRegister(){
-        if(!validateData()){
-            _status.value = RegisterUiStatus.ErrorWithMessage("Wrong information")
+    fun orRegister() {
+        if (!validateData()) {
+            _status.value = RegisterUiStatus.ErrorWithMessage("Por favor, completa todos los campos correctamente")
             return
         }
 
@@ -66,22 +54,42 @@ class RegisterViewModel(private val registerRepository:RegisterRepository):ViewM
             phone = phone.value!!,
             user = user.value!!,
             password = password.value!!
-            )
+        )
     }
 
-    fun clearStatus(){
+
+    private fun validateData(): Boolean {
+        when {
+            name.value.isNullOrEmpty() -> return false
+            email.value.isNullOrEmpty() -> return false
+            phone.value.isNullOrEmpty() -> return false
+            user.value.isNullOrEmpty() -> return false
+            password.value.isNullOrEmpty() -> return false
+            passwordConfirmation.value.isNullOrEmpty() -> return false
+            password.value != passwordConfirmation.value -> {
+                passwordMatchError.value = true
+                return false
+            }
+        }
+        passwordMatchError.value = false
+        return true
+    }
+
+
+    fun clearStatus() {
         _status.value = RegisterUiStatus.Resume
     }
 
-    fun clearData(){
+    fun clearData() {
         name.value = ""
         email.value = ""
         phone.value = ""
         user.value = ""
         password.value = ""
+        passwordConfirmation.value = ""
     }
 
-    companion object{
+    companion object {
         val Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as SenderosApplication

@@ -87,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUser">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_ingresed_numberTwo"
+                android:id="@+id/textUserPassword"
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Contraseña"
@@ -109,11 +109,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textUserPassword"
+                android:id="@+id/textUserPasswordConfirmation"
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Confirmar contraseña"
-
+                android:text="@={viewmodelregister.passwordConfirmation}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
