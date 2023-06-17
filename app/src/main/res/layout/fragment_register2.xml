@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
-            name="viewmodel"
+            name="viewmodelRegister"
             type="com.example.senderos4.ui.login.viewmodels.LoginViewModel" />
     </data>
 
@@ -16,7 +17,7 @@
 
 
         <ImageView
-            android:id="@+id/image_background"
+            android:id="@+id/image_background_Register2"
             android:layout_width="@dimen/background_width"
             android:layout_height="@dimen/background_height"
             android:src="@drawable/backgroundlogin"
@@ -28,28 +29,27 @@
             app:tint="#8B9255FF" />
 
         <ImageView
-            android:id="@+id/image_logo"
+            android:id="@+id/image_logo_register2"
             android:layout_width="@dimen/logo_width"
             android:layout_height="@dimen/logo_height"
-            android:src="@drawable/logo"
+            android:src="@drawable/buhopurple"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.047" />
+            app:layout_constraintVertical_bias="0.01999998" />
 
         <TextView
             android:id="@+id/welcomeText"
-            android:layout_width="@dimen/welcomeText_width"
-            android:layout_height="@dimen/welcomeText_height"
-            android:text="@string/Welcome_Text"
-            android:textAlignment="textEnd"
+            android:layout_width="268dp"
+            android:layout_height="82dp"
+            android:layout_marginStart="16dp"
+            android:text="Crea un usuario para identificarte con SENDeros"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_item_"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_logo"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.116" />
+            app:layout_constraintVertical_bias="0.163" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUser"
@@ -63,84 +63,94 @@
             app:layout_constraintVertical_bias="0.304">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textUserName"
+                android:id="@+id/textUserIdentifier"
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
-                android:hint="@string/userName"
+                android:hint="Usuario: Jose_10"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
-                android:text="@={viewmodel.name}"
+                tools:layout_editor_absoluteY="171dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="@dimen/textInputLayoutUser_width"
+            android:layout_height="@dimen/textInputLayoutUser_height"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_ingresed"
+                android:layout_width="@dimen/textInputEditUser_width"
+                android:layout_height="@dimen/textInputEditUser_height"
+                android:hint="Confirmar contraseña"
+                app:errorEnabled="true"
+                tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPassword"
-            android:layout_width="@dimen/textInputLayoutPassword_width"
-            android:layout_height="@dimen/textInputLayoutPassword_height"
-            app:endIconMode="password_toggle"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/textInputLayout"
+            android:layout_width="@dimen/textInputLayoutUser_width"
+            android:layout_height="@dimen/textInputLayoutUser_height"
+            android:layout_marginTop="28dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUser"
-            app:layout_constraintVertical_bias="0.06999999">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUser">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textUserPassword"
-                android:layout_width="@dimen/textInputEditPassword_width"
-                android:layout_height="@dimen/textInputEditPassword_height"
-                android:hint="@string/passwordText"
-                android:inputType="textPassword"
-                android:text="@={viewmodel.password}"
-                app:errorEnabled="true" />
+                android:id="@+id/password_ingresed_numberTwo"
+                android:layout_width="@dimen/textInputEditUser_width"
+                android:layout_height="@dimen/textInputEditUser_height"
+                android:hint="Contraseña"
+                app:errorEnabled="true"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="171dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/ForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forgotPassword"
-            app:layout_constraintBottom_toTopOf="@+id/loginButton"
-            app:layout_constraintEnd_toEndOf="@+id/loginButton"
-            app:layout_constraintHorizontal_bias="0.96"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayoutPassword"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
-
         <Button
-            android:id="@+id/loginButton"
-            android:layout_width="@dimen/loginButton_width"
+            android:id="@+id/confirmation_register"
+            android:layout_width="0dp"
             android:layout_height="@dimen/loginButton_height"
-            android:layout_marginTop="92dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="87dp"
             android:backgroundTint="@color/buttonColor"
-            android:onClick="@{()->viewmodel.onLogin()}"
-            android:text="@string/login"
+            android:text="Finalizar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
         <TextView
             android:id="@+id/InvitationTextView"
             android:layout_width="@dimen/InvitationTextView_width"
             android:layout_height="@dimen/InvitationTextView_height"
-            android:layout_marginTop="20dp"
-            android:text="@string/InvitationText"
+            android:layout_marginTop="16dp"
+            android:text="¿Ya posees una cuenta en SENDeros?"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_register" />
 
         <TextView
             android:id="@+id/RegisterView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register"
+            android:layout_marginTop="8dp"
+            android:text="Iniciar sesion"
             android:textColor="@color/registerColor"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/InvitationTextView"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/InvitationTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

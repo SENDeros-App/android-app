@@ -63,6 +63,24 @@
         <action
             android:id="@+id/action_loginFragment_to_map_fragment"
             app:destination="@id/map_fragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.senderos4.ui.register.RegisterFragment"
+        android:label="Register" >
+        <action
+            android:id="@+id/action_registerFragment_to_register2Fragment"
+            app:destination="@id/register2Fragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/register2Fragment"
+        android:name="com.example.senderos4.ui.register.Register2Fragment"
+        android:label="Crear Usuario" />
 
 </navigation>

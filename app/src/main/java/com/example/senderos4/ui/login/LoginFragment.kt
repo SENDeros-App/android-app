@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.senderos4.MainActivity
 import com.example.senderos4.R
@@ -47,7 +48,14 @@ class LoginFragment : HiddenMenuFragment() {
 
         setViewModel()
         observeStatus()
+        click()
 
+    }
+
+    private fun click() {
+        binding.RegisterView.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
     }
 
     private fun setViewModel() {

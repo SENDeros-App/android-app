@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
-            name="viewmodel"
+            name="viewmodelRegister"
             type="com.example.senderos4.ui.login.viewmodels.LoginViewModel" />
     </data>
 
@@ -41,13 +42,13 @@
             android:id="@+id/welcomeText"
             android:layout_width="@dimen/welcomeText_width"
             android:layout_height="@dimen/welcomeText_height"
-            android:layout_marginStart="@dimen/little_padding_8"
+            android:layout_marginStart="16dp"
             android:text="Descubre nuevos caminos y conecta con el mundo a traves de SENDeros"
             android:textAlignment="textStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.069" />
+            app:layout_constraintVertical_bias="0.096" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUser"
@@ -67,7 +68,6 @@
                 android:hint="Nombre"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
-                android:text="@={viewmodel.name}"
                 tools:layout_editor_absoluteY="171dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -86,7 +86,6 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Correo electronico"
-                android:text="@={viewmodel.name}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
@@ -107,7 +106,6 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Numero de telefono"
-                android:text="@={viewmodel.name}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
@@ -115,41 +113,42 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutPassword"
-            android:layout_width="@dimen/textInputLayoutPassword_width"
-            android:layout_height="@dimen/textInputLayoutPassword_height"
-            android:layout_marginTop="36dp"
-            app:endIconMode="password_toggle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPhone">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textUserPassword"
-                android:layout_width="@dimen/textInputEditPassword_width"
-                android:layout_height="@dimen/textInputEditPassword_height"
-                android:hint="@string/passwordText"
-                android:inputType="textPassword"
-                android:text="@={viewmodel.password}"
-                app:errorEnabled="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <Button
-            android:id="@+id/loginButton"
-            android:layout_width="wrap_content"
+            android:id="@+id/confirmationInfo"
+            android:layout_width="0dp"
             android:layout_height="@dimen/loginButton_height"
             android:layout_marginStart="62dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="87dp"
-            android:layout_marginBottom="32dp"
             android:backgroundTint="@color/buttonColor"
-            android:onClick="@{()->viewmodel.onLogin()}"
             android:text="Confirmar"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.588"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPhone" />
+
+        <TextView
+            android:id="@+id/InvitationTextView"
+            android:layout_width="@dimen/InvitationTextView_width"
+            android:layout_height="@dimen/InvitationTextView_height"
+            android:layout_marginTop="32dp"
+            android:text="¿Ya posees una cuenta en SENDeros?"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmationInfo" />
+
+        <TextView
+            android:id="@+id/initSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Iniciar sesion"
+            android:textColor="@color/registerColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/InvitationTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
