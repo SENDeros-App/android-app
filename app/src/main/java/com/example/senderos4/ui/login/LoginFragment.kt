@@ -1,6 +1,7 @@
 package com.example.senderos4.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,13 @@ import com.example.senderos4.MainActivity
 import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.databinding.FragmentLoginBinding
+import com.example.senderos4.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.ui.login.viewmodels.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
+import retrofit2.HttpException
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : HiddenMenuFragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -41,13 +44,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*val token = app.getTokent() // Obtener el token
-
-        if (token.isNotEmpty()) {
-            // El usuario ya ha iniciado sesión antes, va a la pantalla principal
-            findNavController().navigate(R.id.action_loginFragment_to_welcomeFragment)
-            return
-        }*/
 
         setViewModel()
         observeStatus()
@@ -69,7 +65,19 @@ class LoginFragment : Fragment() {
     private fun handleUiStatus(status: LoginUiStatus) {
         when(status) {
             is LoginUiStatus.Error -> {
-                Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
+
+                if (status.exception is HttpException){
+                    when(status.exception.code()) {
+                        404 ->
+                        Toast.makeText(requireContext(), "Malas credenciales", Toast.LENGTH_SHORT).show()
+                        500 ->
+                            Toast.makeText(requireContext(), "Error al conectarse al servidor ...", Toast.LENGTH_SHORT).show()
+                    }
+
+                } else {
+                    Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
+                }
+                Log.d("Error Login", "error", status.exception)
             }
             is LoginUiStatus.ErrorWithMessage -> {
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()

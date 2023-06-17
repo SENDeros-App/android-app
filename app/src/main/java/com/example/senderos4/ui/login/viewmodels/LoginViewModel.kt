@@ -25,9 +25,15 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
         viewModelScope.launch {
             _status.postValue(
                 when(val response = repository.login(name, password)){
-                    is ApiResponse.Error -> LoginUiStatus.Error(response.exception)
-                    is ApiResponse.ErrorWithMessage -> LoginUiStatus.ErrorWithMessage(response.message)
-                    is ApiResponse.Success -> LoginUiStatus.Success(response.data)
+                    is ApiResponse.Error -> {
+                        LoginUiStatus.Error(response.exception)
+                    }
+                    is ApiResponse.ErrorWithMessage -> {
+                        LoginUiStatus.ErrorWithMessage(response.message)
+                    }
+                    is ApiResponse.Success -> {
+                        LoginUiStatus.Success(response.data)
+                    }
 
                 }
             )

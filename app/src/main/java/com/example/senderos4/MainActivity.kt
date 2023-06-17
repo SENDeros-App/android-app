@@ -104,13 +104,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateNavigationViewHeader() {
         app.isLoggedIn.observe(this) { isLoggedIn ->
             if (isLoggedIn) {
-                loginTextView.text = "Logout"
+                loginTextView.text = "Cerrar sesion"
                 loginTextView.setOnClickListener {
                     app.clearAuthToken()
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             } else {
-                loginTextView.text = "Login"
+                loginTextView.text = "Iniciar sesion"
                 loginTextView.setOnClickListener {
                     navController.navigate(R.id.action_map_fragment_to_loginFragment)
                     drawerLayout.closeDrawer(GravityCompat.START)

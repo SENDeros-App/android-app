@@ -11,7 +11,7 @@ class ClassificationRepository(private val users:List<User>, private var headers
     fun getUsersTopByDivision(division: String, count: Int): List<User> {
         val usersForDivision = usersByDivision[division] ?: emptyList()
         return usersForDivision
-            .sortedByDescending { it.px.toInt() }
+            //.sortedByDescending { it.px.toInt() }
             .take(count)
     }
 
