@@ -70,7 +70,7 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
         val Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as SenderosApplication
-                LoginViewModel(app.credentialsRepository)
+                LoginViewModel(app.loginRepository)
             }
         }
 

@@ -10,6 +10,7 @@ import com.example.senderos4.data.users
 import com.example.senderos4.network.retrofit.RetrofitInstance
 import com.example.senderos4.ui.clasificacion.repositories.ClassificationRepository
 import com.example.senderos4.ui.login.repositories.LoginRepository
+import com.example.senderos4.ui.register.repositories.RegisterRepository
 
 class SenderosApplication:Application() {
 
@@ -65,8 +66,12 @@ class SenderosApplication:Application() {
     }
 
 
-    val credentialsRepository: LoginRepository by lazy {
+    val loginRepository: LoginRepository by lazy {
         LoginRepository(getAPIService())
+    }
+
+    val registerRepository:RegisterRepository by lazy{
+        RegisterRepository(getAPIService())
     }
 
 

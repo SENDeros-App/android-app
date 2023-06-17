@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewmodelRegister"
-            type="com.example.senderos4.ui.login.viewmodels.LoginViewModel" />
+            name="viewmodelregister"
+            type="com.example.senderos4.ui.register.viewmodels.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,6 +67,7 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Usuario: Jose_10"
+                android:text="@={viewmodelregister.user}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
@@ -74,26 +75,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
-            android:layout_width="@dimen/textInputLayoutUser_width"
-            android:layout_height="@dimen/textInputLayoutUser_height"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.509"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_ingresed"
-                android:layout_width="@dimen/textInputEditUser_width"
-                android:layout_height="@dimen/textInputEditUser_height"
-                android:hint="Confirmar contraseña"
-                app:errorEnabled="true"
-                tools:layout_editor_absoluteX="74dp"
-                tools:layout_editor_absoluteY="171dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -110,6 +91,29 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Contraseña"
+                android:text="@={viewmodelregister.password}"
+                app:errorEnabled="true"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="171dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="@dimen/textInputLayoutUser_width"
+            android:layout_height="@dimen/textInputLayoutUser_height"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_ingresed"
+                android:layout_width="@dimen/textInputEditUser_width"
+                android:layout_height="@dimen/textInputEditUser_height"
+                android:hint="Confirmar contraseña"
+
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
@@ -125,6 +129,7 @@
             android:layout_marginEnd="87dp"
             android:backgroundTint="@color/buttonColor"
             android:text="Finalizar"
+            android:onClick="@{()->viewmodelregister.orRegister()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

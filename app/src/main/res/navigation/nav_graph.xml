@@ -81,6 +81,13 @@
     <fragment
         android:id="@+id/register2Fragment"
         android:name="com.example.senderos4.ui.register.Register2Fragment"
-        android:label="Crear Usuario" />
+        android:label="Crear Usuario" >
+        <action
+            android:id="@+id/action_register2Fragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_register2Fragment_to_map_fragment"
+            app:destination="@id/map_fragment" />
+    </fragment>
 
 </navigation>

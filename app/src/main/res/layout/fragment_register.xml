@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewmodelRegister"
-            type="com.example.senderos4.ui.login.viewmodels.LoginViewModel" />
+            name="viewmodelregister"
+            type="com.example.senderos4.ui.register.viewmodels.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,6 +66,7 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Nombre"
+                android:text="@={viewmodelregister.name}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
@@ -86,6 +87,7 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Correo electronico"
+                android:text="@={viewmodelregister.email}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
@@ -106,6 +108,7 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Numero de telefono"
+                android:text="@={viewmodelregister.phone}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
