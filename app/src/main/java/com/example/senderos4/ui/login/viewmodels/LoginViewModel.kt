@@ -42,7 +42,7 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
 
     fun onLogin() {
         if(!validateData()){
-            _status.value = LoginUiStatus.ErrorWithMessage("Wrong information")
+            _status.value = LoginUiStatus.ErrorWithMessage("Por favor complete todos lo campos")
             return
         }
 

@@ -2,6 +2,7 @@ package com.example.senderos4.ui.register.viewmodels
 
 import android.provider.ContactsContract.CommonDataKinds.Email
 import android.text.Spannable.Factory
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,7 +45,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
     fun orRegister() {
         if (!validateData()) {
-            _status.value = RegisterUiStatus.ErrorWithMessage("Por favor, completa todos los campos correctamente")
+            _status.value = RegisterUiStatus.ErrorWithMessage("Por favor, completa todos los correctamente")
             return
         }
 
@@ -68,6 +69,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
             passwordConfirmation.value.isNullOrEmpty() -> return false
             password.value != passwordConfirmation.value -> {
                 passwordMatchError.value = true
+                _status.value = RegisterUiStatus.ErrorWithMessage("Las contraseñas ingresadas no coinsiden")
                 return false
             }
         }

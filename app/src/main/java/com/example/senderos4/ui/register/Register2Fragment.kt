@@ -64,4 +64,9 @@ class Register2Fragment : Fragment() {
             else -> {}
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        registerViewModel.clearData()
+    }
 }

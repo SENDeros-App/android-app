@@ -15,7 +15,7 @@ class RegisterRepository(private val api:AuthService) {
 
         } catch (e: HttpException){
 
-            if(e.code() === 400){
+            if(e.code() == 400){
                 return ApiResponse.ErrorWithMessage("Invalid fields, name, email or password")
             }
             return ApiResponse.Error(e)

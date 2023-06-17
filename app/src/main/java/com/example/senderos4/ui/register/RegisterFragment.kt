@@ -40,7 +40,7 @@ class RegisterFragment : Fragment() {
     private fun click() {
 
         binding.confirmationInfo.setOnClickListener {
-            if (validarCampos()) {
+            if (validateCampos()) {
                 val name = binding.textUserName.text.toString()
                 val email = binding.textUseremail.text.toString()
                 val phone = binding.textUserPhoneNumbre.text.toString()
@@ -60,11 +60,30 @@ class RegisterFragment : Fragment() {
         binding.viewmodelregister = registerViewModel
     }
 
-    private fun validarCampos(): Boolean {
+    private fun validateCampos(): Boolean {
         val name = binding.textUserName.text.toString()
-        val email = binding.textUseremail.toString()
+        val email = binding.textUseremail.text.toString()
         val phone = binding.textUserPhoneNumbre.text.toString()
 
-        return name.isNotEmpty() && email.isNotEmpty() && phone.isNotEmpty()
+        // Validar que todos los campos estén completos
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            return false
+        }
+
+        // Validar el número de teléfono
+        if (!validatePhoneNumber(phone)) {
+            Toast.makeText(requireContext(), "El número de teléfono ingresado no es válido", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
     }
+
+    private fun validatePhoneNumber(phoneNumber: String): Boolean {
+        val regex = Regex("^\\d{8}$")
+        return regex.matches(phoneNumber)
+    }
+
+
+
 }

@@ -66,8 +66,8 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Nombre"
+                android:maxLength="10"
                 android:text="@={viewmodelregister.name}"
-                app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
 
@@ -87,6 +87,7 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Correo electronico"
+                android:inputType="textEmailAddress"
                 android:text="@={viewmodelregister.email}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"
@@ -108,6 +109,8 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="Numero de telefono"
+                android:inputType="number"
+                android:maxLength="8"
                 android:text="@={viewmodelregister.phone}"
                 app:errorEnabled="true"
                 tools:layout_editor_absoluteX="74dp"

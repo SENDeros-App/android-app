@@ -100,4 +100,9 @@ class LoginFragment : HiddenMenuFragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        loginViewModel.clearData()
+    }
+
 }
