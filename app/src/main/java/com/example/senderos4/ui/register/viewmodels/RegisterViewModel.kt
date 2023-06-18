@@ -24,7 +24,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     var user = MutableLiveData("")
     var password = MutableLiveData("")
     var passwordConfirmation = MutableLiveData("")
-    var passwordMatchError = MutableLiveData(false)
 
     private val _status = MutableLiveData<RegisterUiStatus>(RegisterUiStatus.Resume)
 
@@ -68,12 +67,12 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
             password.value.isNullOrEmpty() -> return false
             passwordConfirmation.value.isNullOrEmpty() -> return false
             password.value != passwordConfirmation.value -> {
-                passwordMatchError.value = true
                 _status.value = RegisterUiStatus.ErrorWithMessage("Las contraseñas ingresadas no coinsiden")
+
                 return false
             }
         }
-        passwordMatchError.value = false
+
         return true
     }
 

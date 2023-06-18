@@ -24,7 +24,6 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,48 +31,49 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setViewModel()
         click()
-
-    }
-
-    private fun click() {
-
-        binding.confirmationInfo.setOnClickListener {
-            if (validateCampos()) {
-                val name = binding.textUserName.text.toString()
-                val email = binding.textUseremail.text.toString()
-                val phone = binding.textUserPhoneNumbre.text.toString()
-
-                registerViewModel.name.value = name
-                registerViewModel.email.value = email
-                registerViewModel.phone.value = phone
-
-                findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
-            } else {
-                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
-            }
-        }
+        setViewModel()
     }
 
     private fun setViewModel() {
         binding.viewmodelregister = registerViewModel
     }
 
-    private fun validateCampos(): Boolean {
-        val name = binding.textUserName.text.toString()
-        val email = binding.textUseremail.text.toString()
-        val phone = binding.textUserPhoneNumbre.text.toString()
+    private fun click() {
+        binding.confirmationInfo.setOnClickListener {
+            if (validateCampos()) {
+                registerViewModel.apply {
+                    name.value = binding.textUserName.text.toString()
+                    email.value = binding.textUseremail.text.toString()
+                    phone.value = binding.textUserPhoneNumbre.text.toString()
+                }
 
-        // Validar que todos los campos estén completos
-        if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-            return false
+                findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
+            }
         }
 
-        // Validar el número de teléfono
-        if (!validatePhoneNumber(phone)) {
-            Toast.makeText(requireContext(), "El número de teléfono ingresado no es válido", Toast.LENGTH_SHORT).show()
-            return false
+        binding.initSesion.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+    }
+
+    private fun validateCampos(): Boolean {
+        with(binding) {
+            val name = textUserName.text.toString()
+            val email = textUseremail.text.toString()
+            val phone = textUserPhoneNumbre.text.toString()
+
+            // Validar que todos los campos estén completos
+            if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+                Toast.makeText(requireContext(), "Por favor, completa todos los correctamente", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+            // Validar el número de teléfono
+            if (!validatePhoneNumber(phone)) {
+                Toast.makeText(requireContext(), "El número de teléfono ingresado no es válido", Toast.LENGTH_SHORT).show()
+                return false
+            }
         }
 
         return true
@@ -83,7 +83,5 @@ class RegisterFragment : Fragment() {
         val regex = Regex("^\\d{8}$")
         return regex.matches(phoneNumber)
     }
-
-
-
 }
+

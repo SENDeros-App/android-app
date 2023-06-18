@@ -44,6 +44,7 @@ class Register2Fragment : Fragment() {
         }
     }
 
+
     private fun setViewModel(){
         binding.viewmodelregister = registerViewModel
     }
@@ -68,5 +69,6 @@ class Register2Fragment : Fragment() {
     override fun onPause() {
         super.onPause()
         registerViewModel.clearData()
+
     }
 }
