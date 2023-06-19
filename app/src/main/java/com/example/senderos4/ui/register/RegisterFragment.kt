@@ -51,10 +51,6 @@ class RegisterFragment : Fragment() {
                 findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
             }
         }
-
-        binding.initSesion.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-        }
     }
 
     private fun validateCampos(): Boolean {
@@ -68,20 +64,10 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(requireContext(), "Por favor, completa todos los correctamente", Toast.LENGTH_SHORT).show()
                 return false
             }
-
-            // Validar el número de teléfono
-            if (!validatePhoneNumber(phone)) {
-                Toast.makeText(requireContext(), "El número de teléfono ingresado no es válido", Toast.LENGTH_SHORT).show()
-                return false
-            }
         }
 
         return true
     }
 
-    private fun validatePhoneNumber(phoneNumber: String): Boolean {
-        val regex = Regex("^\\d{8}$")
-        return regex.matches(phoneNumber)
-    }
 }
 

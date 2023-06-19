@@ -80,6 +80,7 @@ class LoginFragment : HiddenMenuFragment() {
                         Toast.makeText(requireContext(), "Malas credenciales", Toast.LENGTH_SHORT).show()
                         500 ->
                             Toast.makeText(requireContext(), "Error al conectarse al servidor ...", Toast.LENGTH_SHORT).show()
+                        401 ->  Toast.makeText(requireContext(), "Contraseña invalida", Toast.LENGTH_SHORT).show()
                     }
 
                 } else {

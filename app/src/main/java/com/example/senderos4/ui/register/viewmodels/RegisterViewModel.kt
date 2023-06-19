@@ -49,11 +49,11 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
         }
 
         register(
-            name = name.value!!,
-            email = email.value!!,
-            phone = phone.value!!,
             user = user.value!!,
-            password = password.value!!
+            email = email.value!!,
+            password = password.value!!,
+            name = name.value!!,
+            phone = phone.value!!,
         )
     }
 
