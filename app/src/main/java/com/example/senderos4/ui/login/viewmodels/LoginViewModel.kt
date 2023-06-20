@@ -41,6 +41,7 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
     }
 
     fun onLogin() {
+
         if(!validateData()){
             _status.value = LoginUiStatus.ErrorWithMessage("Por favor complete todos lo campos")
             return
@@ -49,7 +50,7 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
         login(name = name.value!!, password = password.value!!)
     }
 
-    private fun validateData(): Boolean {
+    fun validateData(): Boolean {
         when {
             name.value.isNullOrEmpty() -> return false
             password.value.isNullOrEmpty() -> return false

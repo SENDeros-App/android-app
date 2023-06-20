@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.senderos4.ui.login.viewmodels.LoginViewModel" />
@@ -55,6 +56,7 @@
             android:id="@+id/textInputLayoutUser"
             android:layout_width="@dimen/textInputLayoutUser_width"
             android:layout_height="@dimen/textInputLayoutUser_height"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,9 +69,8 @@
                 android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="@string/userName"
-                app:errorEnabled="true"
-                tools:layout_editor_absoluteX="74dp"
                 android:text="@={viewmodel.name}"
+                tools:layout_editor_absoluteX="74dp"
                 tools:layout_editor_absoluteY="171dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -79,6 +80,7 @@
             android:layout_width="@dimen/textInputLayoutPassword_width"
             android:layout_height="@dimen/textInputLayoutPassword_height"
             app:endIconMode="password_toggle"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +115,6 @@
             android:layout_height="@dimen/loginButton_height"
             android:layout_marginTop="92dp"
             android:backgroundTint="@color/buttonColor"
-            android:onClick="@{()->viewmodel.onLogin()}"
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

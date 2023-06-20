@@ -18,6 +18,7 @@ import com.example.senderos4.databinding.FragmentLoginBinding
 import com.example.senderos4.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.ui.login.viewmodels.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import retrofit2.HttpException
 
 
@@ -50,13 +51,40 @@ class LoginFragment : HiddenMenuFragment() {
         observeStatus()
         click()
 
+
     }
 
     private fun click() {
         binding.RegisterView.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
+        binding.loginButton.setOnClickListener {
+            // Validar los campos antes de realizar el inicio de sesión
+            val isValid = loginViewModel.validateData()
+
+            if (!isValid) {
+                setErrorText(binding.textInputLayoutUser, "Campos requeridos")
+                setErrorText(binding.textInputLayoutPassword, "Campos requeridos")
+            } else {
+                loginViewModel.onLogin()
+            }
+        }
+
+        binding.textInputLayoutPassword.editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.textInputLayoutPassword.error = null
+            }
+        }
+
+        binding.textInputLayoutUser.editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.textInputLayoutUser.error = null
+            }
+        }
+
     }
+
 
     private fun setViewModel() {
         binding.viewmodel = loginViewModel
@@ -67,6 +95,7 @@ class LoginFragment : HiddenMenuFragment() {
         loginViewModel.status.observe(viewLifecycleOwner) { status ->
             handleUiStatus(status)
         }
+
     }
 
 
@@ -76,11 +105,18 @@ class LoginFragment : HiddenMenuFragment() {
 
                 if (status.exception is HttpException){
                     when(status.exception.code()) {
-                        404 ->
-                        Toast.makeText(requireContext(), "Malas credenciales", Toast.LENGTH_SHORT).show()
+                        404 ->{
+                            //Toast.makeText(requireContext(), "Malas credenciales", Toast.LENGTH_SHORT).show()
+                            setErrorText(binding.textInputLayoutUser, "Malas credenciales")
+                            setErrorText(binding.textInputLayoutPassword, "Malas credenciales")
+                        }
                         500 ->
                             Toast.makeText(requireContext(), "Error al conectarse al servidor ...", Toast.LENGTH_SHORT).show()
-                        401 ->  Toast.makeText(requireContext(), "Contraseña invalida", Toast.LENGTH_SHORT).show()
+                        401 -> {
+                            //Toast.makeText(requireContext(), "Los datos ingresados son invalidos", Toast.LENGTH_SHORT).show()
+                            setErrorText(binding.textInputLayoutUser, "Los datos ingresados son invalidos")
+                            setErrorText(binding.textInputLayoutPassword, "Los datos ingresados son invalidos")
+                        }
                     }
 
                 } else {
@@ -90,6 +126,7 @@ class LoginFragment : HiddenMenuFragment() {
             }
             is LoginUiStatus.ErrorWithMessage -> {
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
+
             }
             is LoginUiStatus.Success -> {
                 loginViewModel.clearStatus()
@@ -100,6 +137,14 @@ class LoginFragment : HiddenMenuFragment() {
             else -> {}
         }
     }
+
+
+    //funcion para mostrar el error
+    private fun setErrorText(textInputLayout: TextInputLayout, errorMessage: String) {
+        textInputLayout.error = errorMessage
+        textInputLayout.clearFocus()
+    }
+
 
     override fun onPause() {
         super.onPause()
