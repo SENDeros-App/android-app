@@ -51,7 +51,6 @@ class LoginFragment : HiddenMenuFragment() {
         observeStatus()
         click()
 
-
     }
 
     private fun click() {
