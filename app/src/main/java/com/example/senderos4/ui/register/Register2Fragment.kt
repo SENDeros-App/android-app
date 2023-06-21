@@ -1,6 +1,7 @@
 package com.example.senderos4.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.databinding.FragmentRegister2Binding
 import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
+import retrofit2.HttpException
 
 
 class Register2Fragment : Fragment() {
@@ -52,8 +54,19 @@ class Register2Fragment : Fragment() {
     private fun handleUiStatus(status: RegisterUiStatus) {
         when (status) {
             is RegisterUiStatus.Error -> {
-                Toast.makeText(requireContext(), "An error has occurred", Toast.LENGTH_SHORT).show()
+                if (status.exception is HttpException){
+                    when(status.exception.code()) {
+                        409 ->{
+                            Toast.makeText(requireContext(), "El correo ya ha sido registrado", Toast.LENGTH_SHORT).show()
 
+                            findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
+                }
+                Log.d("Error Login", "error", status.exception)
             }
             is RegisterUiStatus.ErrorWithMessage -> {
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
@@ -67,9 +80,9 @@ class Register2Fragment : Fragment() {
         }
     }
 
-    override fun onPause() {
+    /*override fun onPause() {
         super.onPause()
         registerViewModel.clearData()
 
-    }
+    }*/
 }
