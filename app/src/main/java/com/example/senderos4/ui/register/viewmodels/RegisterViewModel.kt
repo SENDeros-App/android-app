@@ -1,8 +1,5 @@
 package com.example.senderos4.ui.register.viewmodels
 
-import android.provider.ContactsContract.CommonDataKinds.Email
-import android.text.Spannable.Factory
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -49,10 +46,10 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
         }
 
         register(
-            user = user.value!!,
+            name = name.value!!,
             email = email.value!!,
             password = password.value!!,
-            name = name.value!!,
+            user = user.value!!,
             phone = phone.value!!,
         )
     }
@@ -72,7 +69,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 return false
             }
         }
-
         return true
     }
 

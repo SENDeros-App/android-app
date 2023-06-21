@@ -1,6 +1,5 @@
 package com.example.senderos4.ui.register.repositories
 
-import android.util.Log
 import com.example.senderos4.network.ApiResponse
 import com.example.senderos4.network.dto.register.RegisterRequest
 import com.example.senderos4.network.service.AuthService
@@ -21,6 +20,7 @@ class RegisterRepository(private val api:AuthService) {
             }
             return ApiResponse.Error(e)
         } catch (e: IOException){
+
             return ApiResponse.Error(e)
 
         }

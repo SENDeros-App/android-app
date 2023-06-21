@@ -53,6 +53,7 @@ class Register2Fragment : Fragment() {
         when (status) {
             is RegisterUiStatus.Error -> {
                 Toast.makeText(requireContext(), "An error has occurred", Toast.LENGTH_SHORT).show()
+
             }
             is RegisterUiStatus.ErrorWithMessage -> {
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
@@ -60,7 +61,7 @@ class Register2Fragment : Fragment() {
             is RegisterUiStatus.Success -> {
                 registerViewModel.clearStatus()
                 registerViewModel.clearData()
-                findNavController().navigate(R.id.action_register2Fragment_to_map_fragment)
+                findNavController().navigate(R.id.action_register2Fragment_to_loginFragment)
             }
             else -> {}
         }
