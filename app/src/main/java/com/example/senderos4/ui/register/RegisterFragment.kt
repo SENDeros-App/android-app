@@ -23,10 +23,6 @@ class RegisterFragment : Fragment() {
         RegisterViewModel.Factory
     }
 
-    companion object {
-        private const val ERROR_MESSAGE_EMPTY_FIELD = "Por favor, completa este campo"
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,11 +38,6 @@ class RegisterFragment : Fragment() {
         setViewModel()
         clearError()
         identError()
-
-    }
-
-    private fun setViewModel() {
-        binding.viewmodelregister = registerViewModel
     }
 
     fun identError() {
@@ -54,14 +45,16 @@ class RegisterFragment : Fragment() {
         val errorMessage = arguments?.getString("errorMessage")
         if (!errorField.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
             when (errorField) {
-                "email" -> binding.textInputLayoutEmail.error = errorMessage
-                "userName" -> binding.textInputLayoutUser.error = errorMessage
-                "phoneNumber" -> binding.textInputLayoutPhone.error = errorMessage
+                "email" -> ErrorUtils.setErrorText(binding.textInputLayoutEmail, errorMessage)
+                "userName" -> ErrorUtils.setErrorText(binding.textInputLayoutUser, errorMessage)
+                "phoneNumber" -> ErrorUtils.setErrorText(binding.textInputLayoutPhone, errorMessage)
             }
         }
     }
 
-
+    private fun setViewModel() {
+        binding.viewmodelregister = registerViewModel
+    }
 
     private fun click() {
         binding.confirmationInfo.setOnClickListener {
@@ -71,46 +64,27 @@ class RegisterFragment : Fragment() {
                 phone.value = binding.textUserPhoneNumbre.text.toString()
             }
 
-            val fieldsAreValid = registerViewModel.validateFields()
-            if (fieldsAreValid) {
+            if (registerViewModel.validateFields()) {
                 findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
             } else {
-                val textInputLayouts = listOf(
-                    binding.textInputLayoutUser,
-                    binding.textInputLayoutEmail,
-                    binding.textInputLayoutPhone
-                )
-                textInputLayouts.forEach { textInputLayout ->
-                    setErrorText(textInputLayout, ERROR_MESSAGE_EMPTY_FIELD)
-                }
+                ErrorUtils.setErrorText(binding.textInputLayoutUser, "Por favor, completa este campo")
+                ErrorUtils.setErrorText(binding.textInputLayoutEmail, "Por favor, completa este campo")
+                ErrorUtils.setErrorText(binding.textInputLayoutPhone, "Por favor, completa este campo")
+
+                registerViewModel.validateFields()
             }
         }
     }
 
-
     private fun clearError() {
-        val textInputLayouts = listOf(
-            binding.textInputLayoutUser,
-            binding.textInputLayoutEmail,
-            binding.textInputLayoutPhone
-        )
-        textInputLayouts.forEach { textInputLayout ->
-            textInputLayout.clearErrorOnFocusChange()
-        }
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutEmail)
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPhone)
     }
 
     fun TextInputLayout.clearErrorOnFocusChange() {
-        editText?.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                error = null
-            }
-        }
+        ErrorUtils.clearErrorOnFocusChange(this)
     }
-
-    private fun setErrorText(textInputLayout: TextInputLayout, errorMessage: String) {
-        textInputLayout.error = errorMessage
-        textInputLayout.clearFocus()
-    }
-
 }
+
 

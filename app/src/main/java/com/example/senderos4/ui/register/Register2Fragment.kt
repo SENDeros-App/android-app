@@ -24,10 +24,6 @@ class Register2Fragment : Fragment() {
         RegisterViewModel.Factory
     }
 
-    companion object {
-        private const val ERROR_MESSAGE_PASSWORD_MISMATCH = "Las contraseñas no coinciden"
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +37,7 @@ class Register2Fragment : Fragment() {
 
         observeStatus()
         setViewModel()
-        clearError()
+        //clearError()
     }
 
     private fun observeStatus() {
@@ -62,8 +58,10 @@ class Register2Fragment : Fragment() {
 
         if (!passwordMatch) {
             passwordTextInputLayouts.forEach { textInputLayout ->
-                setErrorText(textInputLayout, ERROR_MESSAGE_PASSWORD_MISMATCH)
+                ErrorUtils.setErrorText(textInputLayout, "Las contraseñas no coinciden")
+                ErrorUtils.clearErrorOnFocusChange(textInputLayout)
             }
+
         } else {
             passwordTextInputLayouts.forEach { textInputLayout ->
                 textInputLayout.error = null
@@ -71,28 +69,6 @@ class Register2Fragment : Fragment() {
         }
     }
 
-    private fun clearError() {
-        val passwordTextInputLayouts = listOf(
-            binding.textInputLayoutPassword,
-            binding.textInputLayoutPassword2
-        )
-        passwordTextInputLayouts.forEach { textInputLayout ->
-            textInputLayout.clearErrorOnFocusChange()
-        }
-    }
-
-    fun TextInputLayout.clearErrorOnFocusChange() {
-        editText?.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                error = null
-            }
-        }
-    }
-
-    private fun setErrorText(textInputLayout: TextInputLayout, errorMessage: String) {
-        textInputLayout.error = errorMessage
-        textInputLayout.clearFocus()
-    }
 
     private fun setViewModel() {
         binding.viewmodelregister = registerViewModel
@@ -103,32 +79,40 @@ class Register2Fragment : Fragment() {
             is RegisterUiStatus.Error -> {
                 if (status.exception is HttpException) {
                     when (status.exception.code()) {
-                        500 ->
-                            Toast.makeText(
-                                requireContext(),
-                                "Error al conectarse al servidor ...",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        500 -> Toast.makeText(
+                            requireContext(),
+                            "Error al conectarse al servidor ...",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-
                 } else {
                     Toast.makeText(
                         requireContext(),
                         "Error has occurred",
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                 }
                 Log.d("Error Login", "error", status.exception)
             }
 
             is RegisterUiStatus.ErrorWithMessage -> {
                 registerViewModel.clearStatus()
-                Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
                 when (status.message) {
-                    "email ya registrado " -> navigateToRegisterFragment("email", "El email es inválido")
-                    "Usuario ya registrado " -> navigateToRegisterFragment("userName", "El nombre de usuario es inválido")
-                    "telefonico ya registrado" -> navigateToRegisterFragment("phoneNumber", "El número de teléfono es inválido")
+                    "email ya registrado " -> ErrorUtils.navigateToRegisterFragment(
+                        this,
+                        "email",
+                        "El email es inválido"
+                    )
+                    "Usuario ya registrado " -> {
+                        ErrorUtils.setErrorText(binding.textInputLayoutUser, "El usuario es invalido")
+                        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
+                    }
+                    "telefonico ya registrado" -> ErrorUtils.navigateToRegisterFragment(
+                        this,
+                        "phoneNumber",
+                        "El número de teléfono es inválido"
+                    )
                 }
             }
 
@@ -138,13 +122,10 @@ class Register2Fragment : Fragment() {
                 findNavController().navigate(R.id.action_register2Fragment_to_loginFragment)
             }
 
-            else -> {}
+            else -> {
+            }
         }
     }
-
-    private fun navigateToRegisterFragment(errorField: String, errorMessage: String) {
-        val bundle = bundleOf("errorField" to errorField, "errorMessage" to errorMessage)
-        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
-    }
 }
+
 
