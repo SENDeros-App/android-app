@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.databinding.FragmentRegister2Binding
 import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
+import com.google.android.material.textfield.TextInputLayout
 import retrofit2.HttpException
 
 
@@ -38,6 +39,7 @@ class Register2Fragment : Fragment() {
 
         observeStatus()
         setViewModel()
+        clearError()
     }
 
 
@@ -46,8 +48,35 @@ class Register2Fragment : Fragment() {
         registerViewModel.status.observe(viewLifecycleOwner) { status ->
             handleUiStatus(status)
         }
+
+        registerViewModel.passwordMatch.observe(viewLifecycleOwner) { passwordMatch ->
+            // Actualiza la interfaz de usuario con el estado de igualdad de las contraseñas
+            if (!passwordMatch) {
+                setErrorText(binding.textInputLayoutPassword,"Las contraseñas no coinciden")
+                setErrorText(binding.textInputLayoutPassword2, "Las contraseñas no coinciden")
+            } else {
+                binding.textInputLayoutPassword.error = null
+                binding.textInputLayoutPassword2.error = null
+            }
+        }
     }
 
+    private fun clearError() {
+        binding.textInputLayoutPassword.clearErrorOnFocusChange()
+        binding.textInputLayoutPassword2.clearErrorOnFocusChange()
+    }
+
+    fun TextInputLayout.clearErrorOnFocusChange() {
+        editText?.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                error = null
+            }
+        }
+    }
+    private fun setErrorText(textInputLayout: TextInputLayout, errorMessage: String) {
+        textInputLayout.error = errorMessage
+        textInputLayout.clearFocus()
+    }
 
     private fun setViewModel() {
         binding.viewmodelregister = registerViewModel

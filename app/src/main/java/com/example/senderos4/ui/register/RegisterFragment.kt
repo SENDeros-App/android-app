@@ -101,6 +101,5 @@ class RegisterFragment : Fragment() {
         textInputLayout.clearFocus()
     }
 
-
 }
 
