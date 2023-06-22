@@ -23,6 +23,10 @@ class RegisterFragment : Fragment() {
         RegisterViewModel.Factory
     }
 
+    companion object {
+        private const val ERROR_MESSAGE_EMPTY_FIELD = "Por favor, completa este campo"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +45,11 @@ class RegisterFragment : Fragment() {
 
     }
 
-    fun identError(){
+    private fun setViewModel() {
+        binding.viewmodelregister = registerViewModel
+    }
+
+    fun identError() {
         val errorField = arguments?.getString("errorField")
         val errorMessage = arguments?.getString("errorMessage")
         if (!errorField.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
@@ -54,10 +62,6 @@ class RegisterFragment : Fragment() {
     }
 
 
-    private fun setViewModel() {
-        binding.viewmodelregister = registerViewModel
-    }
-
 
     private fun click() {
         binding.confirmationInfo.setOnClickListener {
@@ -67,25 +71,32 @@ class RegisterFragment : Fragment() {
                 phone.value = binding.textUserPhoneNumbre.text.toString()
             }
 
-            if (registerViewModel.validateFields()) {
+            val fieldsAreValid = registerViewModel.validateFields()
+            if (fieldsAreValid) {
                 findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
             } else {
-                setErrorText(binding.textInputLayoutUser, "Por favor, completa este campo")
-                setErrorText(binding.textInputLayoutEmail, "Por favor, completa este campo")
-                setErrorText(binding.textInputLayoutPhone, "Por favor, completa este campo")
-
-                registerViewModel.validateFields()
+                val textInputLayouts = listOf(
+                    binding.textInputLayoutUser,
+                    binding.textInputLayoutEmail,
+                    binding.textInputLayoutPhone
+                )
+                textInputLayouts.forEach { textInputLayout ->
+                    setErrorText(textInputLayout, ERROR_MESSAGE_EMPTY_FIELD)
+                }
             }
         }
-
-
     }
 
 
     private fun clearError() {
-        binding.textInputLayoutUser.clearErrorOnFocusChange()
-        binding.textInputLayoutEmail.clearErrorOnFocusChange()
-        binding.textInputLayoutPhone.clearErrorOnFocusChange()
+        val textInputLayouts = listOf(
+            binding.textInputLayoutUser,
+            binding.textInputLayoutEmail,
+            binding.textInputLayoutPhone
+        )
+        textInputLayouts.forEach { textInputLayout ->
+            textInputLayout.clearErrorOnFocusChange()
+        }
     }
 
     fun TextInputLayout.clearErrorOnFocusChange() {

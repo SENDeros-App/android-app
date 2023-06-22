@@ -20,16 +20,18 @@ import retrofit2.HttpException
 class Register2Fragment : Fragment() {
 
     private lateinit var binding: FragmentRegister2Binding
-
     private val registerViewModel: RegisterViewModel by activityViewModels {
         RegisterViewModel.Factory
+    }
+
+    companion object {
+        private const val ERROR_MESSAGE_PASSWORD_MISMATCH = "Las contraseñas no coinciden"
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentRegister2Binding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,28 +44,41 @@ class Register2Fragment : Fragment() {
         clearError()
     }
 
-
-
     private fun observeStatus() {
         registerViewModel.status.observe(viewLifecycleOwner) { status ->
             handleUiStatus(status)
         }
 
         registerViewModel.passwordMatch.observe(viewLifecycleOwner) { passwordMatch ->
-            // Actualiza la interfaz de usuario con el estado de igualdad de las contraseñas
-            if (!passwordMatch) {
-                setErrorText(binding.textInputLayoutPassword,"Las contraseñas no coinciden")
-                setErrorText(binding.textInputLayoutPassword2, "Las contraseñas no coinciden")
-            } else {
-                binding.textInputLayoutPassword.error = null
-                binding.textInputLayoutPassword2.error = null
+            handlePasswordMatch(passwordMatch)
+        }
+    }
+
+    private fun handlePasswordMatch(passwordMatch: Boolean) {
+        val passwordTextInputLayouts = listOf(
+            binding.textInputLayoutPassword,
+            binding.textInputLayoutPassword2
+        )
+
+        if (!passwordMatch) {
+            passwordTextInputLayouts.forEach { textInputLayout ->
+                setErrorText(textInputLayout, ERROR_MESSAGE_PASSWORD_MISMATCH)
+            }
+        } else {
+            passwordTextInputLayouts.forEach { textInputLayout ->
+                textInputLayout.error = null
             }
         }
     }
 
     private fun clearError() {
-        binding.textInputLayoutPassword.clearErrorOnFocusChange()
-        binding.textInputLayoutPassword2.clearErrorOnFocusChange()
+        val passwordTextInputLayouts = listOf(
+            binding.textInputLayoutPassword,
+            binding.textInputLayoutPassword2
+        )
+        passwordTextInputLayouts.forEach { textInputLayout ->
+            textInputLayout.clearErrorOnFocusChange()
+        }
     }
 
     fun TextInputLayout.clearErrorOnFocusChange() {
@@ -73,6 +88,7 @@ class Register2Fragment : Fragment() {
             }
         }
     }
+
     private fun setErrorText(textInputLayout: TextInputLayout, errorMessage: String) {
         textInputLayout.error = errorMessage
         textInputLayout.clearFocus()
@@ -110,21 +126,11 @@ class Register2Fragment : Fragment() {
                 registerViewModel.clearStatus()
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
                 when (status.message) {
-                    "email ya registrado " -> {
-                        val bundle = bundleOf("errorField" to "email", "errorMessage" to "El email es inválido")
-                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
-                    }
-                    "Usuario ya registrado " -> {
-                        val bundle = bundleOf("errorField" to "userName", "errorMessage" to "El nombre de usuario es inválido")
-                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
-                    }
-                    "telefonico ya registrado" -> {
-                        val bundle = bundleOf("errorField" to "phoneNumber", "errorMessage" to "El número de teléfono es inválido")
-                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
-                    }
+                    "email ya registrado " -> navigateToRegisterFragment("email", "El email es inválido")
+                    "Usuario ya registrado " -> navigateToRegisterFragment("userName", "El nombre de usuario es inválido")
+                    "telefonico ya registrado" -> navigateToRegisterFragment("phoneNumber", "El número de teléfono es inválido")
                 }
             }
-
 
             is RegisterUiStatus.Success -> {
                 registerViewModel.clearStatus()
@@ -136,9 +142,9 @@ class Register2Fragment : Fragment() {
         }
     }
 
-    /*override fun onPause() {
-        super.onPause()
-        registerViewModel.clearData()
-
-    }*/
+    private fun navigateToRegisterFragment(errorField: String, errorMessage: String) {
+        val bundle = bundleOf("errorField" to errorField, "errorMessage" to errorMessage)
+        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
+    }
 }
+
