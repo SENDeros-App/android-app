@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.senderos4.R
+import com.example.senderos4.ui.Map.MarkerType.*
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,15 +33,12 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
-import org.w3c.dom.Text
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener {
 
     private lateinit var btn_select_alert: ImageView
-
-    //private lateinit var send_alert: Button
     private lateinit var map: GoogleMap
 
     override fun onCreateView(
@@ -65,79 +63,79 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         }
         setAddAlertListener()
         map.setPadding(0, 1200, 20, 0)
+        map.setOnMarkerClickListener(markerClickListener)
     }
 
     private fun bind() {
         btn_select_alert = requireView().findViewById(R.id.btn_alert)
-        //send_alert = requireView().findViewById(R.id.send_alert)
     }
 
     @SuppressLint("InflateParams")
     private fun setAddAlertListener() {
         btn_select_alert.setOnClickListener {
             // Función que cree el dialogo
-            val dialog = Dialog(requireContext())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setCancelable(true)
-            dialog.setContentView(R.layout.dialog_alerts)
-            dialog.setTitle("Actualiza el mapa")
+            val dialog_alerts = Dialog(requireContext())
+            dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog_alerts.setCancelable(true)
+            dialog_alerts.setContentView(R.layout.dialog_alerts)
+            dialog_alerts.setTitle("Actualiza el mapa")
 
 
-            val without_light: ImageView = dialog.findViewById(R.id.without_light)
-            val leak: ImageView = dialog.findViewById(R.id.leak)
-            val water: ImageView = dialog.findViewById(R.id.water)
-            val fire: ImageView = dialog.findViewById(R.id.fire)
-            val sewer: ImageView = dialog.findViewById(R.id.sewer)
-            val walkaway: ImageView = dialog.findViewById(R.id.walkaway)
-            val pothole: ImageView = dialog.findViewById(R.id.pothole)
-            val tree: ImageView = dialog.findViewById(R.id.tree)
-            val crash: ImageView = dialog.findViewById(R.id.crash)
+            val without_light: ImageView = dialog_alerts.findViewById(R.id.without_light)
+            val leak: ImageView = dialog_alerts.findViewById(R.id.leak)
+            val water: ImageView = dialog_alerts.findViewById(R.id.water)
+            val fire: ImageView = dialog_alerts.findViewById(R.id.fire)
+            val sewer: ImageView = dialog_alerts.findViewById(R.id.sewer)
+            val walkaway: ImageView = dialog_alerts.findViewById(R.id.walkaway)
+            val pothole: ImageView = dialog_alerts.findViewById(R.id.pothole)
+            val tree: ImageView = dialog_alerts.findViewById(R.id.tree)
+            val crash: ImageView = dialog_alerts.findViewById(R.id.crash)
 
-            dialog.show()
+            dialog_alerts.show()
 
             leak.setOnClickListener {
-                addedImageDialog(MarkerType.LEAK_WATER)
-                dialog.dismiss()
+                addedImageDialog(LEAK_WATER)
+                dialog_alerts.dismiss()
             }
 
             without_light.setOnClickListener {
-                addedImageDialog(MarkerType.LIGHT)
-                dialog.dismiss()
+                addedImageDialog(LIGHT)
+                dialog_alerts.dismiss()
             }
 
             water.setOnClickListener {
-                addedImageDialog(MarkerType.WATER)
-                dialog.dismiss()
+                addedImageDialog(WATER)
+                dialog_alerts.dismiss()
             }
 
             fire.setOnClickListener {
-                addedImageDialog(MarkerType.FIRE)
-                dialog.dismiss()
+                addedImageDialog(FIRE)
+                dialog_alerts.dismiss()
             }
 
             sewer.setOnClickListener {
-                addedImageDialog(MarkerType.SEWER)
-                dialog.dismiss()
+                addedImageDialog(SEWER)
+                dialog_alerts.dismiss()
             }
 
             walkaway.setOnClickListener {
-                addedImageDialog(MarkerType.WALKAWAY)
-                dialog.dismiss()
+                addedImageDialog(WALKAWAY)
+                dialog_alerts.dismiss()
             }
 
             pothole.setOnClickListener {
-                addedImageDialog(MarkerType.POTHOLE)
-                dialog.dismiss()
+                addedImageDialog(POTHOLE)
+                dialog_alerts.dismiss()
             }
 
             tree.setOnClickListener {
-                addedImageDialog(MarkerType.TREE)
-                dialog.dismiss()
+                addedImageDialog(TREE)
+                dialog_alerts.dismiss()
             }
 
             crash.setOnClickListener {
-                addedImageDialog(MarkerType.CRASH_CAR)
-                dialog.dismiss()
+                addedImageDialog(CRASH_CAR)
+                dialog_alerts.dismiss()
             }
 
         }
@@ -149,48 +147,48 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         var text = ""
 
         when (type) {
-            MarkerType.LIGHT -> {
+            LIGHT -> {
                 image = R.drawable.without_ligth
                 text = "Sin Luz"
 
             }
 
-            MarkerType.WATER -> {
+            WATER -> {
                 image = R.drawable.without_water
                 text = "Sin agua"
             }
 
-            MarkerType.WALKAWAY -> {
+            WALKAWAY -> {
                 image = R.drawable.walkaway
                 text = "Pasarela Dañada"
             }
 
-            MarkerType.LEAK_WATER -> {
+            LEAK_WATER -> {
                 image = R.drawable.leak
                 text = "Fuga de agua"
             }
 
-            MarkerType.TREE -> {
+            TREE -> {
                 image = R.drawable.tree
                 text = "Árbol caído"
             }
 
-            MarkerType.SEWER -> {
+            SEWER -> {
                 image = R.drawable.sewer
                 text = "Alcantarilla sin tapa"
             }
 
-            MarkerType.FIRE -> {
+            FIRE -> {
                 image = R.drawable.fire_
                 text = "Incendio"
             }
 
-            MarkerType.POTHOLE -> {
+            POTHOLE -> {
                 image = R.drawable.pothole
                 text = "Bache peligroso"
             }
 
-            MarkerType.CRASH_CAR -> {
+            CRASH_CAR -> {
                 image = R.drawable.crash_car
                 text = "Accidente automivilistico"
             }
@@ -228,55 +226,55 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             var icon = 0
 
             when (type) {
-                MarkerType.LIGHT -> {
+                LIGHT -> {
                     title = "Sin Luz"
                     description = "No hay luz"
                     icon = R.drawable.incident_without_ligth
                 }
 
-                MarkerType.WATER -> {
+                WATER -> {
                     title = "Sin Agua"
                     description = "No hay agua"
                     icon = R.drawable.incident_water
                 }
 
-                MarkerType.WALKAWAY -> {
+                WALKAWAY -> {
                     title = "Psarela Dañada"
                     description = "Pasarela tiene daños precaución"
                     icon = R.drawable.incident_walkaway
                 }
 
-                MarkerType.LEAK_WATER -> {
+                LEAK_WATER -> {
                     title = "Fuja de agua"
                     description = "Aqui hay una fuja de agua"
                     icon = R.drawable.incident_leak
                 }
 
-                MarkerType.TREE -> {
+                TREE -> {
                     title = "Árbol caído"
                     description = "El árbol se encuentra obstaculizando el paso"
                     icon = R.drawable.incident_tree
                 }
 
-                MarkerType.SEWER -> {
+                SEWER -> {
                     title = "Alcantarilla sin tapa"
                     description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
                     icon = R.drawable.incident_sewer
                 }
 
-                MarkerType.FIRE -> {
+                FIRE -> {
                     title = "Incendio"
                     description = "Aqui hay un incendio"
                     icon = R.drawable.incident_fire
                 }
 
-                MarkerType.POTHOLE -> {
+                POTHOLE -> {
                     title = "Bache Peligroso"
                     description = "Hay un bache muy peligroso que puede ocasionar un accidente"
                     icon = R.drawable.incident_bump
                 }
 
-                MarkerType.CRASH_CAR -> {
+                CRASH_CAR -> {
                     title = "Accidente automovilístico"
                     description = "Hay una accidente de carros por la zona"
                     icon = R.drawable.incident_crash
@@ -289,6 +287,19 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         }
 
     }
+
+    val markerClickListener = GoogleMap.OnMarkerClickListener { marker ->
+        // Función que cree el dialogo
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_of_alert)
+
+        dialog.show()
+        // Retorna `false` para permitir que se realicen acciones predeterminadas del marcador, como abrir la ventana de información
+        false
+}
+
 
     private fun bitMapFromVector(vectorResID: Int): BitmapDescriptor {
         val vectorDrawable = ContextCompat.getDrawable(requireContext(), vectorResID)

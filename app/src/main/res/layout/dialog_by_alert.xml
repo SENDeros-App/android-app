@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Add_Photo"
+                android:contentDescription="@string/add_photoDescrip"
                 android:fontFamily="@font/regular_istok"
                 android:gravity="center"
                 android:text="@string/add_photo"
@@ -86,7 +86,7 @@
                 android:contentDescription="Add_Photo"
                 android:fontFamily="@font/regular_istok"
                 android:gravity="center"
-                android:text="Agregar\ncomentario"
+                android:text="@string/add_comment"
                 android:textColor="@color/black" />
 
         </LinearLayout>

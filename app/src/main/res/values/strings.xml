@@ -41,4 +41,7 @@
     <string name="division">Division de pertenencia</string>
     <string name="add_photo">Agregar foto</string>
     <string name="send">Enviar</string>
+    <string name="add_comment">Agregar\ncomentario</string>
+    <string name="add_photoDescrip">Add_Photo</string>
+    <string name="comment">Comentario:</string>
 </resources>
