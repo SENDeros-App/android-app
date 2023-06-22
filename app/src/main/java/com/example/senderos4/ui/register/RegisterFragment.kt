@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.databinding.FragmentRegisterBinding
 import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
+import com.google.android.material.textfield.TextInputLayout
 import retrofit2.HttpException
 
 
@@ -35,7 +36,13 @@ class RegisterFragment : Fragment() {
 
         click()
         setViewModel()
+        clearError()
+
+
+
+
     }
+
 
     private fun setViewModel() {
         binding.viewmodelregister = registerViewModel
@@ -44,39 +51,46 @@ class RegisterFragment : Fragment() {
 
     private fun click() {
         binding.confirmationInfo.setOnClickListener {
-            if (validateCampos()) {
-                registerViewModel.apply {
-                    name.value = binding.textUserName.text.toString()
-                    email.value = binding.textUseremail.text.toString()
-                    phone.value = binding.textUserPhoneNumbre.text.toString()
-                }
+            registerViewModel.apply {
+                name.value = binding.textUserName.text.toString()
+                email.value = binding.textUseremail.text.toString()
+                phone.value = binding.textUserPhoneNumbre.text.toString()
+            }
 
+            if (registerViewModel.validateFields()) {
                 findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
+            } else {
+                setErrorText(binding.textInputLayoutUser, "Por favor, completa este campo")
+                setErrorText(binding.textInputLayoutEmail, "Por favor, completa este campo")
+                setErrorText(binding.textInputLayoutPhone, "Por favor, completa este campo")
+
+                registerViewModel.validateFields()
             }
         }
 
-        binding.textInputLayoutEmail.editText?.setOnFocusChangeListener { _, hasFocus ->
+
+    }
+
+
+    private fun clearError() {
+        binding.textInputLayoutUser.clearErrorOnFocusChange()
+        binding.textInputLayoutEmail.clearErrorOnFocusChange()
+        binding.textInputLayoutPhone.clearErrorOnFocusChange()
+    }
+
+    fun TextInputLayout.clearErrorOnFocusChange() {
+        editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                binding.textInputLayoutEmail.error = null
+                error = null
             }
         }
     }
 
-    private fun validateCampos(): Boolean {
-        with(binding) {
-            val name = textUserName.text.toString()
-            val email = textUseremail.text.toString()
-            val phone = textUserPhoneNumbre.text.toString()
-
-            // Validar que todos los campos estén completos
-            if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-                Toast.makeText(requireContext(), "Por favor, completa todos los correctamente", Toast.LENGTH_SHORT).show()
-                return false
-            }
-        }
-
-        return true
+    private fun setErrorText(textInputLayout: TextInputLayout, errorMessage: String) {
+        textInputLayout.error = errorMessage
+        textInputLayout.clearFocus()
     }
+
 
 }
 

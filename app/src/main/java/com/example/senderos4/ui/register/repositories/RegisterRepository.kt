@@ -1,7 +1,7 @@
 package com.example.senderos4.ui.register.repositories
 
 import com.example.senderos4.network.ApiResponse
-import com.example.senderos4.network.dto.generalMensaje
+import com.example.senderos4.network.dto.register.generalMensaje
 import com.example.senderos4.network.dto.register.RegisterRequest
 import com.example.senderos4.network.service.AuthService
 import com.google.gson.Gson

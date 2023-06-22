@@ -40,6 +40,7 @@ class Register2Fragment : Fragment() {
     }
 
 
+
     private fun observeStatus() {
         registerViewModel.status.observe(viewLifecycleOwner) { status ->
             handleUiStatus(status)
@@ -65,16 +66,23 @@ class Register2Fragment : Fragment() {
                     }
 
                 } else {
-                    Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        "Error has occurred",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
                 Log.d("Error Login", "error", status.exception)
             }
 
             is RegisterUiStatus.ErrorWithMessage -> {
-                if (status.message == "email ya registrado ") {
-                    registerViewModel.clearStatus()
-                    findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
+                registerViewModel.clearStatus()
+                Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
+                when (status.message) {
+                    "email ya registrado ", "Usuario ya registrado ", "telefonico ya registrado" -> {
+                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
+                    }
                 }
             }
 

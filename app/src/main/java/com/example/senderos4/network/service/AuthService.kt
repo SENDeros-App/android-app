@@ -4,6 +4,7 @@ import android.net.Credentials
 import com.example.senderos4.network.dto.login.LoginRequest
 import com.example.senderos4.network.dto.login.LoginResponse
 import com.example.senderos4.network.dto.register.RegisterRequest
+import com.example.senderos4.network.dto.register.RegisterResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -12,5 +13,5 @@ interface AuthService {
     suspend fun login(@Body credentials: LoginRequest): LoginResponse
 
     @POST("auth/signup")
-    suspend fun register(@Body credentials: RegisterRequest):LoginResponse
+    suspend fun register(@Body credentials: RegisterRequest):RegisterResponse
 }

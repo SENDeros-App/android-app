@@ -27,7 +27,19 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     val status: LiveData<RegisterUiStatus>
         get() = _status
 
-   private fun register(name:String, email: String, phone:String, user:String, password:String){
+    //para primer fragmento
+    fun validateFields(): Boolean {
+       when{
+           name.value.isNullOrEmpty() -> return false
+           email.value.isNullOrEmpty() -> return false
+           phone.value.isNullOrEmpty() -> return false
+
+       }
+        return true
+    }
+///
+
+    private fun register(name:String, email: String, phone:String, user:String, password:String){
        viewModelScope.launch {
            _status.postValue(
                when(val response = registerRepository.register(name = name, email = email, phone = phone, user = user, password = password)){
@@ -55,11 +67,8 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     }
 
 
-    private fun validateData(): Boolean {
+    fun validateData(): Boolean {
         when {
-            name.value.isNullOrEmpty() -> return false
-            email.value.isNullOrEmpty() -> return false
-            phone.value.isNullOrEmpty() -> return false
             user.value.isNullOrEmpty() -> return false
             password.value.isNullOrEmpty() -> return false
             passwordConfirmation.value.isNullOrEmpty() -> return false
