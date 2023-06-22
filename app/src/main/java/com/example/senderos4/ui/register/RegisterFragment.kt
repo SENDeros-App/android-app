@@ -37,12 +37,20 @@ class RegisterFragment : Fragment() {
         click()
         setViewModel()
         clearError()
+        identError()
 
+    }
+
+    fun identError(){
+        val errorField = arguments?.getString("errorField")
         val errorMessage = arguments?.getString("errorMessage")
-        if (!errorMessage.isNullOrEmpty()) {
-            binding.textInputLayoutUser.error = errorMessage
+        if (!errorField.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
+            when (errorField) {
+                "email" -> binding.textInputLayoutEmail.error = errorMessage
+                "userName" -> binding.textInputLayoutUser.error = errorMessage
+                "phoneNumber" -> binding.textInputLayoutPhone.error = errorMessage
+            }
         }
-
     }
 
 

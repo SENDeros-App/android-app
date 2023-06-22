@@ -81,12 +81,21 @@ class Register2Fragment : Fragment() {
                 registerViewModel.clearStatus()
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
                 when (status.message) {
-                    "email ya registrado ", "Usuario ya registrado ", "telefonico ya registrado" -> {
-                        val bundle = bundleOf("errorMessage" to "El campo es inválido")
+                    "email ya registrado " -> {
+                        val bundle = bundleOf("errorField" to "email", "errorMessage" to "El email es inválido")
+                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
+                    }
+                    "Usuario ya registrado " -> {
+                        val bundle = bundleOf("errorField" to "userName", "errorMessage" to "El nombre de usuario es inválido")
+                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
+                    }
+                    "telefonico ya registrado" -> {
+                        val bundle = bundleOf("errorField" to "phoneNumber", "errorMessage" to "El número de teléfono es inválido")
                         findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
                     }
                 }
             }
+
 
             is RegisterUiStatus.Success -> {
                 registerViewModel.clearStatus()
