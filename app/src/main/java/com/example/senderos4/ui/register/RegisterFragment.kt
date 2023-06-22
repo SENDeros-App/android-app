@@ -38,8 +38,10 @@ class RegisterFragment : Fragment() {
         setViewModel()
         clearError()
 
-
-
+        val errorMessage = arguments?.getString("errorMessage")
+        if (!errorMessage.isNullOrEmpty()) {
+            binding.textInputLayoutUser.error = errorMessage
+        }
 
     }
 

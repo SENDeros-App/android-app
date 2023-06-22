@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
@@ -81,7 +82,8 @@ class Register2Fragment : Fragment() {
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
                 when (status.message) {
                     "email ya registrado ", "Usuario ya registrado ", "telefonico ya registrado" -> {
-                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
+                        val bundle = bundleOf("errorMessage" to "El campo es inválido")
+                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
                     }
                 }
             }
