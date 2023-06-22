@@ -1,8 +1,10 @@
 package com.example.senderos4.ui.register.repositories
 
 import com.example.senderos4.network.ApiResponse
+import com.example.senderos4.network.dto.generalMensaje
 import com.example.senderos4.network.dto.register.RegisterRequest
 import com.example.senderos4.network.service.AuthService
+import com.google.gson.Gson
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -15,10 +17,20 @@ class RegisterRepository(private val api:AuthService) {
 
         } catch (e: HttpException){
 
-            if(e.code() == 400){
-                return ApiResponse.ErrorWithMessage("invalid data")
+            return if(e.code() == 400){
+
+                ApiResponse.ErrorWithMessage("invalid data")
+
+            } else if(e.code()==409){
+
+                val errorMessage = e.response()?.errorBody()?.string().toString()
+                val messageError = Gson().fromJson(errorMessage, generalMensaje::class.java)
+                ApiResponse.ErrorWithMessage(messageError.message)
+
+            } else{
+                ApiResponse.Error(e)
             }
-            return ApiResponse.Error(e)
+
         } catch (e: IOException){
 
             return ApiResponse.Error(e)

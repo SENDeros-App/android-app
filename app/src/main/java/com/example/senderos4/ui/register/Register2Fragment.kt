@@ -56,10 +56,8 @@ class Register2Fragment : Fragment() {
             is RegisterUiStatus.Error -> {
                 if (status.exception is HttpException){
                     when(status.exception.code()) {
-                        409 ->{
-                            Toast.makeText(requireContext(), "El correo ya ha sido registrado", Toast.LENGTH_SHORT).show()
-
-                            findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
+                        500 ->{
+                            Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
                         }
                     }
 
@@ -69,7 +67,10 @@ class Register2Fragment : Fragment() {
                 Log.d("Error Login", "error", status.exception)
             }
             is RegisterUiStatus.ErrorWithMessage -> {
-                Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
+                if(status.message == "email ya registrado "){
+                    registerViewModel.clearStatus()
+                    findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
+                }
             }
             is RegisterUiStatus.Success -> {
                 registerViewModel.clearStatus()

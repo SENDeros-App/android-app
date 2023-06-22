@@ -35,47 +35,12 @@ class RegisterFragment : Fragment() {
 
         click()
         setViewModel()
-        observeStatus()
     }
 
     private fun setViewModel() {
         binding.viewmodelregister = registerViewModel
     }
 
-    private fun observeStatus() {
-        registerViewModel.status.observe(viewLifecycleOwner) { status ->
-            handleUiStatus(status)
-        }
-    }
-
-    private fun handleUiStatus(status: RegisterUiStatus) {
-        when (status) {
-            is RegisterUiStatus.Error -> {
-                if (status.exception is HttpException){
-                    when(status.exception.code()) {
-                        409 ->{
-                            registerViewModel.clearStatus()
-                            binding.textInputLayoutEmail.error = "Email ya registrado"
-
-                        }
-                    }
-
-                } else {
-                    Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
-                }
-                Log.d("Error Login", "error", status.exception)
-            }
-            is RegisterUiStatus.ErrorWithMessage -> {
-                Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
-            }
-            is RegisterUiStatus.Success -> {
-                registerViewModel.clearStatus()
-                registerViewModel.clearData()
-                findNavController().navigate(R.id.action_register2Fragment_to_loginFragment)
-            }
-            else -> {}
-        }
-    }
 
     private fun click() {
         binding.confirmationInfo.setOnClickListener {
