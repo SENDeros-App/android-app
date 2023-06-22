@@ -47,36 +47,43 @@ class Register2Fragment : Fragment() {
     }
 
 
-    private fun setViewModel(){
+    private fun setViewModel() {
         binding.viewmodelregister = registerViewModel
     }
 
     private fun handleUiStatus(status: RegisterUiStatus) {
         when (status) {
             is RegisterUiStatus.Error -> {
-                if (status.exception is HttpException){
-                    when(status.exception.code()) {
-                        500 ->{
-                            Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
-                        }
+                if (status.exception is HttpException) {
+                    when (status.exception.code()) {
+                        500 ->
+                            Toast.makeText(
+                                requireContext(),
+                                "Error al conectarse al servidor ...",
+                                Toast.LENGTH_SHORT
+                            ).show()
                     }
 
                 } else {
-                    Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 Log.d("Error Login", "error", status.exception)
             }
+
             is RegisterUiStatus.ErrorWithMessage -> {
-                if(status.message == "email ya registrado "){
+                if (status.message == "email ya registrado ") {
                     registerViewModel.clearStatus()
                     findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
                 }
             }
+
             is RegisterUiStatus.Success -> {
                 registerViewModel.clearStatus()
                 registerViewModel.clearData()
                 findNavController().navigate(R.id.action_register2Fragment_to_loginFragment)
             }
+
             else -> {}
         }
     }
