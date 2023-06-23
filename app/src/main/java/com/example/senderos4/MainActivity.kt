@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 loginTextView.text = "Iniciar sesion"
-                userName.text = ""
+                userName.text = "Hello my brother"
                 loginTextView.setOnClickListener {
                     navController.navigate(R.id.action_map_fragment_to_loginFragment)
                     drawerLayout.closeDrawer(GravityCompat.START)

@@ -46,8 +46,9 @@ class SenderosApplication : Application() {
     fun getUser(): User? {
         val userName = prefs.getString(USER_NAME, null)
         val userDivision = prefs.getString(USER_DIVISION, null)
-        return if (userName != null && userDivision!=null) User(userName, userDivision) else null
+        return if (userName != null && userDivision != null) User(userName, userDivision) else null
     }
+
 
     //
 
@@ -74,7 +75,10 @@ class SenderosApplication : Application() {
     fun clearAuthToken() {
         val editor = prefs.edit()
         editor.remove(USER_TOKEN)
+        editor.remove(USER_NAME)
+        editor.remove(USER_DIVISION)
         editor.apply()
+
         checkLoggedInStatus()
     }
 
@@ -88,7 +92,6 @@ class SenderosApplication : Application() {
 
     /*val senderosApplication = application as SenderosApplication
     senderosApplication.clearAuthToken()*/
-
 
 
     private fun getAPIService() = with(RetrofitInstance) {
