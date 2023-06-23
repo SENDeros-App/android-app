@@ -3,6 +3,7 @@ package com.example.senderos4
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,12 +11,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.senderos4.data.User
+import com.example.senderos4.data.header
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.navigation.NavigationView
 
@@ -32,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var modGuestImage: LinearLayout
     private lateinit var settingBottom: ImageView
     private lateinit var loginTextView: TextView
+    private lateinit var userName: TextView
 
 
     val app by lazy {
@@ -54,9 +59,20 @@ class MainActivity : AppCompatActivity() {
         //nuevo
         app.checkLoggedInStatus()
         updateNavigationViewHeader()
+        app.user.observe(this, userObserver)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        app.user.removeObserver(userObserver)
+    }
 
+    private val userObserver = Observer<User?> { user ->
+        if (user != null) {
+            // Aquí puedes acceder al campo 'name' del objeto 'User' y actualizar tu TextView
+            userName.text = user.name
+        }
+    }
 
     private fun navSetting() {
 
@@ -77,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         val headerView = navigationVIew.getHeaderView(0)
         settingBottom = headerView.findViewById(R.id.setting_options)
         loginTextView = headerView.findViewById(R.id.textHeader)
+        userName = headerView.findViewById(R.id.textUserName)
     }
 
 
@@ -111,6 +128,7 @@ class MainActivity : AppCompatActivity() {
                 }
             } else {
                 loginTextView.text = "Iniciar sesion"
+                userName.text = ""
                 loginTextView.setOnClickListener {
                     navController.navigate(R.id.action_map_fragment_to_loginFragment)
                     drawerLayout.closeDrawer(GravityCompat.START)

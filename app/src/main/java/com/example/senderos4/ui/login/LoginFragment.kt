@@ -131,6 +131,9 @@ class LoginFragment : HiddenMenuFragment() {
                 loginViewModel.clearStatus()
                 loginViewModel.clearData()
                 app.saveAuthToken(status.token)
+                app.saveUser(status.user)
+                Log.d("TAG", "USER"+status.user)
+
                 findNavController().navigate(R.id.action_loginFragment_to_map_fragment)
             }
             else -> {}

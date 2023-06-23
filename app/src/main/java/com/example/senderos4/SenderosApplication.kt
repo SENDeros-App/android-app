@@ -3,8 +3,10 @@ package com.example.senderos4
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.senderos4.data.User
 import com.example.senderos4.data.headers
 import com.example.senderos4.data.users
 import com.example.senderos4.network.retrofit.RetrofitInstance
@@ -15,6 +17,23 @@ import com.example.senderos4.ui.register.repositories.RegisterRepository
 class SenderosApplication:Application() {
 
     //new
+
+    private val _user = MutableLiveData<User?>()
+    val user: MutableLiveData<User?>
+        get() = _user
+
+    fun saveUser(user: User) {
+        _user.value = user
+    }
+
+    fun getUser(): User?{
+        return _user.value
+    }
+
+    fun clearUser() {
+        _user.value = null
+    }
+    //
 
     private val _isLoggedIn = MutableLiveData<Boolean>()
     val isLoggedIn: LiveData<Boolean>
@@ -40,7 +59,9 @@ class SenderosApplication:Application() {
         val editor = prefs.edit()
         editor.remove(USER_TOKEN)
         editor.apply()
+        clearUser()
         checkLoggedInStatus()
+
     }
 
     fun checkLoggedInStatus() {

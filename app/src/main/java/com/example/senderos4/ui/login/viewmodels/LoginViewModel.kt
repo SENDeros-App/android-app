@@ -1,5 +1,6 @@
 package com.example.senderos4.ui.login.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -32,7 +33,9 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
                         LoginUiStatus.ErrorWithMessage(response.message)
                     }
                     is ApiResponse.Success -> {
-                        LoginUiStatus.Success(response.data)
+                        val token = response.data.first
+                        val user = response.data.second
+                        LoginUiStatus.Success(token, user)
                     }
 
                 }
