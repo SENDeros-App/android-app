@@ -59,20 +59,10 @@ class MainActivity : AppCompatActivity() {
         //nuevo
         app.checkLoggedInStatus()
         updateNavigationViewHeader()
-        app.user.observe(this, userObserver)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        app.user.removeObserver(userObserver)
-    }
 
-    private val userObserver = Observer<User?> { user ->
-        if (user != null) {
-            // Aquí puedes acceder al campo 'name' del objeto 'User' y actualizar tu TextView
-            userName.text = user.name
-        }
-    }
+
 
     private fun navSetting() {
 
@@ -122,6 +112,7 @@ class MainActivity : AppCompatActivity() {
         app.isLoggedIn.observe(this) { isLoggedIn ->
             if (isLoggedIn) {
                 loginTextView.text = "Cerrar sesion"
+                userName.text = app.getUser()?.name
                 loginTextView.setOnClickListener {
                     app.clearAuthToken()
                     drawerLayout.closeDrawer(GravityCompat.START)

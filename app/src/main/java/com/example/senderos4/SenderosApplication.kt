@@ -10,11 +10,24 @@ import com.example.senderos4.data.User
 import com.example.senderos4.data.headers
 import com.example.senderos4.data.users
 import com.example.senderos4.network.retrofit.RetrofitInstance
+import com.example.senderos4.network.retrofit.RetrofitInstance.setUser
 import com.example.senderos4.ui.clasificacion.repositories.ClassificationRepository
 import com.example.senderos4.ui.login.repositories.LoginRepository
 import com.example.senderos4.ui.register.repositories.RegisterRepository
 
-class SenderosApplication:Application() {
+class SenderosApplication : Application() {
+
+
+    private val prefs: SharedPreferences by lazy {
+        getSharedPreferences("Retrofit", Context.MODE_PRIVATE)
+    }
+
+
+    companion object {
+        const val USER_TOKEN = "user_token"
+        const val USER_NAME = "user_name"
+        const val USER_DIVISION = "user_division"
+    }
 
     //new
 
@@ -23,16 +36,19 @@ class SenderosApplication:Application() {
         get() = _user
 
     fun saveUser(user: User) {
-        _user.value = user
+        val editor = prefs.edit()
+        editor.putString(USER_NAME, user.name)
+        editor.putString(USER_DIVISION, user.division)
+        editor.apply()
+        setUser(user)
     }
 
-    fun getUser(): User?{
-        return _user.value
+    fun getUser(): User? {
+        val userName = prefs.getString(USER_NAME, null)
+        val userDivision = prefs.getString(USER_DIVISION, null)
+        return if (userName != null && userDivision!=null) User(userName, userDivision) else null
     }
 
-    fun clearUser() {
-        _user.value = null
-    }
     //
 
     private val _isLoggedIn = MutableLiveData<Boolean>()
@@ -59,14 +75,12 @@ class SenderosApplication:Application() {
         val editor = prefs.edit()
         editor.remove(USER_TOKEN)
         editor.apply()
-        clearUser()
         checkLoggedInStatus()
-
     }
 
     fun checkLoggedInStatus() {
         val token = getTokent()
-        _isLoggedIn.value = token.isNotEmpty()
+        _isLoggedIn.value = token.isNotEmpty() && true
     }
 
     //
@@ -76,10 +90,6 @@ class SenderosApplication:Application() {
     senderosApplication.clearAuthToken()*/
 
 
-
-    private val prefs: SharedPreferences by lazy {
-        getSharedPreferences("Retrofit", Context.MODE_PRIVATE)
-    }
 
     private fun getAPIService() = with(RetrofitInstance) {
         setToken(getTokent())
@@ -91,14 +101,10 @@ class SenderosApplication:Application() {
         LoginRepository(getAPIService())
     }
 
-    val registerRepository:RegisterRepository by lazy{
+    val registerRepository: RegisterRepository by lazy {
         RegisterRepository(getAPIService())
     }
 
-
-    companion object {
-        const val USER_TOKEN = "user_token"
-    }
 
     val classificationRepository: ClassificationRepository by lazy {
         ClassificationRepository(users, headers)
