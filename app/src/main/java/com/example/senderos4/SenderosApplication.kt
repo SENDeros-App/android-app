@@ -32,7 +32,7 @@ class SenderosApplication : Application() {
     //new
 
     private val _user = MutableLiveData<User?>()
-    val user: MutableLiveData<User?>
+    val user: LiveData<User?>
         get() = _user
 
     fun saveUser(user: User) {
@@ -40,14 +40,19 @@ class SenderosApplication : Application() {
         editor.putString(USER_NAME, user.name)
         editor.putString(USER_DIVISION, user.division)
         editor.apply()
-        setUser(user)
+        _user.value = user
     }
+
 
     fun getUser(): User? {
         val userName = prefs.getString(USER_NAME, null)
         val userDivision = prefs.getString(USER_DIVISION, null)
-        return if (userName != null && userDivision != null) User(userName, userDivision) else null
+        val user = if (userName != null && userDivision != null) User(userName, userDivision) else null
+        _user.value = user
+        return user
     }
+
+
 
 
     //

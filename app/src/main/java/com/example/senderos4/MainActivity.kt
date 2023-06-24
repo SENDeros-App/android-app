@@ -126,6 +126,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        app.user.observe(this) { user ->
+            if (user != null) {
+                userName.text = user.name
+
+            } else {
+                userName.text = "Hello my brother"
+
+            }
+        }
     }
 
 }

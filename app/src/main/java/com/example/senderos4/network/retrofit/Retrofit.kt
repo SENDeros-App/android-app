@@ -5,18 +5,18 @@ import com.example.senderos4.network.service.AuthService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-const val BASE_URL = "http://10.149.13.101:5000/api/"
+const val BASE_URL = "http://192.168.1.14:5000/api/"
 
 object RetrofitInstance {
 
     private var token = ""
     private lateinit var user: User
 
-    fun setToken(token: String){
+    fun setToken(token: String) {
         this.token = token
     }
 
-    fun setUser(user: User){
+    fun setUser(user: User) {
         this.user = user
     }
 
@@ -25,7 +25,7 @@ object RetrofitInstance {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getLoginService(): AuthService{
+    fun getLoginService(): AuthService {
         return retrofit.create(AuthService::class.java)
     }
 
