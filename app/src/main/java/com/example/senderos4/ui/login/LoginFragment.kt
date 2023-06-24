@@ -16,6 +16,7 @@ import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.databinding.FragmentLoginBinding
 import com.example.senderos4.hiddenMenu.HiddenMenuFragment
+import com.example.senderos4.network.dto.login.LoginData
 import com.example.senderos4.ui.login.viewmodels.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -99,40 +100,34 @@ class LoginFragment : HiddenMenuFragment() {
 
 
     private fun handleUiStatus(status: LoginUiStatus) {
-        when(status) {
+        when (status) {
             is LoginUiStatus.Error -> {
-
-                if (status.exception is HttpException){
-                    when(status.exception.code()) {
-                        404 ->{
-                            //Toast.makeText(requireContext(), "Malas credenciales", Toast.LENGTH_SHORT).show()
+                if (status.exception is HttpException) {
+                    when (status.exception.code()) {
+                        404 -> {
                             setErrorText(binding.textInputLayoutUser, "Malas credenciales")
                             setErrorText(binding.textInputLayoutPassword, "Malas credenciales")
                         }
-                        500 ->
-                            Toast.makeText(requireContext(), "Error al conectarse al servidor ...", Toast.LENGTH_SHORT).show()
+                        500 -> Toast.makeText(requireContext(), "Error al conectarse al servidor ...", Toast.LENGTH_SHORT).show()
                         401 -> {
-                            //Toast.makeText(requireContext(), "Los datos ingresados son invalidos", Toast.LENGTH_SHORT).show()
-                            setErrorText(binding.textInputLayoutUser, "Los datos ingresados son invalidos")
-                            setErrorText(binding.textInputLayoutPassword, "Los datos ingresados son invalidos")
+                            setErrorText(binding.textInputLayoutUser, "Los datos ingresados son inválidos")
+                            setErrorText(binding.textInputLayoutPassword, "Los datos ingresados son inválidos")
                         }
                     }
-
                 } else {
-                    Toast.makeText(requireContext(), "Error has occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Se ha producido un error", Toast.LENGTH_SHORT).show()
                 }
                 Log.d("Error Login", "error", status.exception)
             }
             is LoginUiStatus.ErrorWithMessage -> {
                 Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
-
             }
             is LoginUiStatus.Success -> {
                 loginViewModel.clearStatus()
                 loginViewModel.clearData()
-                app.saveAuthToken(status.token)
-                app.saveUser(status.user)
-                Log.d("TAG", "USER"+status.user)
+
+                val loginData = LoginData(status.token, status.user)
+                app.saveLoginData(loginData)
 
                 findNavController().navigate(R.id.action_loginFragment_to_map_fragment)
             }

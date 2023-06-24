@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         navigationVIew.setupWithNavController(navController)
 
         //nuevo
-        app.checkLoggedInStatus()
-        updateNavigationViewHeader()
+
+        observeLoginData()
     }
 
 
@@ -108,17 +108,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     //new
-    private fun updateNavigationViewHeader() {
-        app.isLoggedIn.observe(this) { isLoggedIn ->
-            if (isLoggedIn) {
-                loginTextView.text = "Cerrar sesion"
-                userName.text = app.getUser()?.name
+    private fun observeLoginData() {
+        app.loginData.observe(this) { loginData ->
+            if (loginData != null) {
+                // Usuario logueado
+                loginTextView.text = "Cerrar sesión"
+                userName.text = loginData.user.name
                 loginTextView.setOnClickListener {
-                    app.clearAuthToken()
+                    app.clearLoginData()
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
             } else {
-                loginTextView.text = "Iniciar sesion"
+                // Usuario no logueado
+                loginTextView.text = "Iniciar sesión"
                 userName.text = "Hello my brother"
                 loginTextView.setOnClickListener {
                     navController.navigate(R.id.action_map_fragment_to_loginFragment)
@@ -126,17 +128,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        app.user.observe(this) { user ->
-            if (user != null) {
-                userName.text = user.name
-
-            } else {
-                userName.text = "Hello my brother"
-
-            }
-        }
     }
+
+
 
 }
 

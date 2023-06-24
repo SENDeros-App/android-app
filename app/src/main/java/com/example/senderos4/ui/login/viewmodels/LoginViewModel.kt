@@ -25,7 +25,7 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
     private fun login(name: String, password: String) {
         viewModelScope.launch {
             _status.postValue(
-                when(val response = repository.login(name, password)){
+                when (val response = repository.login(name, password)) {
                     is ApiResponse.Error -> {
                         LoginUiStatus.Error(response.exception)
                     }
@@ -33,15 +33,18 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
                         LoginUiStatus.ErrorWithMessage(response.message)
                     }
                     is ApiResponse.Success -> {
-                        val token = response.data.first
-                        val user = response.data.second
+                        val token = response.data.token
+                        val user = response.data.user
                         LoginUiStatus.Success(token, user)
                     }
-
+                    else -> {
+                        LoginUiStatus.ErrorWithMessage("Error desconocido")
+                    }
                 }
             )
         }
     }
+
 
     fun onLogin() {
 
