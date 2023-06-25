@@ -3,7 +3,6 @@ package com.example.senderos4
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.senderos4.data.User
@@ -67,9 +66,15 @@ class SenderosApplication : Application() {
         return if (token != null && user != null) LoginData(token, user) else null
     }
 
-    private fun getAPIService(): AuthService {
+    /*private fun getAPIService(): AuthService {
         return RetrofitInstance.getLoginService()
+    }*/
+    private fun getAPIService() = with(RetrofitInstance){
+        loadLoginData()?.let { setLoginData(it) }
+        getLoginService()
     }
+
+
 
     val loginRepository: LoginRepository by lazy {
         LoginRepository(getAPIService())

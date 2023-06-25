@@ -20,7 +20,6 @@ class LoginRepository(private val api: AuthService) {
             val token = response.token
             val user = response.user
             val loginData = LoginData(token, user)
-            RetrofitInstance.setLoginData(loginData)
             return ApiResponse.Success(loginData)
 
         } catch (e: HttpException){

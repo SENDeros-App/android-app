@@ -15,10 +15,7 @@ object RetrofitInstance {
     fun setLoginData(data: LoginData) {
         loginData = data
     }
-
-    fun getLoginData(): LoginData {
-        return loginData
-    }
+    
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
