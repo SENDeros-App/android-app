@@ -82,9 +82,7 @@ class RegisterFragment : Fragment() {
         ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPhone)
     }
 
-    fun TextInputLayout.clearErrorOnFocusChange() {
-        ErrorUtils.clearErrorOnFocusChange(this)
-    }
+
 }
 
 

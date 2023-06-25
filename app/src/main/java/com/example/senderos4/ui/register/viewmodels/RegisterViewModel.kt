@@ -54,7 +54,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
     fun orRegister() {
         if (!validateData()) {
-            _status.value = RegisterUiStatus.ErrorWithMessage("Por favor, completa todos los correctamente")
+            _status.value = RegisterUiStatus.ErrorWithMessage("Por favor, completa todos los campos correctamente")
             return
         }
 

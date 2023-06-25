@@ -66,9 +66,6 @@ class SenderosApplication : Application() {
         return if (token != null && user != null) LoginData(token, user) else null
     }
 
-    /*private fun getAPIService(): AuthService {
-        return RetrofitInstance.getLoginService()
-    }*/
     private fun getAPIService() = with(RetrofitInstance){
         loadLoginData()?.let { setLoginData(it) }
         getLoginService()
