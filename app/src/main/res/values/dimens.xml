@@ -42,4 +42,7 @@
     <dimen name="description_division">15sp</dimen>
     <dimen name="margin_recyclerview_division">8dp</dimen>
     <dimen name="height_linear_division">155dp</dimen>
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="text_268dp">268dp</dimen>
+    <dimen name="text_height_82dp">82dp</dimen>
 </resources>

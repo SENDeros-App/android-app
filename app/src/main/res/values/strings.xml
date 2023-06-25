@@ -46,4 +46,16 @@
     <string name="px">px</string>
     <string name="climb_indicator">Flechas que indican ascenso</string>
     <string name="division">Division de pertenencia</string>
+    <string name="descubre_atraves_de_senderos">Descubre nuevos caminos y conecta con el mundo a traves de SENDeros</string>
+    <string name="nombre">Nombre</string>
+    <string name="email">Correo electronico</string>
+    <string name="phone">Numero de telefono</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="ya_posees_una_cuenta_en_senderos">¿Ya posees una cuenta en SENDeros?</string>
+    <string name="crea_un_usuario">Crea un usuario para identificarte con SENDeros</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="posees_una_cuenta">¿Ya posees una cuenta en SENDeros?</string>
 </resources>
