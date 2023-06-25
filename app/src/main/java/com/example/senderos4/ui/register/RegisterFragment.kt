@@ -41,8 +41,8 @@ class RegisterFragment : Fragment() {
     }
 
     fun identError() {
-        val errorField = arguments?.getString("errorField")
-        val errorMessage = arguments?.getString("errorMessage")
+        val errorField = arguments?.getString(getString(R.string.errorfield))
+        val errorMessage = arguments?.getString(getString(R.string.errormessage))
         if (!errorField.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
             when (errorField) {
                 "email" -> ErrorUtils.setErrorText(binding.textInputLayoutEmail, errorMessage)
@@ -67,9 +67,9 @@ class RegisterFragment : Fragment() {
             if (registerViewModel.validateFields()) {
                 findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
             } else {
-                ErrorUtils.setErrorText(binding.textInputLayoutUser, "Por favor, completa este campo")
-                ErrorUtils.setErrorText(binding.textInputLayoutEmail, "Por favor, completa este campo")
-                ErrorUtils.setErrorText(binding.textInputLayoutPhone, "Por favor, completa este campo")
+                ErrorUtils.setErrorText(binding.textInputLayoutUser, getString(R.string.completa_campo))
+                ErrorUtils.setErrorText(binding.textInputLayoutEmail,getString(R.string.completa_campo))
+                ErrorUtils.setErrorText(binding.textInputLayoutPhone,getString(R.string.completa_campo))
 
                 registerViewModel.validateFields()
             }

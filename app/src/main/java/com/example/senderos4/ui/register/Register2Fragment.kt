@@ -58,7 +58,7 @@ class Register2Fragment : Fragment() {
 
         if (!passwordMatch) {
             passwordTextInputLayouts.forEach { textInputLayout ->
-                ErrorUtils.setErrorText(textInputLayout, "Las contraseñas no coinciden")
+                ErrorUtils.setErrorText(textInputLayout, getString(R.string.contraseno_coinciden))
                 ErrorUtils.clearErrorOnFocusChange(textInputLayout)
             }
 
@@ -81,14 +81,14 @@ class Register2Fragment : Fragment() {
                     when (status.exception.code()) {
                         500 -> Toast.makeText(
                             requireContext(),
-                            "Error al conectarse al servidor ...",
+                            getString(R.string.error_conectarse_servidor),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "Error has occurred",
+                        getString(R.string.error_has_occurred),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -99,19 +99,19 @@ class Register2Fragment : Fragment() {
                 registerViewModel.clearStatus()
                 //Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
                 when (status.message) {
-                    "email ya registrado " -> ErrorUtils.navigateToRegisterFragment(
+                    getString(R.string.email_ya_registrado) -> ErrorUtils.navigateToRegisterFragment(
                         this,
                         "email",
-                        "El email es inválido"
+                        getString(R.string.email_ya_registrado)
                     )
-                    "Usuario ya registrado " -> {
-                        ErrorUtils.setErrorText(binding.textInputLayoutUser, "El usuario es invalido")
+                    getString(R.string.usuario_ya_registrado) -> {
+                        ErrorUtils.setErrorText(binding.textInputLayoutUser, getString(R.string.usuario_ya_registrado))
                         ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
                     }
-                    "telefonico ya registrado" -> ErrorUtils.navigateToRegisterFragment(
+                    getString(R.string.telefonico_ya_registrado) -> ErrorUtils.navigateToRegisterFragment(
                         this,
                         "phoneNumber",
-                        "El número de teléfono es inválido"
+                        getString(R.string.telefonico_ya_registrado)
                     )
                 }
             }

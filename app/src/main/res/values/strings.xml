@@ -58,4 +58,13 @@
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="registrarse">Registrarse</string>
     <string name="posees_una_cuenta">¿Ya posees una cuenta en SENDeros?</string>
+    <string name="errorfield">errorField</string>
+    <string name="errormessage">errorMessage</string>
+    <string name="completa_campo">Por favor, completa este campo</string>
+    <string name="contraseno_coinciden">Las contraseñas no coinciden</string>
+    <string name="error_conectarse_servidor">Error al conectarse al servidor ...</string>
+    <string name="error_has_occurred">Error has occurred</string>
+    <string name="email_ya_registrado">"email ya registrado "</string>
+    <string name="usuario_ya_registrado">"Usuario ya registrado "</string>
+    <string name="telefonico_ya_registrado">telefonico ya registrado</string>
 </resources>
