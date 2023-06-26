@@ -48,6 +48,30 @@ class Register2Fragment : Fragment() {
         registerViewModel.passwordMatch.observe(viewLifecycleOwner) { passwordMatch ->
             handlePasswordMatch(passwordMatch)
         }
+
+        registerViewModel.userError.observe(viewLifecycleOwner) { error ->
+            handleUserError(error)
+        }
+
+        registerViewModel.passwordError.observe(viewLifecycleOwner) { error ->
+            handlePasswordError(error)
+        }
+
+        registerViewModel.userError.observe(viewLifecycleOwner) { error ->
+            handleUserError(error)
+        }
+    }
+
+    private fun handleUserError(error: String?) {
+        binding.textInputLayoutUser.error = error
+    }
+
+    private fun handlePasswordError(error: String?) {
+        binding.textInputLayoutPassword.error = error
+        binding.textInputLayoutPassword2.error = error
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword)
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword2)
+
     }
 
     private fun handlePasswordMatch(passwordMatch: Boolean) {
@@ -58,10 +82,9 @@ class Register2Fragment : Fragment() {
 
         if (!passwordMatch) {
             passwordTextInputLayouts.forEach { textInputLayout ->
-                ErrorUtils.setErrorText(textInputLayout, getString(R.string.contraseno_coinciden))
+                textInputLayout.error = getString(R.string.contraseno_coinciden)
                 ErrorUtils.clearErrorOnFocusChange(textInputLayout)
             }
-
         } else {
             passwordTextInputLayouts.forEach { textInputLayout ->
                 textInputLayout.error = null

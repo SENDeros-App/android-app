@@ -11,6 +11,5 @@ sealed class RegisterUiStatus {
 
     data class Error(val exception: Exception) : RegisterUiStatus()
 
-
     object Success : RegisterUiStatus()
 }

@@ -2,6 +2,7 @@ package com.example.senderos4.ui.register
 
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,22 +59,42 @@ class RegisterFragment : Fragment() {
 
     private fun click() {
         binding.confirmationInfo.setOnClickListener {
-            registerViewModel.apply {
-                name.value = binding.textUserName.text.toString()
-                email.value = binding.textUseremail.text.toString()
-                phone.value = binding.textUserPhoneNumbre.text.toString()
-            }
+            val name = binding.textUserName.text.toString()
+            val email = binding.textUseremail.text.toString()
+            val phone = binding.textUserPhoneNumbre.text.toString()
 
-            if (registerViewModel.validateFields()) {
+            if (registerViewModel.validateFields() && validateName(name) && validateEmail(email)) {
+                registerViewModel.name.value = name
+                registerViewModel.email.value = email
+                registerViewModel.phone.value = phone
+
                 findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
             } else {
-                ErrorUtils.setErrorText(binding.textInputLayoutUser, getString(R.string.completa_campo))
-                ErrorUtils.setErrorText(binding.textInputLayoutEmail,getString(R.string.completa_campo))
-                ErrorUtils.setErrorText(binding.textInputLayoutPhone,getString(R.string.completa_campo))
-
-                registerViewModel.validateFields()
+                // Mostrar mensajes de error
+                if (!validateName(name)) {
+                    binding.textInputLayoutUser.error = "El nombre contiene digitos invalidos"
+                }
+                if (!validateEmail(email)) {
+                    binding.textInputLayoutEmail.error = "El correo electrónico no es válido"
+                }
+                if (!registerViewModel.validateFields()) {
+                    ErrorUtils.setErrorText(binding.textInputLayoutUser, getString(R.string.completa_campo))
+                    ErrorUtils.setErrorText(binding.textInputLayoutEmail,getString(R.string.completa_campo))
+                    ErrorUtils.setErrorText(binding.textInputLayoutPhone,getString(R.string.completa_campo))
+                }
             }
         }
+    }
+
+    private fun validateName(name: String): Boolean {
+        val regex = Regex("[a-zA-Z ]+")
+        return  regex.matches(name)
+        //name.length >= 2 &&
+    }
+
+    private fun validateEmail(email: String): Boolean {
+        val regex = Regex("[a-zA-Z0-9@._-]+")
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches() && regex.matches(email)
     }
 
     private fun clearError() {

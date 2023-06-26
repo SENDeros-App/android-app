@@ -22,6 +22,9 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     var password = MutableLiveData("")
     var passwordConfirmation = MutableLiveData("")
     var passwordMatch = MutableLiveData(true)
+    val userError: MutableLiveData<String> = MutableLiveData()
+    val passwordError: MutableLiveData<String> = MutableLiveData()
+
 
     private val _status = MutableLiveData<RegisterUiStatus>(RegisterUiStatus.Resume)
 
@@ -69,18 +72,36 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
 
     fun validateData(): Boolean {
+        val userRegex = Regex("^[a-zA-Z0-9]+$")
+        val passwordRegex = Regex("^[a-zA-Z0-9@#$%^&+=]+$")
+
         when {
-            user.value.isNullOrEmpty() -> return false
-            password.value.isNullOrEmpty() -> return false
+            user.value.isNullOrEmpty() -> {
+                userError.value = "El campo de nombre no puede estar vacío"
+                return false
+            }
+            !user.value!!.matches(userRegex) -> {
+                userError.value = "Digitos invalidos"
+                return false
+            }
+            password.value.isNullOrEmpty() -> {
+                passwordError.value = "El campo de contraseña no puede estar vacío"
+                return false
+            }
+            !password.value!!.matches(passwordRegex) -> {
+                passwordError.value = "El campo de contraseña solo puede contener letras, números y los siguientes símbolos: @ # $ % ^ & + ="
+                return false
+            }
             passwordConfirmation.value.isNullOrEmpty() -> return false
             password.value != passwordConfirmation.value -> {
-                _status.value = RegisterUiStatus.ErrorWithMessage("Las contraseñas ingresadas no coinsiden")
+                _status.value = RegisterUiStatus.ErrorWithMessage("Las contraseñas ingresadas no coinciden")
                 passwordMatch.value = password.value == passwordConfirmation.value
                 return false
             }
         }
         return true
     }
+
 
 
     fun clearStatus() {
