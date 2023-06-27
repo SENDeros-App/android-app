@@ -130,6 +130,7 @@
             android:text="@string/confirmar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
+            android:enabled="@{viewmodelregister.validatePhase1}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPhone" />
 

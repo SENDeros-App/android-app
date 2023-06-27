@@ -133,6 +133,7 @@
             android:layout_marginEnd="87dp"
             android:backgroundTint="@color/buttonColor"
             android:onClick="@{()->viewmodelregister.orRegister()}"
+            android:enabled="@{viewmodelregister.validatePhase2}"
             android:text="@string/registrarse"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

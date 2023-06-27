@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.databinding.FragmentRegister2Binding
 import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
-import com.google.android.material.textfield.TextInputLayout
 import retrofit2.HttpException
 
 
@@ -37,7 +35,7 @@ class Register2Fragment : Fragment() {
 
         observeStatus()
         setViewModel()
-        clearError()
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun observeStatus() {
@@ -45,50 +43,23 @@ class Register2Fragment : Fragment() {
             handleUiStatus(status)
         }
 
-        registerViewModel.passwordMatch.observe(viewLifecycleOwner) { passwordMatch ->
-            handlePasswordMatch(passwordMatch)
+        registerViewModel.errorUser.observe(viewLifecycleOwner){
+            binding.textInputLayoutUser.error = it
         }
 
-        registerViewModel.userError.observe(viewLifecycleOwner) { error ->
-            handleUserError(error)
+        registerViewModel.errorPassword.observe(viewLifecycleOwner){
+            binding.textInputLayoutPassword.error = it
+            binding.textInputLayoutPassword2.error = it
         }
 
-        registerViewModel.passwordError.observe(viewLifecycleOwner) { error ->
-            handlePasswordError(error)
-        }
-
-        registerViewModel.userError.observe(viewLifecycleOwner) { error ->
-            handleUserError(error)
-        }
+        /*registerViewModel.errorPasswordConfirmation.observe(viewLifecycleOwner){
+            binding.textInputLayoutPassword2.error = it
+            binding.textInputLayoutPassword2.error = it
+        }*/
     }
 
-    private fun handleUserError(error: String?) {
-        error?.let { ErrorUtils.setErrorText(binding.textInputLayoutUser, it) }
-    }
 
-    private fun handlePasswordError(error: String?) {
 
-        error?.let { ErrorUtils.setErrorText(binding.textInputLayoutPassword, it) }
-        error?.let { ErrorUtils.setErrorText(binding.textInputLayoutPassword2, it) }
-
-    }
-
-    private fun handlePasswordMatch(passwordMatch: Boolean) {
-        val passwordTextInputLayouts = listOf(
-            binding.textInputLayoutPassword,
-            binding.textInputLayoutPassword2
-        )
-
-        if (!passwordMatch) {
-            passwordTextInputLayouts.forEach { textInputLayout ->
-                textInputLayout.error = getString(R.string.contraseno_coinciden)
-            }
-        } else {
-            passwordTextInputLayouts.forEach { textInputLayout ->
-                textInputLayout.error = null
-            }
-        }
-    }
 
 
     private fun setViewModel() {
@@ -148,11 +119,6 @@ class Register2Fragment : Fragment() {
         }
     }
 
-    private fun clearError(){
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword)
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword2)
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
-    }
 }
 
 

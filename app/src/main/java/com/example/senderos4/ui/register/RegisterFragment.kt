@@ -37,8 +37,21 @@ class RegisterFragment : Fragment() {
 
         click()
         setViewModel()
-        clearError()
         identError()
+        binding.lifecycleOwner = viewLifecycleOwner
+
+
+        registerViewModel.errorName.observe(viewLifecycleOwner) {
+            binding.textInputLayoutUser.error = it
+        }
+
+        registerViewModel.errorEmail.observe(viewLifecycleOwner){
+            binding.textInputLayoutEmail.error = it
+        }
+
+        registerViewModel.errorPhoneNumber.observe(viewLifecycleOwner){
+            binding.textInputLayoutPhone.error = it
+        }
     }
 
     fun identError() {
@@ -47,7 +60,7 @@ class RegisterFragment : Fragment() {
         if (!quienContieneError.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
             when (quienContieneError) {
                 "email" -> ErrorUtils.setErrorText(binding.textInputLayoutEmail, errorMessage)
-                "userName" -> ErrorUtils.setErrorText(binding.textInputLayoutUser, errorMessage)
+                //"userName" -> ErrorUtils.setErrorText(binding.textInputLayoutUser, errorMessage)
                 "phoneNumber" -> ErrorUtils.setErrorText(binding.textInputLayoutPhone, errorMessage)
             }
         }
@@ -59,37 +72,8 @@ class RegisterFragment : Fragment() {
 
     private fun click() {
         binding.confirmationInfo.setOnClickListener {
-            val name = binding.textUserName.text.toString()
-            val email = binding.textUseremail.text.toString()
-            val phone = binding.textUserPhoneNumbre.text.toString()
-
-            if (registerViewModel.validateFields() && registerViewModel.validateName(name) && registerViewModel.validateEmail(email)) {
-                registerViewModel.name.value = name
-                registerViewModel.email.value = email
-                registerViewModel.phone.value = phone
-
-                findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
-            } else {
-                // Mostrar mensajes de error
-                if (!registerViewModel.validateName(name)) {
-                    binding.textInputLayoutUser.error = "El nombre contiene digitos invalidos"
-                }
-                if (!registerViewModel.validateEmail(email)) {
-                    binding.textInputLayoutEmail.error = "El correo electrónico no es válido"
-                }
-                if (!registerViewModel.validateFields()) {
-                    ErrorUtils.setErrorText(binding.textInputLayoutUser, getString(R.string.completa_campo))
-                    ErrorUtils.setErrorText(binding.textInputLayoutEmail,getString(R.string.completa_campo))
-                    ErrorUtils.setErrorText(binding.textInputLayoutPhone,getString(R.string.completa_campo))
-                }
-            }
+            findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
         }
-    }
-
-    private fun clearError() {
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutEmail)
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPhone)
     }
 
 
