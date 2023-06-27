@@ -42,10 +42,10 @@ class RegisterFragment : Fragment() {
     }
 
     fun identError() {
-        val errorField = arguments?.getString(getString(R.string.errorfield))
+        val quienContieneError = arguments?.getString(getString(R.string.quienContieneError))
         val errorMessage = arguments?.getString(getString(R.string.errormessage))
-        if (!errorField.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
-            when (errorField) {
+        if (!quienContieneError.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
+            when (quienContieneError) {
                 "email" -> ErrorUtils.setErrorText(binding.textInputLayoutEmail, errorMessage)
                 "userName" -> ErrorUtils.setErrorText(binding.textInputLayoutUser, errorMessage)
                 "phoneNumber" -> ErrorUtils.setErrorText(binding.textInputLayoutPhone, errorMessage)
@@ -63,7 +63,7 @@ class RegisterFragment : Fragment() {
             val email = binding.textUseremail.text.toString()
             val phone = binding.textUserPhoneNumbre.text.toString()
 
-            if (registerViewModel.validateFields() && validateName(name) && validateEmail(email)) {
+            if (registerViewModel.validateFields() && registerViewModel.validateName(name) && registerViewModel.validateEmail(email)) {
                 registerViewModel.name.value = name
                 registerViewModel.email.value = email
                 registerViewModel.phone.value = phone
@@ -71,10 +71,10 @@ class RegisterFragment : Fragment() {
                 findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
             } else {
                 // Mostrar mensajes de error
-                if (!validateName(name)) {
+                if (!registerViewModel.validateName(name)) {
                     binding.textInputLayoutUser.error = "El nombre contiene digitos invalidos"
                 }
-                if (!validateEmail(email)) {
+                if (!registerViewModel.validateEmail(email)) {
                     binding.textInputLayoutEmail.error = "El correo electrónico no es válido"
                 }
                 if (!registerViewModel.validateFields()) {
@@ -84,17 +84,6 @@ class RegisterFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun validateName(name: String): Boolean {
-        val regex = Regex("[a-zA-Z ]+")
-        return  regex.matches(name)
-        //name.length >= 2 &&
-    }
-
-    private fun validateEmail(email: String): Boolean {
-        val regex = Regex("[a-zA-Z0-9@._-]+")
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches() && regex.matches(email)
     }
 
     private fun clearError() {

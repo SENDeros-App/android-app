@@ -37,7 +37,7 @@ class Register2Fragment : Fragment() {
 
         observeStatus()
         setViewModel()
-        //clearError()
+        clearError()
     }
 
     private fun observeStatus() {
@@ -63,14 +63,13 @@ class Register2Fragment : Fragment() {
     }
 
     private fun handleUserError(error: String?) {
-        binding.textInputLayoutUser.error = error
+        error?.let { ErrorUtils.setErrorText(binding.textInputLayoutUser, it) }
     }
 
     private fun handlePasswordError(error: String?) {
-        binding.textInputLayoutPassword.error = error
-        binding.textInputLayoutPassword2.error = error
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword)
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword2)
+
+        error?.let { ErrorUtils.setErrorText(binding.textInputLayoutPassword, it) }
+        error?.let { ErrorUtils.setErrorText(binding.textInputLayoutPassword2, it) }
 
     }
 
@@ -83,7 +82,6 @@ class Register2Fragment : Fragment() {
         if (!passwordMatch) {
             passwordTextInputLayouts.forEach { textInputLayout ->
                 textInputLayout.error = getString(R.string.contraseno_coinciden)
-                ErrorUtils.clearErrorOnFocusChange(textInputLayout)
             }
         } else {
             passwordTextInputLayouts.forEach { textInputLayout ->
@@ -148,6 +146,12 @@ class Register2Fragment : Fragment() {
             else -> {
             }
         }
+    }
+
+    private fun clearError(){
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword)
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword2)
+        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
     }
 }
 

@@ -21,8 +21,8 @@ object ErrorUtils {
         textInputLayout.clearFocus()
     }
 
-    fun navigateToRegisterFragment(fragment: Fragment, errorField: String, errorMessage: String) {
-        val bundle = bundleOf("errorField" to errorField, "errorMessage" to errorMessage)
+    fun navigateToRegisterFragment(fragment: Fragment, quienContieneError: String, errorMessage: String) {
+        val bundle = bundleOf("quienContieneError" to quienContieneError, "errorMessage" to errorMessage)
         fragment.findNavController().navigate(R.id.action_register2Fragment_to_registerFragment, bundle)
     }
 }

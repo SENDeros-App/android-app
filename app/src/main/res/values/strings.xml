@@ -58,7 +58,7 @@
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="registrarse">Registrarse</string>
     <string name="posees_una_cuenta">¿Ya posees una cuenta en SENDeros?</string>
-    <string name="errorfield">errorField</string>
+    <string name="quienContieneError">quienContieneError</string>
     <string name="errormessage">errorMessage</string>
     <string name="completa_campo">Por favor, completa este campo</string>
     <string name="contraseno_coinciden">Las contraseñas no coinciden</string>

@@ -1,5 +1,6 @@
 package com.example.senderos4.ui.register.viewmodels
 
+import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,6 +41,16 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
        }
         return true
+    }
+
+    fun validateName(name: String): Boolean {
+        val regex = Regex("[a-zA-Z ]+")
+        return name.length >= 2 && regex.matches(name)
+    }
+
+    fun validateEmail(email: String): Boolean {
+        val regex = Regex("[a-zA-Z0-9@._-]+")
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches() && regex.matches(email)
     }
 ///
 
