@@ -52,15 +52,11 @@ class Register2Fragment : Fragment() {
             binding.textInputLayoutPassword2.error = it
         }
 
-        /*registerViewModel.errorPasswordConfirmation.observe(viewLifecycleOwner){
+        registerViewModel.errorPasswordConfirmation.observe(viewLifecycleOwner){
             binding.textInputLayoutPassword2.error = it
             binding.textInputLayoutPassword2.error = it
-        }*/
+        }
     }
-
-
-
-
 
     private fun setViewModel() {
         binding.viewmodelregister = registerViewModel

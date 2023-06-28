@@ -101,29 +101,45 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
     }
 
-    var validatePhase1 = MediatorLiveData<Boolean>(false).apply {
+    var validatePhase1 = MediatorLiveData(false).apply {
         addSource(errorName) {
-            value = it.isEmpty()
+            val errorValuePhone = errorPhoneNumber.value?.isEmpty() ?: false
+            val errorValueEmail = errorEmail.value?.isEmpty() ?: false
+            value = errorValueEmail && errorValuePhone && it.isEmpty()
         }
+
         addSource(errorEmail) {
-            value = it.isEmpty()
+            val errorValueName = errorName.value?.isEmpty() ?: false
+            val errorPhoneNumber = errorPhoneNumber.value?.isEmpty() ?: false
+            value = errorPhoneNumber && errorValueName && it.isEmpty()
         }
+
         addSource(errorPhoneNumber) {
-            value = it.isEmpty()
+            val errorValueName = errorName.value?.isEmpty() ?: false
+            val errorValueEmail = errorEmail.value?.isEmpty() ?: false
+            value = errorValueEmail && errorValueName && it.isEmpty()
         }
     }
 
 
-    var validatePhase2 = MediatorLiveData<Boolean>(false).apply {
+    var validatePhase2 = MediatorLiveData(false).apply {
         addSource(errorUser) {
-            value = it.isEmpty()
+            val errorValuePassword = errorPassword.value?.isEmpty() ?: false
+            val errorPasswordConfirmation = errorPasswordConfirmation.value?.isEmpty() ?: false
+            value = errorValuePassword && errorPasswordConfirmation && it.isEmpty()
         }
+
         addSource(errorPassword) {
-            value = it.isEmpty()
+            val errorValueUser = errorUser.value?.isEmpty() ?: false
+            val errorPasswordConfirmation = errorPasswordConfirmation.value?.isEmpty() ?: false
+            value = errorValueUser && errorPasswordConfirmation && it.isEmpty()
         }
-        /*addSource(errorPasswordConfirmation) {
-            value = it.isEmpty()
-        }*/
+
+        addSource(errorPasswordConfirmation) {
+            val errorValueUser = errorUser.value?.isEmpty() ?: false
+            val errorValuePassword = errorPassword.value?.isEmpty() ?: false
+            value = errorValueUser && errorValuePassword && it.isEmpty()
+        }
     }
 
     private val _status = MutableLiveData<RegisterUiStatus>(RegisterUiStatus.Resume)
