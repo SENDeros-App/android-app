@@ -23,56 +23,58 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
         get() = _status
 
     var name = MutableLiveData("")
-    var errorName = name.map { value ->
-        val validator = Validator(value)
-            .isRequired("El nombre es requerido")
-            .minLength(4, "El nombre debe tener mas de 4 caracteres")
-            .maxLength(50, "El nombre debe contener menos de 50 digitos")
-            .matches(
-                Regex("[a-zA-Z ]+"),
-                "El nombre solamente puede estar compuesto por letras"
-            )
-        val errors = validator.validate()
-        if (errors.isEmpty())
-            return@map ""
-        else {
-            return@map errors.joinToString(separator = "\n")
+    var errorName = MediatorLiveData("").apply { ->
+        addSource(name){nameValue ->
+            val validator = Validator(nameValue)
+                .isRequired("El nombre es requerido")
+                .minLength(4, "El nombre debe tener mas de 4 caracteres")
+                .maxLength(50, "El nombre debe contener menos de 50 digitos")
+                .matches(
+                    Regex("^[a-zA-ZÀ-ÿ\\s]+$"),
+                    "El nombre solamente puede estar compuesto por letras"
+                )
+            val errors = validator.validate()
+            value = if(errors.isEmpty()) ""
+            else {
+                errors.joinToString(separator = "\n")
+            }
         }
-
     }
 
     var email = MutableLiveData("")
-    var errorEmail = email.map { value ->
-        val validator = Validator(value)
-            .isRequired("El email es requerido")
-            .matches(Regex("[a-zA-Z0-9@._-áéíóú]+"), "El email contiene digitos invalidos")
-        val errors = validator.validate()
-        if (errors.isEmpty())
-            return@map ""
-        else {
-            return@map errors.joinToString(separator = "\n")
+    var errorEmail = MediatorLiveData("").apply {
+        addSource(email){emailValue ->
+            val validator = Validator(emailValue)
+                .isRequired("El email es requerido")
+                .matches(Regex("^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6})$"), "El email contiene digitos invalidos")
+            val errors = validator.validate()
+            value = if (errors.isEmpty()) ""
+            else {
+                errors.joinToString(separator = "\n")
+            }
         }
     }
 
     var phone = MutableLiveData("")
-    var errorPhoneNumber = phone.map { value ->
-        val validator = Validator(value)
-            .isRequired("El número es requerido")
-            .minLength(8, "Ingresar un número valido")
-        val errors = validator.validate()
-        if (errors.isEmpty())
-            return@map ""
-        else {
-            return@map errors.joinToString(separator = "\n")
+    var errorPhoneNumber = MediatorLiveData("").apply {
+        addSource(phone){phoneValue ->
+            val validator = Validator(phoneValue)
+                .isRequired("El número es requerido")
+                .minLength(8, "Ingresar un número valido")
+            val errors = validator.validate()
+            value = if (errors.isEmpty()) ""
+            else {
+                errors.joinToString(separator = "\n")
+            }
         }
     }
 
     var user = MutableLiveData("")
     var errorUser = MediatorLiveData("").apply {
-        addSource(user) { nameValue ->
-            val validator = Validator(nameValue)
+        addSource(user) { userValue ->
+            val validator = Validator(userValue)
                 .isRequired("Usuario es requerido")
-                .matches(Regex("[a-z0-9._-]+"), "El email contiene digitos invalidos")
+                .matches(Regex("[a-z0-9._-]+"), "El nombre de usuario solo debe contener letras minúsculas, dígitos y los caracteres especiales . _ -")
                 .minLength(5, "El nombre de usuario debe contener como minimo 5 digitos")
                 .maxLength(10, "EL nombre no debe exeder los 10 caracteres")
             val errors = validator.validate()
@@ -97,17 +99,18 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     }
 
     var password = MutableLiveData("")
-    var errorPassword = password.map { value ->
-        val validator = Validator(value)
-            .isRequired("Este campo es requerido")
-            .minLength(8, "La contraseña debe tener minimo 8 digitos")
-            .maxLength(15, "La contraseñ no debe exeder los 15 digitos")
-            .matches(Regex("^[a-zA-Z0-9@#$%^&+=]+$"), "La contraseña contine digitos invalidos")
-        val errors = validator.validate()
-        if (errors.isEmpty())
-            return@map ""
-        else {
-            return@map errors.joinToString(separator = "\n")
+    var errorPassword = MediatorLiveData("").apply {
+        addSource(password){passwordValue ->
+            val validator = Validator(passwordValue)
+                .isRequired("Este campo es requerido")
+                .minLength(8, "La contraseña debe tener minimo 8 digitos")
+                .maxLength(15, "La contraseñ no debe exeder los 15 digitos")
+                .matches(Regex("^[a-zA-Z0-9@#$%^&+=-_]+$"), "La contraseña contine digitos invalidos")
+            val errors = validator.validate()
+            value = if(errors.isEmpty()) ""
+            else{
+                errors.joinToString(separator = "\n")
+            }
         }
     }
 
