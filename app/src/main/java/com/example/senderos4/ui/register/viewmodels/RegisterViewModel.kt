@@ -18,19 +18,27 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val registerRepository: RegisterRepository) : ViewModel() {
 
+    private val _status = MutableLiveData<RegisterUiStatus>(RegisterUiStatus.Resume)
+    val status: LiveData<RegisterUiStatus>
+        get() = _status
+
     var name = MutableLiveData("")
     var errorName = name.map { value ->
         val validator = Validator(value)
             .isRequired("El nombre es requerido")
             .minLength(4, "El nombre debe tener mas de 4 caracteres")
             .maxLength(50, "El nombre debe contener menos de 50 digitos")
-            .matches(Regex("[a-zA-Z ]+"), "El nombre solamente puede estar compuesto por letras")
+            .matches(
+                Regex("[a-zA-Z ]+"),
+                "El nombre solamente puede estar compuesto por letras"
+            )
         val errors = validator.validate()
         if (errors.isEmpty())
             return@map ""
         else {
             return@map errors.joinToString(separator = "\n")
         }
+
     }
 
     var email = MutableLiveData("")
@@ -60,19 +68,32 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     }
 
     var user = MutableLiveData("")
-    var errorUser = user.map { value ->
-        val validator = Validator(value)
-            .isRequired("Usuario es requerido")
-            .matches(Regex("[a-z0-9._-]+"), "El email contiene digitos invalidos")
-            .minLength(5, "El nombre de usuario debe contener como minimo 5 digitos")
-            .maxLength(10, "EL nombre no debe exeder los 10 caracteres")
-        val errors = validator.validate()
-        if (errors.isEmpty())
-            return@map ""
-        else {
-            return@map errors.joinToString(separator = "\n")
+    var errorUser = MediatorLiveData("").apply {
+        addSource(user) { nameValue ->
+            val validator = Validator(nameValue)
+                .isRequired("Usuario es requerido")
+                .matches(Regex("[a-z0-9._-]+"), "El email contiene digitos invalidos")
+                .minLength(5, "El nombre de usuario debe contener como minimo 5 digitos")
+                .maxLength(10, "EL nombre no debe exeder los 10 caracteres")
+            val errors = validator.validate()
+            value = if (errors.isEmpty()) ""
+            else {
+                errors.joinToString(separator = "\n")
+            }
         }
 
+        addSource(_status) {
+            value = when (it) {
+                is RegisterUiStatus.ErrorWithMessage -> {
+                    if (it.message == "Usuario ya registrado ") {
+                        "Usuario ya registrado "
+                    } else {
+                        ""
+                    }
+                }
+                else -> ""
+            }
+        }
     }
 
     var password = MutableLiveData("")
@@ -89,7 +110,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
             return@map errors.joinToString(separator = "\n")
         }
     }
-
 
     var passwordConfirmation = MutableLiveData("")
     var errorPasswordConfirmation = passwordConfirmation.map {
@@ -121,7 +141,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
         }
     }
 
-
     var validatePhase2 = MediatorLiveData(false).apply {
         addSource(errorUser) {
             val errorValuePassword = errorPassword.value?.isEmpty() ?: false
@@ -141,11 +160,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
             value = errorValueUser && errorValuePassword && it.isEmpty()
         }
     }
-
-    private val _status = MutableLiveData<RegisterUiStatus>(RegisterUiStatus.Resume)
-
-    val status: LiveData<RegisterUiStatus>
-        get() = _status
 
     private fun register(
         name: String,

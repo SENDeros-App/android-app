@@ -52,7 +52,6 @@ class LoginFragment : HiddenMenuFragment() {
         setViewModel()
         observeStatus()
         click()
-        clearError()
     }
 
     private fun click() {
@@ -129,11 +128,6 @@ class LoginFragment : HiddenMenuFragment() {
             }
             else -> {}
         }
-    }
-
-    private fun clearError() {
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
-        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutPassword)
     }
 
 

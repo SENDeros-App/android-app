@@ -8,17 +8,9 @@ import com.google.android.material.textfield.TextInputLayout
 
 object ErrorUtils {
 
-    fun clearErrorOnFocusChange(textInputLayout: TextInputLayout) {
-        textInputLayout.editText?.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                textInputLayout.error = null
-            }
-        }
-    }
-
     fun setErrorText(textInputLayout: TextInputLayout, errorMessage: String) {
         textInputLayout.error = errorMessage
-        textInputLayout.clearFocus()
+        //textInputLayout.clearFocus()
     }
 
     fun navigateToRegisterFragment(fragment: Fragment, quienContieneError: String, errorMessage: String) {

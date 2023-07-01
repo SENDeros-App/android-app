@@ -84,22 +84,20 @@ class Register2Fragment : Fragment() {
             }
 
             is RegisterUiStatus.ErrorWithMessage -> {
-                registerViewModel.clearStatus()
+                //registerViewModel.clearStatus()
                 //Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
                 when (status.message) {
-                    getString(R.string.email_ya_registrado) -> ErrorUtils.navigateToRegisterFragment(
-                        this,
-                        "email",
-                        getString(R.string.email_ya_registrado)
-                    )
+                    getString(R.string.email_ya_registrado) -> {
+
+                    }
                     getString(R.string.usuario_ya_registrado) -> {
+
                         ErrorUtils.setErrorText(binding.textInputLayoutUser, getString(R.string.usuario_ya_registrado))
-                        ErrorUtils.clearErrorOnFocusChange(binding.textInputLayoutUser)
                     }
                     getString(R.string.telefonico_ya_registrado) -> ErrorUtils.navigateToRegisterFragment(
                         this,
                         "phoneNumber",
-                        getString(R.string.telefonico_ya_registrado)
+                        "Telefono ya registrado"
                     )
                 }
             }

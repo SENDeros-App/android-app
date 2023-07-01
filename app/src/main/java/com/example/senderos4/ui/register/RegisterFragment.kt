@@ -59,9 +59,14 @@ class RegisterFragment : Fragment() {
         val errorMessage = arguments?.getString(getString(R.string.errormessage))
         if (!quienContieneError.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
             when (quienContieneError) {
-                "email" -> ErrorUtils.setErrorText(binding.textInputLayoutEmail, errorMessage)
+                "email" -> {
+                    binding.textInputLayoutEmail.error = errorMessage
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+                }
                 //"userName" -> ErrorUtils.setErrorText(binding.textInputLayoutUser, errorMessage)
-                "phoneNumber" -> ErrorUtils.setErrorText(binding.textInputLayoutPhone, errorMessage)
+                "phoneNumber" -> {
+                    binding.textInputLayoutPhone.error = errorMessage
+                }
             }
         }
     }
