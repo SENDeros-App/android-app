@@ -53,6 +53,19 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 errors.joinToString(separator = "\n")
             }
         }
+
+        /*addSource(_status) {
+            value = when (it) {
+                is RegisterUiStatus.ErrorWithMessage -> {
+                    if (it.message == "Usuario ya registrado ") {
+                        "Usuario ya registrado "
+                    } else {
+                        ""
+                    }
+                }
+                else -> ""
+            }
+        }*/
     }
 
     var phone = MutableLiveData("")
@@ -67,6 +80,19 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 errors.joinToString(separator = "\n")
             }
         }
+
+        /*addSource(_status) {
+            value = when (it) {
+                is RegisterUiStatus.ErrorWithMessage -> {
+                    if (it.message == "Usuario ya registrado ") {
+                        "Usuario ya registrado "
+                    } else {
+                        ""
+                    }
+                }
+                else -> ""
+            }
+        }*/
     }
 
     var user = MutableLiveData("")
@@ -84,7 +110,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
             }
         }
 
-        addSource(_status) {
+        /*addSource(_status) {
             value = when (it) {
                 is RegisterUiStatus.ErrorWithMessage -> {
                     if (it.message == "Usuario ya registrado ") {
@@ -95,7 +121,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 }
                 else -> ""
             }
-        }
+        }*/
     }
 
     var password = MutableLiveData("")
