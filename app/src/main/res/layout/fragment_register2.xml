@@ -20,10 +20,13 @@
             android:id="@+id/image_background_Register2"
             android:layout_width="@dimen/background_width"
             android:layout_height="@dimen/background_height"
+            android:scaleX="-1"
             android:src="@drawable/backgroundlogin"
             android:tintMode="src_in"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.498"
             app:tint="#8B9255FF" />
@@ -32,10 +35,11 @@
             android:id="@+id/image_logo_register2"
             android:layout_width="@dimen/logo_width"
             android:layout_height="@dimen/logo_height"
-            android:scaleX="-1"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.01999998" />
 
@@ -43,14 +47,14 @@
             android:id="@+id/welcomeText"
             android:layout_width="@dimen/text_268dp"
             android:layout_height="@dimen/text_height_82dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/crea_un_usuario"
             android:textAlignment="center"
             android:textSize="@dimen/text_size_item_"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.163" />
+            app:layout_constraintVertical_bias="0.120000005" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutUser"
@@ -105,16 +109,16 @@
             android:id="@+id/textInputLayoutPassword2"
             android:layout_width="360dp"
             android:layout_height="109dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="35dp"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.313"
+            app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textUserPasswordConfirmation"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/textInputEditUser_width"
                 android:layout_height="@dimen/textInputEditUser_height"
                 android:hint="@string/confirm_password"
                 android:inputType="textPassword"
