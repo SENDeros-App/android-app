@@ -35,11 +35,10 @@
             android:id="@+id/image_logo_register2"
             android:layout_width="@dimen/logo_width"
             android:layout_height="@dimen/logo_height"
+            android:scaleX="-1"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.01999998" />
 
@@ -47,12 +46,12 @@
             android:id="@+id/welcomeText"
             android:layout_width="@dimen/text_268dp"
             android:layout_height="@dimen/text_height_82dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:text="@string/crea_un_usuario"
             android:textAlignment="center"
             android:textSize="@dimen/text_size_item_"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.120000005" />
 

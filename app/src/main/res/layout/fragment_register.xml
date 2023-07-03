@@ -20,12 +20,12 @@
             android:id="@+id/image_background"
             android:layout_width="@dimen/background_width"
             android:layout_height="@dimen/background_height"
+            android:scaleX="-1"
             android:src="@drawable/backgroundlogin"
             android:tintMode="src_in"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498"
             app:tint="#8B9255FF" />
 
         <ImageView
