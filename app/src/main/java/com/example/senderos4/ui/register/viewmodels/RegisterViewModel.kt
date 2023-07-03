@@ -43,70 +43,100 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
     var email = MutableLiveData("")
     var errorEmail = MediatorLiveData("").apply {
+
+        var emailValidate = false
+
         addSource(email){emailValue ->
             val validator = Validator(emailValue)
                 .isRequired("El email es requerido")
                 .matches(Regex("^([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6})$"), "El email contiene digitos invalidos")
             val errors = validator.validate()
-            value = if (errors.isEmpty()) ""
+            value = if (errors.isEmpty()) {
+                emailValidate = false
+                ""
+            }
             else {
                 errors.joinToString(separator = "\n")
             }
         }
 
-        /*addSource(_status) {
-            value = when (it) {
-                is RegisterUiStatus.ErrorWithMessage -> {
-                    if (it.message == "Usuario ya registrado ") {
-                        "Usuario ya registrado "
-                    } else {
-                        ""
-                    }
+        addSource(_status) { status ->
+            value = when {
+                !emailValidate -> {
+                    "El email es requerido" // Agrega el mensaje de error correspondiente
+                }
+                status is RegisterUiStatus.ErrorWithMessage && status.message == "email ya registrado " -> {
+                    "Email ya registrado "
                 }
                 else -> ""
             }
-        }*/
+        }
     }
 
     var phone = MutableLiveData("")
     var errorPhoneNumber = MediatorLiveData("").apply {
+
+        var phoneValidate = false
+
         addSource(phone){phoneValue ->
             val validator = Validator(phoneValue)
-                .isRequired("El número es requerido")
+                .isRequired("El número de teléfono es requerido")
                 .minLength(8, "Ingresar un número valido")
             val errors = validator.validate()
-            value = if (errors.isEmpty()) ""
+            value = if (errors.isEmpty()) {
+                phoneValidate = true
+                ""
+            }
             else {
                 errors.joinToString(separator = "\n")
             }
         }
 
-        /*addSource(_status) {
-            value = when (it) {
-                is RegisterUiStatus.ErrorWithMessage -> {
-                    if (it.message == "Usuario ya registrado ") {
-                        "Usuario ya registrado "
-                    } else {
-                        ""
-                    }
+
+        addSource(_status) { status ->
+            value = when {
+                !phoneValidate -> {
+                    "El número de teléfono es requerido" // Agrega el mensaje de error correspondiente
+                }
+                status is RegisterUiStatus.ErrorWithMessage && status.message == "telefonico ya registrado" -> {
+                    "Numero telefonico ya registrado "
                 }
                 else -> ""
             }
-        }*/
+        }
     }
+
 
     var user = MutableLiveData("")
     var errorUser = MediatorLiveData("").apply {
+
+        var userValidate = false
+
         addSource(user) { userValue ->
             val validator = Validator(userValue)
-                .isRequired("Usuario es requerido")
+                .isRequired("El nombre de suario es requerido")
                 .matches(Regex("[a-z0-9._-]+"), "El nombre de usuario solo debe contener letras minúsculas, dígitos y los caracteres especiales . _ -")
                 .minLength(5, "El nombre de usuario debe contener como minimo 5 digitos")
                 .maxLength(10, "EL nombre no debe exeder los 10 caracteres")
             val errors = validator.validate()
-            value = if (errors.isEmpty()) ""
+            value = if (errors.isEmpty()) {
+                userValidate = true
+                ""
+            }
             else {
                 errors.joinToString(separator = "\n")
+            }
+        }
+
+        addSource(_status) { status ->
+            value = when {
+                !userValidate -> {
+                    "El nombre de suario es requerido" // Agrega el mensaje de error correspondiente
+                }
+                status is RegisterUiStatus.ErrorWithMessage && status.message == "Usuario ya registrado " -> {
+                    "Usuario ya registrado "
+                }
+                else -> ""
             }
         }
 

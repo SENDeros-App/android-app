@@ -88,20 +88,17 @@ class Register2Fragment : Fragment() {
                 //Toast.makeText(requireContext(), status.message, Toast.LENGTH_SHORT).show()
                 when (status.message) {
                     getString(R.string.email_ya_registrado) -> {
-
+                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
                     }
-                    getString(R.string.usuario_ya_registrado) -> {
+                    /*getString(R.string.usuario_ya_registrado) -> {
 
                         ErrorUtils.setErrorText(binding.textInputLayoutUser, getString(R.string.usuario_ya_registrado))
+                    }*/
+                    getString(R.string.telefonico_ya_registrado) ->{
+                        findNavController().navigate(R.id.action_register2Fragment_to_registerFragment)
                     }
-                    getString(R.string.telefonico_ya_registrado) -> ErrorUtils.navigateToRegisterFragment(
-                        this,
-                        "phoneNumber",
-                        "Telefono ya registrado"
-                    )
                 }
             }
-
             is RegisterUiStatus.Success -> {
                 registerViewModel.clearStatus()
                 registerViewModel.clearData()

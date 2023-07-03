@@ -40,7 +40,9 @@ class RegisterFragment : Fragment() {
         identError()
         binding.lifecycleOwner = viewLifecycleOwner
 
+    }
 
+    fun identError() {
         registerViewModel.errorName.observe(viewLifecycleOwner) {
             binding.textInputLayoutUser.error = it
         }
@@ -51,23 +53,6 @@ class RegisterFragment : Fragment() {
 
         registerViewModel.errorPhoneNumber.observe(viewLifecycleOwner){
             binding.textInputLayoutPhone.error = it
-        }
-    }
-
-    fun identError() {
-        val quienContieneError = arguments?.getString(getString(R.string.quienContieneError))
-        val errorMessage = arguments?.getString(getString(R.string.errormessage))
-        if (!quienContieneError.isNullOrEmpty() && !errorMessage.isNullOrEmpty()) {
-            when (quienContieneError) {
-                "email" -> {
-                    binding.textInputLayoutEmail.error = errorMessage
-                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-                }
-                //"userName" -> ErrorUtils.setErrorText(binding.textInputLayoutUser, errorMessage)
-                "phoneNumber" -> {
-                    binding.textInputLayoutPhone.error = errorMessage
-                }
-            }
         }
     }
 
