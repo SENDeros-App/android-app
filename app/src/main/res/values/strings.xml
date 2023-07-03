@@ -67,4 +67,13 @@
     <string name="email_ya_registrado">"email ya registrado "</string>
     <string name="usuario_ya_registrado">"Usuario ya registrado "</string>
     <string name="telefonico_ya_registrado">telefonico ya registrado</string>
+    <string name="add_photo">Agregar foto</string>
+    <string name="send">Enviar</string>
+    <string name="add_comment">Agregar\ncomentario</string>
+    <string name="add_photoDescrip">Add_Photo</string>
+    <string name="comment">Comentario:</string>
+    <string name="user">Usuario</string>
+    <string name="leak">Fuga de agua</string>
+    <string name="add_photo_descrp">Add_Photo</string>
+
 </resources>
