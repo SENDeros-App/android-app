@@ -4,11 +4,34 @@
     <dimen name="little_padding_8">8dp</dimen>
     <dimen name="medium_padding_16">16dp</dimen>
     <dimen name="margincard">5dp</dimen>
+
+    <dimen name="logo_width">134dp</dimen>
+    <dimen name="logo_height">157dp</dimen>
+    <dimen name="background_width">362dp</dimen>
+    <dimen name="background_height">433dp</dimen>
+    <dimen name="welcomeText_width">227dp</dimen>
+    <dimen name="welcomeText_height">87dp</dimen>
+    <dimen name="textInputLayoutUser_width">360dp</dimen>
+    <dimen name="textInputLayoutUser_height">100dp</dimen>
+    <dimen name="textInputEditUser_width">345dp</dimen>
+    <dimen name="textInputEditUser_height">57dp</dimen>
+    <dimen name="textInputLayoutPassword_width">360dp</dimen>
+    <dimen name="textInputLayoutPassword_height">85dp</dimen>
+    <dimen name="textInputEditPassword_width">345dp</dimen>
+    <dimen name="textInputEditPassword_height">57dp</dimen>
+    <dimen name="loginButton_width">275dp</dimen>
+    <dimen name="loginButton_height">59dp</dimen>
+    <dimen name="loginButton_margin">64dp</dimen>
+    <dimen name="InvitationTextView_width">169dp</dimen>
+    <dimen name="InvitationTextView_height">65dp</dimen>
+    <dimen name="RegisterTextView_margin">56dp</dimen>
+
     <dimen name="letter_18sp">18sp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
     <dimen name="margin_50dp">50dp</dimen>
     <dimen name="width_300dp">300dp</dimen>
     <dimen name="margin_15dp">15dp</dimen>
+
     <dimen name="marginCard">5dp</dimen>
     <dimen name="text_size_item_">20sp</dimen>
     <dimen name="padding_item_13dp">13dp</dimen>
@@ -19,5 +42,10 @@
     <dimen name="description_division">15sp</dimen>
     <dimen name="margin_recyclerview_division">8dp</dimen>
     <dimen name="height_linear_division">155dp</dimen>
+
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="text_268dp">268dp</dimen>
+    <dimen name="text_height_82dp">82dp</dimen>
+
     <dimen name="_25dp">25dp</dimen>
 </resources>

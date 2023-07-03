@@ -1,363 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#d9d9d9"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        tools:context=".ui.Settings.SettingsFragment">
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?android:attr/actionBarSize"
+    android:background="#d9d9d9"
+    tools:context=".ui.Settings.SettingsFragment">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#d9d9d9"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/general"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/general"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/general_action_fragment"
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/general_action_fragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textGeneralView"
+                    android:layout_width="78dp"
+                    android:layout_height="23dp"
+                    android:text="@string/general_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
 
-                    <TextView
-                        android:id="@+id/textGeneralView"
-                        android:layout_width="78dp"
-                        android:layout_height="23dp"
-                        android:text="@string/general_text"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/settings_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textGeneralView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/settings_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textGeneralView"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/mapview"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textMapView"
+                    android:layout_width="228dp"
+                    android:layout_height="25dp"
+                    android:text="@string/map_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.448"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
 
-                    <TextView
-                        android:id="@+id/textMapView"
-                        android:layout_width="228dp"
-                        android:layout_height="25dp"
-                        android:text="@string/map_text"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.448"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/map_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textMapView"
+                    app:layout_constraintHorizontal_bias="0.41"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.518" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/map_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textMapView"
-                        app:layout_constraintHorizontal_bias="0.41"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.518" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingStart="16dp"
+            android:text="@string/warning_text" />
 
-            <TextView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/warning"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:paddingStart="16dp"
-                android:text="@string/warning_text" />
+                android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/warning"
+                <TextView
+                    android:id="@+id/textWarningView"
+                    android:layout_width="78dp"
+                    android:layout_height="23dp"
+                    android:text="Avisos"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
+
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/warning_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textWarningView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/area"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textAreaView"
+                    android:layout_width="78dp"
+                    android:layout_height="23dp"
+                    android:text="Area"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
 
-                    <TextView
-                        android:id="@+id/textWarningView"
-                        android:layout_width="78dp"
-                        android:layout_height="23dp"
-                        android:text="Avisos"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/location_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textAreaView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/warning_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textWarningView"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingStart="16dp"
+            android:text="@string/account_text" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/area"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textAccountView"
+                    android:layout_width="228dp"
+                    android:layout_height="25dp"
+                    android:text="Cuenta e Inicio de secion "
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.448"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
 
-                    <TextView
-                        android:id="@+id/textAreaView"
-                        android:layout_width="78dp"
-                        android:layout_height="23dp"
-                        android:text="Area"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/profile_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textAccountView"
+                    app:layout_constraintHorizontal_bias="0.41"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.518" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/location_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textAreaView"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:paddingStart="16dp"
+            android:text="@string/app_text" />
 
-            <TextView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/support"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:paddingStart="16dp"
-                android:text="@string/account_text" />
+                android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/account"
+                <TextView
+                    android:id="@+id/textSupportView"
+                    android:layout_width="228dp"
+                    android:layout_height="25dp"
+                    android:text="Informar un Problema"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.448"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
+
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/infsms_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textSupportView"
+                    app:layout_constraintHorizontal_bias="0.41"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.518" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/textInfoView"
+                    android:layout_width="228dp"
+                    android:layout_height="25dp"
+                    android:text="Informacion"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.448"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
 
-                    <TextView
-                        android:id="@+id/textAccountView"
-                        android:layout_width="228dp"
-                        android:layout_height="25dp"
-                        android:text="Cuenta e Inicio de secion "
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.448"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/info_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textInfoView"
+                    app:layout_constraintHorizontal_bias="0.41"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.518" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/profile_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textAccountView"
-                        app:layout_constraintHorizontal_bias="0.41"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.518" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Invitation"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="5dp">
 
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:paddingStart="16dp"
-                android:text="@string/app_text" />
+                android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/support"
-                android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
+                <TextView
+                    android:id="@+id/textInvitationView"
+                    android:layout_width="228dp"
+                    android:layout_height="25dp"
+                    android:text="Invitar Un Amigo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.448"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.511" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/share_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textInvitationView"
+                    app:layout_constraintHorizontal_bias="0.41"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.518" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/textSupportView"
-                        android:layout_width="228dp"
-                        android:layout_height="25dp"
-                        android:text="Informar un Problema"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.448"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
+        </androidx.cardview.widget.CardView>
 
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/infsms_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textSupportView"
-                        app:layout_constraintHorizontal_bias="0.41"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.518" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/info"
-                android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textInfoView"
-                        android:layout_width="228dp"
-                        android:layout_height="25dp"
-                        android:text="Informacion"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.448"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
-
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/info_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textInfoView"
-                        app:layout_constraintHorizontal_bias="0.41"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.518" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Invitation"
-                android:layout_width="match_parent"
-                android:layout_height="68dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="5dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textInvitationView"
-                        android:layout_width="228dp"
-                        android:layout_height="25dp"
-                        android:text="Invitar Un Amigo"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.448"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.511" />
-
-                    <ImageView
-                        android:layout_width="41dp"
-                        android:layout_height="41dp"
-                        android:src="@drawable/share_settings"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textInvitationView"
-                        app:layout_constraintHorizontal_bias="0.41"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.518" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/senderos_text"
-                android:textAlignment="center" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/senderos_text"
+            android:textAlignment="center" />
 
 
-        </LinearLayout>
+    </LinearLayout>
 
-    </ScrollView>
+</ScrollView>

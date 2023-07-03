@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="291dp"
+        android:layout_height="285dp"
         android:orientation="vertical">
 
         <ImageView
@@ -19,36 +20,41 @@
             app:srcCompat="@drawable/setting_icon" />
 
 
-        <ImageView
-            android:id="@+id/login"
+        <LinearLayout
+            android:elevation="20dp"
+            android:id="@+id/linearLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="@dimen/medium_padding_16"
-            android:src="@drawable/user_desconected_icon" />
+            android:layout_marginBottom="32dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Modo invitado"
-            android:layout_gravity="center"
-            android:paddingBottom="@dimen/medium_padding_16"/>
-        <!--<Button
-            android:id="@+id/button_iniciarSesion"
-            android:layout_width="247dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:text="@string/text_button_iniciarSesion" />
+            <TextView
+                android:id="@+id/textUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hello my brother"
+                android:layout_gravity="center"/>
 
-        <Button
-            android:id="@+id/button_registrarse"
-            android:layout_width="258dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/text_button_registrarse" />-->
+            <ImageView
+                android:id="@+id/login"
+                android:layout_width="110dp"
+                android:layout_height="105dp"
+                android:layout_gravity="center"
+                android:background="@drawable/radius_mod_guest"
+                android:elevation="20dp"
+                android:src="@drawable/icon_user_guest" />
+
+            <TextView
+                android:id="@+id/textHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:text="Iniciar sesion"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="@color/purple_Logo"/>
+        </LinearLayout>
 
         <SearchView
             android:id="@+id/search_alert"

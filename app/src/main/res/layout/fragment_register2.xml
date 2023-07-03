@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodelregister"
+            type="com.example.senderos4.ui.register.viewmodels.RegisterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginFragment">
+
+
+        <ImageView
+            android:id="@+id/image_background_Register2"
+            android:layout_width="@dimen/background_width"
+            android:layout_height="@dimen/background_height"
+            android:scaleX="-1"
+            android:src="@drawable/backgroundlogin"
+            android:tintMode="src_in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498"
+            app:tint="#8B9255FF" />
+
+        <ImageView
+            android:id="@+id/image_logo_register2"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:scaleX="-1"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.01999998" />
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="@dimen/text_268dp"
+            android:layout_height="@dimen/text_height_82dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/crea_un_usuario"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_item_"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.120000005" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutUser"
+            android:layout_width="@dimen/textInputLayoutUser_width"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_bias="0.304">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textUserIdentifier"
+                android:layout_width="@dimen/textInputEditUser_width"
+                android:layout_height="@dimen/textInputEditUser_height"
+                android:hint="@string/usuario"
+                android:maxLength="10"
+                android:text="@={viewmodelregister.user}"
+                app:errorEnabled="true"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="171dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword"
+            android:layout_width="356dp"
+            android:layout_height="106dp"
+            android:layout_marginTop="28dp"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUser">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textUserPassword"
+                android:layout_width="@dimen/textInputEditUser_width"
+                android:layout_height="@dimen/textInputEditUser_height"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:text="@={viewmodelregister.password}"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="171dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword2"
+            android:layout_width="360dp"
+            android:layout_height="109dp"
+            android:layout_marginTop="35dp"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textUserPasswordConfirmation"
+                android:layout_width="@dimen/textInputEditUser_width"
+                android:layout_height="@dimen/textInputEditUser_height"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                android:text="@={viewmodelregister.passwordConfirmation}"
+                app:errorEnabled="true"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="171dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/confirmation_register"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/loginButton_height"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="87dp"
+            android:backgroundTint="@color/buttonColor"
+            android:onClick="@{()->viewmodelregister.orRegister()}"
+            android:enabled="@{viewmodelregister.validatePhase2}"
+            android:text="@string/registrarse"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword2" />
+
+        <TextView
+            android:id="@+id/InvitationTextView"
+            android:layout_width="@dimen/InvitationTextView_width"
+            android:layout_height="@dimen/InvitationTextView_height"
+            android:layout_marginTop="16dp"
+            android:text="@string/posees_una_cuenta"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_register" />
+
+        <TextView
+            android:id="@+id/RegisterView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/little_padding_8"
+            android:text="@string/iniciar_sesion"
+            android:textColor="@color/registerColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/InvitationTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

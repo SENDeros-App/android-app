@@ -18,6 +18,13 @@
     <string name="languaje_text">Idioma</string>
     <string name="DarkMode">Modo Oscuro</string>
     <string name="ModeState">Desactivado</string>
+    <string name="Welcome_Text">¡Bienvenido de nuevo! ¡Estamos emocionados de que estés aquí de nuevo en nuestra aplicación!</string>
+    <string name="userName">Nombre de Usuario</string>
+    <string name="passwordText">Contraseña</string>
+    <string name="forgotPassword">Olvidaste Contraseña?</string>
+    <string name="login">Iniciar Sesion</string>
+    <string name="InvitationText">¿Aun no posees cuenta en SENDeros App?</string>
+    <string name="register">Registrate</string>
     <string name="map_id">45703342c84daa68</string>
     <string name="actualiza_el_mapa">Actualiza el mapa</string>
     <string name="without_ligth">Sin luz</string>
@@ -39,6 +46,27 @@
     <string name="px">px</string>
     <string name="climb_indicator">Flechas que indican ascenso</string>
     <string name="division">Division de pertenencia</string>
+    <string name="descubre_atraves_de_senderos">Descubre nuevos caminos y conecta con el mundo a traves de SENDeros</string>
+    <string name="nombre">Nombre</string>
+    <string name="email">Correo electronico</string>
+    <string name="phone">Numero de telefono</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="ya_posees_una_cuenta_en_senderos">¿Ya posees una cuenta en SENDeros?</string>
+    <string name="crea_un_usuario">Crea un usuario para identificarte con SENDeros</string>
+    <string name="usuario">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="posees_una_cuenta">¿Ya posees una cuenta en SENDeros?</string>
+    <string name="quienContieneError">quienContieneError</string>
+    <string name="errormessage">errorMessage</string>
+    <string name="completa_campo">Por favor, completa este campo</string>
+    <string name="contraseno_coinciden">Las contraseñas no coinciden</string>
+    <string name="error_conectarse_servidor">Error al conectarse al servidor ...</string>
+    <string name="error_has_occurred">Error has occurred</string>
+    <string name="email_ya_registrado">"email ya registrado "</string>
+    <string name="usuario_ya_registrado">"Usuario ya registrado "</string>
+    <string name="telefonico_ya_registrado">telefonico ya registrado</string>
     <string name="add_photo">Agregar foto</string>
     <string name="send">Enviar</string>
     <string name="add_comment">Agregar\ncomentario</string>
@@ -47,4 +75,5 @@
     <string name="user">Usuario</string>
     <string name="leak">Fuga de agua</string>
     <string name="add_photo_descrp">Add_Photo</string>
+
 </resources>
