@@ -19,4 +19,5 @@
     <dimen name="description_division">15sp</dimen>
     <dimen name="margin_recyclerview_division">8dp</dimen>
     <dimen name="height_linear_division">155dp</dimen>
+    <dimen name="_25dp">25dp</dimen>
 </resources>
