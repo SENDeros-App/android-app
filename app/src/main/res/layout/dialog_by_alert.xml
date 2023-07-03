@@ -83,7 +83,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Add_Photo"
+                android:contentDescription="@string/add_photo_descrp"
                 android:fontFamily="@font/regular_istok"
                 android:gravity="center"
                 android:text="@string/add_comment"

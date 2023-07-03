@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="@dimen/_25dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Fuga de agua"
+            android:text="@string/leak"
             android:layout_marginTop="@dimen/margin_10dp"
             android:gravity="center"
             android:fontFamily="@font/bold_istok"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Usuario"
+            android:text="@string/user"
             android:gravity="center"
             android:fontFamily="@font/bold_istok"
             android:textColor="@color/small_letters_color"/>

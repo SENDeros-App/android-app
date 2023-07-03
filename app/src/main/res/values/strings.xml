@@ -44,4 +44,7 @@
     <string name="add_comment">Agregar\ncomentario</string>
     <string name="add_photoDescrip">Add_Photo</string>
     <string name="comment">Comentario:</string>
+    <string name="user">Usuario</string>
+    <string name="leak">Fuga de agua</string>
+    <string name="add_photo_descrp">Add_Photo</string>
 </resources>
