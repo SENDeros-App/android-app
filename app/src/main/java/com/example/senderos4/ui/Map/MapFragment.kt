@@ -85,13 +85,22 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
                     createDialog()
                 } else {
                     // Usuario no logueado
-                    Toast.makeText(requireContext(), "por favor iniciar sesion", Toast.LENGTH_SHORT).show()
+                    dialogWarning()
+                    //Toast.makeText(requireContext(), "por favor iniciar sesion", Toast.LENGTH_SHORT).show()
                 }
             }
 
 
         }
 
+    }
+
+    private fun dialogWarning(){
+        val dialog_alert = Dialog(requireContext())
+        dialog_alert.setCancelable(true)
+        dialog_alert.setContentView(R.layout.dialog_warning)
+
+        dialog_alert.show()
     }
 
     private fun createDialog(){

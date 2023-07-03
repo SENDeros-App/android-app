@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/width_300dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bold_istok"
+        android:text="@string/warning_"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="@dimen/margin_linearLayout_division_20dp"/>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/regular_istok"
+        android:text="@string/warningText"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="53dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#512DA8"
+        android:text="@string/login"
+        android:fontFamily="@font/regular_istok"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_15dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#9058D7"
+        android:text="@string/registrarse"
+        android:fontFamily="@font/regular_istok"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_10dp"/>
+
+</LinearLayout>
