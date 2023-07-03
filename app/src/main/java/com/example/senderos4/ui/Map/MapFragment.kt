@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.senderos4.R
+import com.example.senderos4.SenderosApplication
 import com.example.senderos4.ui.Map.MarkerType.*
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -40,6 +41,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     private lateinit var btn_select_alert: ImageView
     private lateinit var map: GoogleMap
+
+    val app by lazy {
+        requireActivity().application as SenderosApplication
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -73,73 +78,87 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     @SuppressLint("InflateParams")
     private fun setAddAlertListener() {
         btn_select_alert.setOnClickListener {
-            // Función que cree el dialogo
-            val dialog_alerts = Dialog(requireContext())
-            dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog_alerts.setCancelable(true)
-            dialog_alerts.setContentView(R.layout.dialog_alerts)
-            dialog_alerts.setTitle("Actualiza el mapa")
-
-
-            val without_light: ImageView = dialog_alerts.findViewById(R.id.without_light)
-            val leak: ImageView = dialog_alerts.findViewById(R.id.leak)
-            val water: ImageView = dialog_alerts.findViewById(R.id.water)
-            val fire: ImageView = dialog_alerts.findViewById(R.id.fire)
-            val sewer: ImageView = dialog_alerts.findViewById(R.id.sewer)
-            val walkaway: ImageView = dialog_alerts.findViewById(R.id.walkaway)
-            val pothole: ImageView = dialog_alerts.findViewById(R.id.pothole)
-            val tree: ImageView = dialog_alerts.findViewById(R.id.tree)
-            val crash: ImageView = dialog_alerts.findViewById(R.id.crash)
-
-            dialog_alerts.show()
-
-            leak.setOnClickListener {
-                addedImageDialog(LEAK_WATER)
-                dialog_alerts.dismiss()
+            app.loginData.observe(viewLifecycleOwner) { loginData ->
+                // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                if (loginData != null) {
+                    // Usuario logueado
+                    createDialog()
+                } else {
+                    // Usuario no logueado
+                    Toast.makeText(requireContext(), "por favor iniciar sesion", Toast.LENGTH_SHORT).show()
+                }
             }
 
-            without_light.setOnClickListener {
-                addedImageDialog(LIGHT)
-                dialog_alerts.dismiss()
-            }
-
-            water.setOnClickListener {
-                addedImageDialog(WATER)
-                dialog_alerts.dismiss()
-            }
-
-            fire.setOnClickListener {
-                addedImageDialog(FIRE)
-                dialog_alerts.dismiss()
-            }
-
-            sewer.setOnClickListener {
-                addedImageDialog(SEWER)
-                dialog_alerts.dismiss()
-            }
-
-            walkaway.setOnClickListener {
-                addedImageDialog(WALKAWAY)
-                dialog_alerts.dismiss()
-            }
-
-            pothole.setOnClickListener {
-                addedImageDialog(POTHOLE)
-                dialog_alerts.dismiss()
-            }
-
-            tree.setOnClickListener {
-                addedImageDialog(TREE)
-                dialog_alerts.dismiss()
-            }
-
-            crash.setOnClickListener {
-                addedImageDialog(CRASH_CAR)
-                dialog_alerts.dismiss()
-            }
 
         }
 
+    }
+
+    private fun createDialog(){
+        // Función que cree el dialogo
+        val dialog_alerts = Dialog(requireContext())
+        dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog_alerts.setCancelable(true)
+        dialog_alerts.setContentView(R.layout.dialog_alerts)
+        dialog_alerts.setTitle("Actualiza el mapa")
+
+
+        val without_light: ImageView = dialog_alerts.findViewById(R.id.without_light)
+        val leak: ImageView = dialog_alerts.findViewById(R.id.leak)
+        val water: ImageView = dialog_alerts.findViewById(R.id.water)
+        val fire: ImageView = dialog_alerts.findViewById(R.id.fire)
+        val sewer: ImageView = dialog_alerts.findViewById(R.id.sewer)
+        val walkaway: ImageView = dialog_alerts.findViewById(R.id.walkaway)
+        val pothole: ImageView = dialog_alerts.findViewById(R.id.pothole)
+        val tree: ImageView = dialog_alerts.findViewById(R.id.tree)
+        val crash: ImageView = dialog_alerts.findViewById(R.id.crash)
+
+        dialog_alerts.show()
+
+        leak.setOnClickListener {
+            addedImageDialog(LEAK_WATER)
+            dialog_alerts.dismiss()
+        }
+
+        without_light.setOnClickListener {
+            addedImageDialog(LIGHT)
+            dialog_alerts.dismiss()
+        }
+
+        water.setOnClickListener {
+            addedImageDialog(WATER)
+            dialog_alerts.dismiss()
+        }
+
+        fire.setOnClickListener {
+            addedImageDialog(FIRE)
+            dialog_alerts.dismiss()
+        }
+
+        sewer.setOnClickListener {
+            addedImageDialog(SEWER)
+            dialog_alerts.dismiss()
+        }
+
+        walkaway.setOnClickListener {
+            addedImageDialog(WALKAWAY)
+            dialog_alerts.dismiss()
+        }
+
+        pothole.setOnClickListener {
+            addedImageDialog(POTHOLE)
+            dialog_alerts.dismiss()
+        }
+
+        tree.setOnClickListener {
+            addedImageDialog(TREE)
+            dialog_alerts.dismiss()
+        }
+
+        crash.setOnClickListener {
+            addedImageDialog(CRASH_CAR)
+            dialog_alerts.dismiss()
+        }
     }
 
     private fun addedImageDialog(type: MarkerType) {
