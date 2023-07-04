@@ -78,7 +78,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     @SuppressLint("InflateParams")
     private fun setAddAlertListener() {
         btn_select_alert.setOnClickListener {
-            app.loginData.observe(viewLifecycleOwner) { loginData ->
+            /*app.loginData.observe(viewLifecycleOwner) { loginData ->
                 // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
                 if (loginData != null) {
                     // Usuario logueado
@@ -88,11 +88,145 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
                     dialogWarning()
                     //Toast.makeText(requireContext(), "por favor iniciar sesion", Toast.LENGTH_SHORT).show()
                 }
+            }*/
+
+            // Función que cree el dialogo
+            val dialog_alerts = Dialog(requireContext())
+            dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog_alerts.setCancelable(true)
+            dialog_alerts.setContentView(R.layout.dialog_alerts)
+            dialog_alerts.setTitle("Actualiza el mapa")
+
+
+            val without_light: ImageView = dialog_alerts.findViewById(R.id.without_light)
+            val leak: ImageView = dialog_alerts.findViewById(R.id.leak)
+            val water: ImageView = dialog_alerts.findViewById(R.id.water)
+            val fire: ImageView = dialog_alerts.findViewById(R.id.fire)
+            val sewer: ImageView = dialog_alerts.findViewById(R.id.sewer)
+            val walkaway: ImageView = dialog_alerts.findViewById(R.id.walkaway)
+            val pothole: ImageView = dialog_alerts.findViewById(R.id.pothole)
+            val tree: ImageView = dialog_alerts.findViewById(R.id.tree)
+            val crash: ImageView = dialog_alerts.findViewById(R.id.crash)
+
+            dialog_alerts.show()
+
+            leak.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(LEAK_WATER)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
             }
 
+            without_light.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(LIGHT)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
 
+            water.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(WATER)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
+
+            fire.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(FIRE)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
+
+            sewer.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(SEWER)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
+
+            walkaway.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(WALKAWAY)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
+
+            pothole.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(POTHOLE)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
+
+            tree.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(TREE)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
+
+            crash.setOnClickListener {
+                app.loginData.observe(viewLifecycleOwner) { loginData ->
+                    // Aquí puedes realizar las acciones necesarias cuando el estado de inicio de sesión cambia
+                    if (loginData != null) {
+                        // Usuario logueado
+                        addedImageDialog(CRASH_CAR)
+                    } else {
+                        // Usuario no logueado
+                        dialogWarning()
+                    }
+                }
+            }
         }
-
     }
 
     private fun dialogWarning(){
@@ -101,73 +235,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         dialog_alert.setContentView(R.layout.dialog_warning)
 
         dialog_alert.show()
-    }
-
-    private fun createDialog(){
-        // Función que cree el dialogo
-        val dialog_alerts = Dialog(requireContext())
-        dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog_alerts.setCancelable(true)
-        dialog_alerts.setContentView(R.layout.dialog_alerts)
-        dialog_alerts.setTitle("Actualiza el mapa")
-
-
-        val without_light: ImageView = dialog_alerts.findViewById(R.id.without_light)
-        val leak: ImageView = dialog_alerts.findViewById(R.id.leak)
-        val water: ImageView = dialog_alerts.findViewById(R.id.water)
-        val fire: ImageView = dialog_alerts.findViewById(R.id.fire)
-        val sewer: ImageView = dialog_alerts.findViewById(R.id.sewer)
-        val walkaway: ImageView = dialog_alerts.findViewById(R.id.walkaway)
-        val pothole: ImageView = dialog_alerts.findViewById(R.id.pothole)
-        val tree: ImageView = dialog_alerts.findViewById(R.id.tree)
-        val crash: ImageView = dialog_alerts.findViewById(R.id.crash)
-
-        dialog_alerts.show()
-
-        leak.setOnClickListener {
-            addedImageDialog(LEAK_WATER)
-            dialog_alerts.dismiss()
-        }
-
-        without_light.setOnClickListener {
-            addedImageDialog(LIGHT)
-            dialog_alerts.dismiss()
-        }
-
-        water.setOnClickListener {
-            addedImageDialog(WATER)
-            dialog_alerts.dismiss()
-        }
-
-        fire.setOnClickListener {
-            addedImageDialog(FIRE)
-            dialog_alerts.dismiss()
-        }
-
-        sewer.setOnClickListener {
-            addedImageDialog(SEWER)
-            dialog_alerts.dismiss()
-        }
-
-        walkaway.setOnClickListener {
-            addedImageDialog(WALKAWAY)
-            dialog_alerts.dismiss()
-        }
-
-        pothole.setOnClickListener {
-            addedImageDialog(POTHOLE)
-            dialog_alerts.dismiss()
-        }
-
-        tree.setOnClickListener {
-            addedImageDialog(TREE)
-            dialog_alerts.dismiss()
-        }
-
-        crash.setOnClickListener {
-            addedImageDialog(CRASH_CAR)
-            dialog_alerts.dismiss()
-        }
     }
 
     private fun addedImageDialog(type: MarkerType) {
