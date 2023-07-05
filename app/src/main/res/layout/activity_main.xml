@@ -42,9 +42,23 @@
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:navGraph="@navigation/nav_graph" />
+
+        <ImageView
+            android:id="@+id/NotWifi"
+            android:layout_width="119dp"
+            android:layout_height="127dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/fragmentContainerView"
+            app:layout_constraintStart_toStartOf="@+id/fragmentContainerView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.415"
+            app:srcCompat="@drawable/no_wifi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,12 +1,22 @@
 package com.example.senderos4
 
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.TextView.GONE
+import android.widget.TextView.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
@@ -22,6 +32,7 @@ import com.example.senderos4.data.User
 import com.example.senderos4.data.header
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.GlobalScope
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +48,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var settingBottom: ImageView
     private lateinit var loginTextView: TextView
     private lateinit var userName: TextView
+    private lateinit var noWifi :ImageView
 
+    private lateinit var connectivityManager: ConnectivityManager
+    private lateinit var connectivityReceiver: ConnectivityReceiver
 
     val app by lazy {
         application as SenderosApplication
@@ -56,10 +70,93 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, drawerLayout)
         navigationVIew.setupWithNavController(navController)
 
-        //nuevo
-
+        connectionInternet()
         observeLoginData()
     }
+
+    private fun connectionInternet(){
+        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityReceiver = ConnectivityReceiver(this) // Pasamos el this
+
+        // Registrar el BroadcastReceiver para onservar cambios en la conectividad
+        val intentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(connectivityReceiver, intentFilter)
+
+    }
+
+    fun bind() {
+        toolbar = findViewById(R.id.myToolbar)
+        drawerLayout = findViewById(R.id.drawer)
+        navController = findNavController(R.id.fragmentContainerView)
+        navigationVIew = findViewById(R.id.navigationView)
+        noWifi = findViewById(R.id.NotWifi)
+
+
+        val headerView = navigationVIew.getHeaderView(0)
+        settingBottom = headerView.findViewById(R.id.setting_options)
+        loginTextView = headerView.findViewById(R.id.textHeader)
+        userName = headerView.findViewById(R.id.textUserName)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(connectivityReceiver)
+    }
+
+    inner class ConnectivityReceiver(private val context: Context) : BroadcastReceiver() {
+
+        private var isConnected = false
+        private var isAnimationRunning = false
+        private lateinit var fadeInAnimation: Animation
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            isConnected = networkInfo != null && networkInfo.isConnected
+
+            if (isConnected) {
+                Toast.makeText(context, "Conectado", Toast.LENGTH_LONG).show()
+                noWifi.visibility = ImageView.GONE
+                stopAnimation()
+            } else {
+                Toast.makeText(context, "SIN CONECCION A INTERNET", Toast.LENGTH_LONG).show()
+                noWifi.visibility = ImageView.VISIBLE
+                startAnimation()
+            }
+        }
+
+        private fun startAnimation() {
+            if (!isAnimationRunning) {
+                fadeInAnimation = AnimationUtils.loadAnimation(context, R.anim.fade_animation)
+                fadeInAnimation.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {
+                        isAnimationRunning = true
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        if (!isConnected) {
+                            // Si no hay conexión, repetir la animación
+                            noWifi.startAnimation(fadeInAnimation)
+                        } else {
+                            stopAnimation()
+                        }
+                    }
+
+                    override fun onAnimationRepeat(animation: Animation?) {
+                        // No se utiliza en este caso
+                    }
+                })
+                noWifi.startAnimation(fadeInAnimation)
+            }
+        }
+
+        private fun stopAnimation() {
+            if (isAnimationRunning) {
+                noWifi.clearAnimation()
+                isAnimationRunning = false
+            }
+        }
+    }
+
+
 
 
 
@@ -73,18 +170,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun bind() {
-        toolbar = findViewById(R.id.myToolbar)
-        drawerLayout = findViewById(R.id.drawer)
-        navController = findNavController(R.id.fragmentContainerView)
-        navigationVIew = findViewById(R.id.navigationView)
-
-
-        val headerView = navigationVIew.getHeaderView(0)
-        settingBottom = headerView.findViewById(R.id.setting_options)
-        loginTextView = headerView.findViewById(R.id.textHeader)
-        userName = headerView.findViewById(R.id.textUserName)
-    }
 
 
     override fun onSupportNavigateUp(): Boolean {
@@ -129,8 +214,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
 }
 

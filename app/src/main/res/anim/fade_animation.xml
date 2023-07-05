@@ -1,0 +1,17 @@
+<!-- fade_animation.xml -->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:repeatMode="reverse"
+    android:repeatCount="-1">
+
+    <alpha
+        android:fromAlpha="2.0"
+        android:toAlpha="0.5"
+        android:duration="600" />
+
+    <alpha
+        android:fromAlpha="0.5"
+        android:toAlpha="2.0"
+        android:startOffset="600"
+        android:duration="600" />
+
+</set>
