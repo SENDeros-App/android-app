@@ -26,6 +26,7 @@
         android:layout_marginTop="53dp"/>
 
     <Button
+        android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#512DA8"
@@ -35,6 +36,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_15dp"/>
     <Button
+        android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#9058D7"

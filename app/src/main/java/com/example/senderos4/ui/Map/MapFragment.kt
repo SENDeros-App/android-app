@@ -19,6 +19,8 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.ui.Map.MarkerType.*
@@ -80,6 +82,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     private fun bind() {
         btn_select_alert = requireView().findViewById(R.id.btn_alert)
+
     }
 
     @SuppressLint("InflateParams")
@@ -91,11 +94,25 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     }
 
     private fun dialogWarning(){
-        val dialog_alert = Dialog(requireContext())
-        dialog_alert.setCancelable(true)
-        dialog_alert.setContentView(R.layout.dialog_warning)
+        val dialog_warning = Dialog(requireContext())
+        dialog_warning.setCancelable(true)
+        dialog_warning.setContentView(R.layout.dialog_warning)
+        dialog_warning.show()
 
-        dialog_alert.show()
+
+        val btn_login: Button = dialog_warning.findViewById(R.id.login_btn)
+        val btn_register: Button = dialog_warning.findViewById(R.id.register_btn)
+
+        btn_login.setOnClickListener {
+            findNavController().navigate(R.id.action_map_fragment_to_loginFragment)
+            dialog_warning.dismiss()
+        }
+
+        btn_register.setOnClickListener {
+            findNavController().navigate(R.id.action_map_fragment_to_registerFragment)
+            dialog_warning.dismiss()
+        }
+
     }
 
     private fun createDialog(){
