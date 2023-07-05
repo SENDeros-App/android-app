@@ -19,7 +19,10 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
+import com.example.senderos4.SenderosApplication
 import com.example.senderos4.ui.Map.MarkerType.*
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -41,6 +44,12 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     private lateinit var btn_select_alert: ImageView
     private lateinit var map: GoogleMap
 
+    val app by lazy {
+        requireActivity().application as SenderosApplication
+    }
+
+    private var loggedIn: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -50,8 +59,13 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getMapFragment()
         bind()
+
+        app.loginData.observe(requireActivity()) { loginData ->
+            loggedIn = loginData != null
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -68,78 +82,122 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     private fun bind() {
         btn_select_alert = requireView().findViewById(R.id.btn_alert)
+
     }
 
     @SuppressLint("InflateParams")
     private fun setAddAlertListener() {
         btn_select_alert.setOnClickListener {
-            // Función que cree el dialogo
-            val dialog_alerts = Dialog(requireContext())
-            dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog_alerts.setCancelable(true)
-            dialog_alerts.setContentView(R.layout.dialog_alerts)
-            dialog_alerts.setTitle("Actualiza el mapa")
-
-
-            val without_light: ImageView = dialog_alerts.findViewById(R.id.without_light)
-            val leak: ImageView = dialog_alerts.findViewById(R.id.leak)
-            val water: ImageView = dialog_alerts.findViewById(R.id.water)
-            val fire: ImageView = dialog_alerts.findViewById(R.id.fire)
-            val sewer: ImageView = dialog_alerts.findViewById(R.id.sewer)
-            val walkaway: ImageView = dialog_alerts.findViewById(R.id.walkaway)
-            val pothole: ImageView = dialog_alerts.findViewById(R.id.pothole)
-            val tree: ImageView = dialog_alerts.findViewById(R.id.tree)
-            val crash: ImageView = dialog_alerts.findViewById(R.id.crash)
-
-            dialog_alerts.show()
-
-            leak.setOnClickListener {
-                addedImageDialog(LEAK_WATER)
-                dialog_alerts.dismiss()
-            }
-
-            without_light.setOnClickListener {
-                addedImageDialog(LIGHT)
-                dialog_alerts.dismiss()
-            }
-
-            water.setOnClickListener {
-                addedImageDialog(WATER)
-                dialog_alerts.dismiss()
-            }
-
-            fire.setOnClickListener {
-                addedImageDialog(FIRE)
-                dialog_alerts.dismiss()
-            }
-
-            sewer.setOnClickListener {
-                addedImageDialog(SEWER)
-                dialog_alerts.dismiss()
-            }
-
-            walkaway.setOnClickListener {
-                addedImageDialog(WALKAWAY)
-                dialog_alerts.dismiss()
-            }
-
-            pothole.setOnClickListener {
-                addedImageDialog(POTHOLE)
-                dialog_alerts.dismiss()
-            }
-
-            tree.setOnClickListener {
-                addedImageDialog(TREE)
-                dialog_alerts.dismiss()
-            }
-
-            crash.setOnClickListener {
-                addedImageDialog(CRASH_CAR)
-                dialog_alerts.dismiss()
-            }
-
+            createDialog()
         }
 
+    }
+
+    private fun dialogWarning(){
+        val dialog_warning = Dialog(requireContext())
+        dialog_warning.setCancelable(true)
+        dialog_warning.setContentView(R.layout.dialog_warning)
+        dialog_warning.show()
+
+
+        val btn_login: Button = dialog_warning.findViewById(R.id.login_btn)
+        val btn_register: Button = dialog_warning.findViewById(R.id.register_btn)
+
+        btn_login.setOnClickListener {
+            findNavController().navigate(R.id.action_map_fragment_to_loginFragment)
+            dialog_warning.dismiss()
+        }
+
+        btn_register.setOnClickListener {
+            findNavController().navigate(R.id.action_map_fragment_to_registerFragment)
+            dialog_warning.dismiss()
+        }
+
+    }
+
+    private fun createDialog(){
+        // Función que cree el dialogo
+        val dialog_alerts = Dialog(requireContext())
+        dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog_alerts.setCancelable(true)
+        dialog_alerts.setContentView(R.layout.dialog_alerts)
+        dialog_alerts.setTitle("Actualiza el mapa")
+
+
+        val without_light: ImageView = dialog_alerts.findViewById(R.id.without_light)
+        val leak: ImageView = dialog_alerts.findViewById(R.id.leak)
+        val water: ImageView = dialog_alerts.findViewById(R.id.water)
+        val fire: ImageView = dialog_alerts.findViewById(R.id.fire)
+        val sewer: ImageView = dialog_alerts.findViewById(R.id.sewer)
+        val walkaway: ImageView = dialog_alerts.findViewById(R.id.walkaway)
+        val pothole: ImageView = dialog_alerts.findViewById(R.id.pothole)
+        val tree: ImageView = dialog_alerts.findViewById(R.id.tree)
+        val crash: ImageView = dialog_alerts.findViewById(R.id.crash)
+
+        dialog_alerts.show()
+
+        leak.setOnClickListener {
+            handleClick(R.id.leak)
+            dialog_alerts.dismiss()
+        }
+
+        without_light.setOnClickListener {
+            handleClick(R.id.without_light)
+            dialog_alerts.dismiss()
+        }
+
+        water.setOnClickListener {
+            handleClick(R.id.water)
+            dialog_alerts.dismiss()
+        }
+
+        fire.setOnClickListener {
+            handleClick(R.id.fire)
+            dialog_alerts.dismiss()
+        }
+
+        sewer.setOnClickListener {
+            handleClick(R.id.sewer)
+            dialog_alerts.dismiss()
+        }
+
+        walkaway.setOnClickListener {
+            handleClick(R.id.walkaway)
+            dialog_alerts.dismiss()
+        }
+
+        pothole.setOnClickListener {
+            handleClick(R.id.pothole)
+            dialog_alerts.dismiss()
+        }
+
+        tree.setOnClickListener {
+            handleClick(R.id.tree)
+            dialog_alerts.dismiss()
+        }
+
+        crash.setOnClickListener {
+            handleClick(R.id.crash)
+            dialog_alerts.dismiss()
+        }
+    }
+
+    private fun handleClick(id: Int) {
+        if(loggedIn){
+            when(id){
+                R.id.leak-> addedImageDialog(LEAK_WATER)
+                R.id.without_light -> addedImageDialog(LIGHT)
+                R.id.water -> addedImageDialog(WATER)
+                R.id.fire -> addedImageDialog(WATER)
+                R.id.sewer -> addedImageDialog(WATER)
+                R.id.walkaway -> addedImageDialog(WALKAWAY)
+                R.id.pothole ->addedImageDialog(POTHOLE)
+                R.id.tree -> addedImageDialog(TREE)
+                R.id.crash -> addedImageDialog(TREE)
+            }
+        }else{
+            dialogWarning()
+        }
     }
 
     private fun addedImageDialog(type: MarkerType) {
@@ -298,7 +356,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         dialog.show()
         // Retorna `false` para permitir que se realicen acciones predeterminadas del marcador, como abrir la ventana de información
         false
-}
+    }
 
 
     private fun bitMapFromVector(vectorResID: Int): BitmapDescriptor {

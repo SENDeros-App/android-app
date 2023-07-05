@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.databinding.FragmentRegister2Binding
-import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
 import retrofit2.HttpException
 
 

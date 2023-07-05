@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodelregister"
-            type="com.example.senderos4.ui.register.viewmodels.RegisterViewModel" />
+            type="com.example.senderos4.ui.register.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

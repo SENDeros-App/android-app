@@ -1,20 +1,14 @@
 package com.example.senderos4.ui.register
 
 import android.os.Bundle
-import android.util.Log
-import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.databinding.FragmentRegisterBinding
-import com.example.senderos4.ui.register.viewmodels.RegisterViewModel
-import com.google.android.material.textfield.TextInputLayout
-import retrofit2.HttpException
 
 
 class RegisterFragment : Fragment() {

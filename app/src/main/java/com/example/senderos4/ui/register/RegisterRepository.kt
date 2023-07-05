@@ -1,4 +1,4 @@
-package com.example.senderos4.ui.register.repositories
+package com.example.senderos4.ui.register
 
 import com.example.senderos4.network.ApiResponse
 import com.example.senderos4.network.dto.register.generalMensaje

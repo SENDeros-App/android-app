@@ -1,4 +1,4 @@
-package com.example.senderos4.ui.register.viewmodels
+package com.example.senderos4.ui.register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -12,8 +12,6 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.helpers.Validator
 import com.example.senderos4.network.ApiResponse
-import com.example.senderos4.ui.register.RegisterUiStatus
-import com.example.senderos4.ui.register.repositories.RegisterRepository
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val registerRepository: RegisterRepository) : ViewModel() {
