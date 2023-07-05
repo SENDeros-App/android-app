@@ -11,7 +11,7 @@
         android:text="@string/warning_"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/_16sp"
         android:layout_marginTop="@dimen/margin_linearLayout_division_20dp"/>
 
     <TextView
@@ -22,7 +22,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/_16sp"
         android:layout_marginTop="53dp"/>
 
     <Button
@@ -32,17 +32,17 @@
         android:backgroundTint="#512DA8"
         android:text="@string/login"
         android:fontFamily="@font/regular_istok"
-        android:textSize="14sp"
+        android:textSize="@dimen/_14sp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_15dp"/>
     <Button
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#9058D7"
+        android:backgroundTint="@color/register_color"
         android:text="@string/registrarse"
         android:fontFamily="@font/regular_istok"
-        android:textSize="14sp"
+        android:textSize="@dimen/_14sp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/margin_10dp"
         android:layout_marginBottom="@dimen/margin_15dp"/>

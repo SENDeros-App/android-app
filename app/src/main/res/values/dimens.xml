@@ -48,4 +48,6 @@
     <dimen name="text_height_82dp">82dp</dimen>
 
     <dimen name="_25dp">25dp</dimen>
+    <dimen name="_16sp">16sp</dimen>
+    <dimen name="_14sp">14sp</dimen>
 </resources>
