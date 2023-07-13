@@ -55,7 +55,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     }
 
     private var loggedIn: Boolean = false
-    private lateinit var user:String
+    private lateinit var user: String
+    private lateinit var token: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -73,6 +74,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         app.loginData.observe(requireActivity()) { loginData ->
             loggedIn = loginData != null
             user = loginData?.user?.name.toString()
+            token = loginData?.token.toString()
         }
 
         socketAlerts.initSocket()
@@ -105,21 +107,94 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
             try {
                 val markerJSON = JSONObject(markerString)
-                val user= markerJSON.getString("user")
-                val alerta = markerJSON.getString("type")
-                val type = markerJSON.getString("id")
-                val longitude = markerJSON.getDouble("longitud").toDouble()
-                val latitude = markerJSON.getDouble("latitud").toDouble()
-                Log.e("tag", type)
+                val token = markerJSON.getString("token")
+                val user = markerJSON.getString("user")
+                val latitude = markerJSON.getDouble("latitud")
+                val longitude = markerJSON.getDouble("longitud")
+                val name = markerJSON.getString("name")
+                val id = markerJSON.getString("type")
 
-                addMarkerAPI(type, longitude, latitude)
-                Toast.makeText(requireContext(), type, Toast.LENGTH_LONG).show()
+                addMarkerAPI(name, longitude, latitude)
+                Toast.makeText(requireContext(), name, Toast.LENGTH_LONG).show()
             } catch (e: JSONException) {
                 // Manejar el error de análisis de JSON adecuadamente
                 Log.e("tag", "Error al analizar el objeto JSON: ${e.message}")
             }
         }
     }
+
+
+    private fun addMarkerAPI(type:String, longitude:Double, latitude:Double) {
+        Toast.makeText(requireContext(), latitude.toString(), Toast.LENGTH_LONG).show()
+
+        val local = LatLng(latitude, longitude)
+
+        var title = ""
+        var description = ""
+        var icon = 0
+
+        when (type) {
+            "LIGHT" -> {
+                title = "Sin Luz"
+                description = "No hay luz"
+                icon = R.drawable.incident_without_ligth
+            }
+
+            "WATER" -> {
+                title = "Sin Agua"
+                description = "No hay agua"
+                icon = R.drawable.incident_water
+            }
+
+            "WALKAWAY" -> {
+                title = "Psarela Dañada"
+                description = "Pasarela tiene daños precaución"
+                icon = R.drawable.incident_walkaway
+            }
+
+            "LEAK_WATER" -> {
+                title = "Fuja de agua"
+                description = "Aqui hay una fuja de agua"
+                icon = R.drawable.incident_leak
+            }
+
+            "TREE" -> {
+                title = "Árbol caído"
+                description = "El árbol se encuentra obstaculizando el paso"
+                icon = R.drawable.incident_tree
+            }
+
+            "SEWER" -> {
+                title = "Alcantarilla sin tapa"
+                description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
+                icon = R.drawable.incident_sewer
+            }
+
+            "FIRE" -> {
+                title = "Incendio"
+                description = "Aqui hay un incendio"
+                icon = R.drawable.incident_fire
+            }
+
+            "POTHOLE" -> {
+                title = "Bache Peligroso"
+                description = "Hay un bache muy peligroso que puede ocasionar un accidente"
+                icon = R.drawable.incident_bump
+            }
+
+            "CRASH_CAR" -> {
+                title = "Accidente automovilístico"
+                description = "Hay una accidente de carros por la zona"
+                icon = R.drawable.incident_crash
+            }
+        }
+        map.addMarker(
+            MarkerOptions().position(local).title(title).snippet(description).anchor(0.0f, 1.0f)
+                .icon(bitMapFromVector(icon)))
+
+    }
+
+
 
     private fun addedMarker(type: MarkerType) {
 
@@ -203,7 +278,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             )
 
 
-            val marcador = Markers(user,latitude.toString(), longitude.toString(),type.toString(),id.toString())
+            val marcador =
+                Markers(token, user, latitude.toString(), longitude.toString(), type.toString(), id)
 
             socketAlerts.emitCreatedMarker(marcador)
         }
@@ -382,132 +458,85 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     }
 
 
-
     private fun newDialog(image: Int, text: String, type: MarkerType) {
-    val dialog_alert = Dialog(requireContext())
-    dialog_alert.setCancelable(true)
-    dialog_alert.setContentView(R.layout.dialog_by_alert)
-    dialog_alert.setTitle("Titulo")
-    val imageView: ImageView = dialog_alert.findViewById(R.id.icon_dialog_alert)
-    val textView: TextView = dialog_alert.findViewById(R.id.name_alert)
-    val btn: Button = dialog_alert.findViewById(R.id.send_alert)
-    textView.text = text
-    imageView.setImageResource(image)
-    dialog_alert.show()
+        val dialog_alert = Dialog(requireContext())
+        dialog_alert.setCancelable(true)
+        dialog_alert.setContentView(R.layout.dialog_by_alert)
+        dialog_alert.setTitle("Titulo")
+        val imageView: ImageView = dialog_alert.findViewById(R.id.icon_dialog_alert)
+        val textView: TextView = dialog_alert.findViewById(R.id.name_alert)
+        val btn: Button = dialog_alert.findViewById(R.id.send_alert)
+        textView.text = text
+        imageView.setImageResource(image)
+        dialog_alert.show()
 
-    btn.setOnClickListener {
-        addedMarker(type)
-        dialog_alert.dismiss()
-    }
-}
-
-
-
-val markerClickListener = GoogleMap.OnMarkerClickListener { marker ->
-    // Función que cree el dialogo
-    val dialog = Dialog(requireContext())
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-    dialog.setCancelable(true)
-    dialog.setContentView(R.layout.dialog_of_alert)
-
-    dialog.show()
-    // Retorna `false` para permitir que se realicen acciones predeterminadas del marcador, como abrir la ventana de información
-    false
-}
-
-
-private fun bitMapFromVector(vectorResID: Int): BitmapDescriptor {
-    val vectorDrawable = ContextCompat.getDrawable(requireContext(), vectorResID)
-    vectorDrawable!!.setBounds(
-        0, 0, vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight
-    )
-    val bitmap = Bitmap.createBitmap(
-        vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
-    )
-    val canvas = Canvas(bitmap)
-    vectorDrawable.draw(canvas)
-    return BitmapDescriptorFactory.fromBitmap(bitmap)
-}
-
-
-private fun getMapFragment() {
-    val mapFragment: SupportMapFragment =
-        childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-    mapFragment.getMapAsync(this)
-}
-
-@SuppressLint("MissingPermission")
-private fun getCurrentLocation(onComplete: (Location) -> Unit) {
-    val fusedLocationProviderClient =
-        LocationServices.getFusedLocationProviderClient(requireActivity())
-    val locationTask: Task<Location> =
-        fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
-    locationTask.addOnSuccessListener { currentLocation ->
-        onComplete(currentLocation)
-    }
-}
-
-private fun moveCamera(location: Location) {
-    val ubi = LatLng(location.latitude, location.longitude)
-    map.moveCamera(CameraUpdateFactory.newLatLng(ubi))
-    val cameraPosition =
-        CameraPosition.builder().target(ubi).zoom(18f).bearing(0f).tilt(45f).build()
-    map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-}
-
-private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
-    requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION
-) == PackageManager.PERMISSION_GRANTED
-
-@SuppressLint("MissingPermission")
-private fun enableLocation() {
-    if (!::map.isInitialized) return
-    if (isLocationPermissionGranted()) {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
+        btn.setOnClickListener {
+            addedMarker(type)
+            dialog_alert.dismiss()
         }
-        map.isMyLocationEnabled = true
-    } else {
-        requestLocationPermission()
     }
-}
 
-private fun requestLocationPermission() {
-    if (ActivityCompat.shouldShowRequestPermissionRationale(
-            requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
-        )
-    ) {
-        Toast.makeText(
-            requireContext(), "Va a ajustes y acepta los permisos", Toast.LENGTH_SHORT
-        ).show()
-    } else {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            REQUEST_CODE_LOCATION
-        )
+
+    val markerClickListener = GoogleMap.OnMarkerClickListener { marker ->
+        // Función que cree el dialogo
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_of_alert)
+
+        dialog.show()
+        // Retorna `false` para permitir que se realicen acciones predeterminadas del marcador, como abrir la ventana de información
+        false
     }
-}
 
-@SuppressLint("MissingPermission")
-override fun onRequestPermissionsResult(
-    requestCode: Int, permissions: Array<out String>, grantResults: IntArray
-) {
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    when (requestCode) {
-        REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+    private fun bitMapFromVector(vectorResID: Int): BitmapDescriptor {
+        val vectorDrawable = ContextCompat.getDrawable(requireContext(), vectorResID)
+        vectorDrawable!!.setBounds(
+            0, 0, vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight
+        )
+        val bitmap = Bitmap.createBitmap(
+            vectorDrawable.intrinsicWidth, vectorDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
+
+    private fun getMapFragment() {
+        val mapFragment: SupportMapFragment =
+            childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getCurrentLocation(onComplete: (Location) -> Unit) {
+        val fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+        val locationTask: Task<Location> =
+            fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+        locationTask.addOnSuccessListener { currentLocation ->
+            onComplete(currentLocation)
+        }
+    }
+
+    private fun moveCamera(location: Location) {
+        val ubi = LatLng(location.latitude, location.longitude)
+        map.moveCamera(CameraUpdateFactory.newLatLng(ubi))
+        val cameraPosition =
+            CameraPosition.builder().target(ubi).zoom(18f).bearing(0f).tilt(45f).build()
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+    private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
+        requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    @SuppressLint("MissingPermission")
+    private fun enableLocation() {
+        if (!::map.isInitialized) return
+        if (isLocationPermissionGranted()) {
             if (ActivityCompat.checkSelfPermission(
                     requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
@@ -525,128 +554,104 @@ override fun onRequestPermissionsResult(
             }
             map.isMyLocationEnabled = true
         } else {
+            requestLocationPermission()
+        }
+    }
+
+    private fun requestLocationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        ) {
+            Toast.makeText(
+                requireContext(), "Va a ajustes y acepta los permisos", Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_CODE_LOCATION
+            )
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return
+                }
+                map.isMyLocationEnabled = true
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Para activar la localización ve a los ajuste y activa los permisos",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            else -> {}
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onResume() {
+        super.onResume()
+        if (!::map.isInitialized) return
+        if (!isLocationPermissionGranted()) {
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            map.isMyLocationEnabled = false
             Toast.makeText(
                 requireContext(),
                 "Para activar la localización ve a los ajuste y activa los permisos",
                 Toast.LENGTH_SHORT
             ).show()
         }
-
-        else -> {}
     }
-}
 
-@SuppressLint("MissingPermission")
-override fun onResume() {
-    super.onResume()
-    if (!::map.isInitialized) return
-    if (!isLocationPermissionGranted()) {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }
-        map.isMyLocationEnabled = false
+    override fun onMyLocationButtonClick(): Boolean {
+        Toast.makeText(requireContext(), "Boton pulsado", Toast.LENGTH_LONG).show()
+        return true
+    }
+
+    override fun onMyLocationClick(p0: Location) {
         Toast.makeText(
-            requireContext(),
-            "Para activar la localización ve a los ajuste y activa los permisos",
-            Toast.LENGTH_SHORT
+            requireContext(), "Estás en ${p0.latitude}, ${p0.longitude}", Toast.LENGTH_SHORT
         ).show()
     }
-}
 
-    fun addMarkerAPI( type:String, longitude:Double, latitude:Double) {
-
-        val local = LatLng(latitude, longitude)
-
-        var title = ""
-        var description = ""
-        var icon = 0
-
-        when (type) {
-            "LIGHT" -> {
-                title = "Sin Luz"
-                description = "No hay luz"
-                icon = R.drawable.incident_without_ligth
-            }
-
-            "WATER" -> {
-                title = "Sin Agua"
-                description = "No hay agua"
-                icon = R.drawable.incident_water
-            }
-
-            "WALKAWAY" -> {
-                title = "Psarela Dañada"
-                description = "Pasarela tiene daños precaución"
-                icon = R.drawable.incident_walkaway
-            }
-
-            "LEAK_WATER" -> {
-                title = "Fuja de agua"
-                description = "Aqui hay una fuja de agua"
-                icon = R.drawable.incident_leak
-            }
-
-            "TREE" -> {
-                title = "Árbol caído"
-                description = "El árbol se encuentra obstaculizando el paso"
-                icon = R.drawable.incident_tree
-            }
-
-            "SEWER" -> {
-                title = "Alcantarilla sin tapa"
-                description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
-                icon = R.drawable.incident_sewer
-            }
-
-            "FIRE" -> {
-                title = "Incendio"
-                description = "Aqui hay un incendio"
-                icon = R.drawable.incident_fire
-            }
-
-            "POTHOLE" -> {
-                title = "Bache Peligroso"
-                description = "Hay un bache muy peligroso que puede ocasionar un accidente"
-                icon = R.drawable.incident_bump
-            }
-
-            "CRASH_CAR" -> {
-                title = "Accidente automovilístico"
-                description = "Hay una accidente de carros por la zona"
-                icon = R.drawable.incident_crash
-            }
-        }
-        map.addMarker(
-            MarkerOptions().position(local).title(title).snippet(description).anchor(0.0f, 1.0f)
-                .icon(bitMapFromVector(icon)))
-
+    companion object {
+        const val REQUEST_CODE_LOCATION = 0
     }
-
-override fun onMyLocationButtonClick(): Boolean {
-    Toast.makeText(requireContext(), "Boton pulsado", Toast.LENGTH_LONG).show()
-    return true
-}
-
-override fun onMyLocationClick(p0: Location) {
-    Toast.makeText(
-        requireContext(), "Estás en ${p0.latitude}, ${p0.longitude}", Toast.LENGTH_SHORT
-    ).show()
-}
-
-companion object {
-    const val REQUEST_CODE_LOCATION = 0
-}
 
 }
