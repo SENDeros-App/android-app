@@ -82,6 +82,23 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     }
 
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        enableLocation()
+        map.setOnMyLocationClickListener(this)
+        getCurrentLocation {
+            moveCamera(it)
+        }
+        setAddAlertListener()
+        map.setPadding(0, 1200, 20, 0)
+        map.setOnMarkerClickListener(markerClickListener)
+    }
+
+    private fun bind() {
+        btn_select_alert = requireView().findViewById(R.id.btn_alert)
+
+    }
+
     private val onNewMarker = Emitter.Listener { args ->
         requireActivity().runOnUiThread {
             val markerString = args[0] as String
@@ -103,7 +120,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             }
         }
     }
-
 
     private fun addedMarker(type: MarkerType) {
 
@@ -192,23 +208,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             socketAlerts.emitCreatedMarker(marcador)
         }
 
-
-    }
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        enableLocation()
-        map.setOnMyLocationClickListener(this)
-        getCurrentLocation {
-            moveCamera(it)
-        }
-        setAddAlertListener()
-        map.setPadding(0, 1200, 20, 0)
-        map.setOnMarkerClickListener(markerClickListener)
-    }
-
-    private fun bind() {
-        btn_select_alert = requireView().findViewById(R.id.btn_alert)
 
     }
 
