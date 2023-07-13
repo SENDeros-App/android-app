@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 import io.socket.emitter.Emitter
+import org.json.JSONException
 import org.json.JSONObject
 
 
@@ -53,6 +55,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     }
 
     private var loggedIn: Boolean = false
+    private lateinit var user:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -69,6 +72,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
         app.loginData.observe(requireActivity()) { loginData ->
             loggedIn = loginData != null
+            user = loginData?.user?.name.toString()
         }
 
         socketAlerts.initSocket()
@@ -77,19 +81,29 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         socketAlerts.addMarkerListener(onNewMarker)
     }
 
+
     private val onNewMarker = Emitter.Listener { args ->
         requireActivity().runOnUiThread {
-            val markerJSON = args[0] as JSONObject
+            val markerString = args[0] as String
 
-            val user = markerJSON.getString("user")
-            val type = markerJSON.getString("type")
-            val longitude = markerJSON.getDouble("longitude")
-            val latitude = markerJSON.getDouble("latitude")
+            try {
+                val markerJSON = JSONObject(markerString)
+                val user= markerJSON.getString("user")
+                val alerta = markerJSON.getString("type")
+                val type = markerJSON.getString("id")
+                val longitude = markerJSON.getDouble("longitud").toDouble()
+                val latitude = markerJSON.getDouble("latitud").toDouble()
+                Log.e("tag", type)
 
-            addMarkerAPI(user, type, longitude, latitude)
-            Toast.makeText(requireContext(), type, Toast.LENGTH_LONG).show()
+                addMarkerAPI(type, longitude, latitude)
+                Toast.makeText(requireContext(), type, Toast.LENGTH_LONG).show()
+            } catch (e: JSONException) {
+                // Manejar el error de análisis de JSON adecuadamente
+                Log.e("tag", "Error al analizar el objeto JSON: ${e.message}")
+            }
         }
     }
+
 
     private fun addedMarker(type: MarkerType) {
 
@@ -99,6 +113,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             val local = LatLng(latitude, longitude)
 
             var title = ""
+            var id = ""
             var description = ""
             var icon = 0
 
@@ -107,54 +122,63 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
                     title = "Sin Luz"
                     description = "No hay luz"
                     icon = R.drawable.incident_without_ligth
+                    id = "64af2e47ba77f0b9c44e53de"
                 }
 
                 WATER -> {
                     title = "Sin Agua"
                     description = "No hay agua"
                     icon = R.drawable.incident_water
+                    id = "64af2f0dba77f0b9c44e53e3"
                 }
 
                 WALKAWAY -> {
-                    title = "Psarela Dañada"
+                    title = "Pasarela Dañada"
                     description = "Pasarela tiene daños precaución"
                     icon = R.drawable.incident_walkaway
+                    id = "64af2f6cba77f0b9c44e53ef"
                 }
 
                 LEAK_WATER -> {
                     title = "Fuja de agua"
                     description = "Aqui hay una fuja de agua"
                     icon = R.drawable.incident_leak
+                    id = "64af2f3bba77f0b9c44e53e9"
                 }
 
                 TREE -> {
                     title = "Árbol caído"
                     description = "El árbol se encuentra obstaculizando el paso"
                     icon = R.drawable.incident_tree
+                    id = "64af2f8dba77f0b9c44e53f2"
                 }
 
                 SEWER -> {
                     title = "Alcantarilla sin tapa"
                     description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
                     icon = R.drawable.incident_sewer
+                    id = "64af2f59ba77f0b9c44e53ec"
                 }
 
                 FIRE -> {
                     title = "Incendio"
                     description = "Aqui hay un incendio"
                     icon = R.drawable.incident_fire
+                    id = "64af2f2bba77f0b9c44e53e6"
                 }
 
                 POTHOLE -> {
                     title = "Bache Peligroso"
                     description = "Hay un bache muy peligroso que puede ocasionar un accidente"
                     icon = R.drawable.incident_bump
+                    id = "64af2f9bba77f0b9c44e53f5"
                 }
 
                 CRASH_CAR -> {
                     title = "Accidente automovilístico"
                     description = "Hay una accidente de carros por la zona"
                     icon = R.drawable.incident_crash
+                    id = "64af2fa9ba77f0b9c44e53f8"
                 }
             }
             map.addMarker(
@@ -162,7 +186,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
                     .icon(bitMapFromVector(icon))
             )
 
-            val marcador = Markers("yo", type.toString(), longitude, latitude)
+
+            val marcador = Markers(user,latitude.toString(), longitude.toString(),type.toString(),id.toString())
 
             socketAlerts.emitCreatedMarker(marcador)
         }
@@ -541,7 +566,7 @@ override fun onResume() {
     }
 }
 
-    fun addMarkerAPI(user:String, type:String, longitude:Double, latitude:Double) {
+    fun addMarkerAPI( type:String, longitude:Double, latitude:Double) {
 
         val local = LatLng(latitude, longitude)
 
