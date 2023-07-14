@@ -58,6 +58,9 @@ class RegisterFragment : Fragment() {
         binding.confirmationInfo.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
         }
+        binding.initSesion.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
     }
 
 

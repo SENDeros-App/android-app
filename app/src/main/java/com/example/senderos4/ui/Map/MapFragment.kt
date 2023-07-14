@@ -79,18 +79,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             user = loginData?.user?.name.toString()
             token = loginData?.token.toString()
         }
-        mapLogingButton()
 
         socketAlerts.initSocket()
         socketAlerts.connect()
 
         socketAlerts.addMarkerListener(onNewMarker)
-    }
-
-    private fun mapLogingButton() {
-        if (loggedIn) {
-            binding.mapLoginButton.visibility = View.INVISIBLE
-        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
