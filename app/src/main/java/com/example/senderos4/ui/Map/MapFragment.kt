@@ -386,12 +386,12 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
                 R.id.leak -> addedImageDialog(LEAK_WATER)
                 R.id.without_light -> addedImageDialog(LIGHT)
                 R.id.water -> addedImageDialog(WATER)
-                R.id.fire -> addedImageDialog(WATER)
-                R.id.sewer -> addedImageDialog(WATER)
+                R.id.fire -> addedImageDialog(FIRE)
+                R.id.sewer -> addedImageDialog(SEWER)
                 R.id.walkaway -> addedImageDialog(WALKAWAY)
                 R.id.pothole -> addedImageDialog(POTHOLE)
                 R.id.tree -> addedImageDialog(TREE)
-                R.id.crash -> addedImageDialog(TREE)
+                R.id.crash -> addedImageDialog(CRASH_CAR)
             }
         } else {
             dialogWarning()
