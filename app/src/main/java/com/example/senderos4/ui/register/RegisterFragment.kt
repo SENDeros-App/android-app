@@ -32,8 +32,15 @@ class RegisterFragment : Fragment() {
         click()
         setViewModel()
         identError()
+        clicknav()
         binding.lifecycleOwner = viewLifecycleOwner
 
+    }
+
+    private fun clicknav() {
+        binding.initSesion.setOnClickListener {
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
     }
 
     fun identError() {
@@ -57,9 +64,6 @@ class RegisterFragment : Fragment() {
     private fun click() {
         binding.confirmationInfo.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_register2Fragment)
-        }
-        binding.initSesion.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
     }
 
