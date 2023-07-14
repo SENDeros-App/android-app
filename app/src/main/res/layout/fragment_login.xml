@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.senderos4.ui.login.viewmodels.LoginViewModel" />
+            type="com.example.senderos4.ui.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

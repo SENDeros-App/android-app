@@ -11,7 +11,7 @@ import com.example.senderos4.data.users
 import com.example.senderos4.network.dto.login.LoginData
 import com.example.senderos4.network.retrofit.RetrofitInstance
 import com.example.senderos4.ui.clasificacion.repositories.ClassificationRepository
-import com.example.senderos4.ui.login.repositories.LoginRepository
+import com.example.senderos4.ui.login.LoginRepository
 import com.example.senderos4.ui.register.RegisterRepository
 
 class SenderosApplication : Application() {

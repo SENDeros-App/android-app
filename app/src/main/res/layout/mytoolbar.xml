@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<layout>
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/myToolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:id="@+id/myToolbar"
         android:elevation="8dp"
         android:theme="@style/ToolbarTheme">
 
-    <!--@style/ThemeOverlay.AppCompat.Dark.ActionBar-->
-</androidx.appcompat.widget.Toolbar>
+        <!--@style/ThemeOverlay.AppCompat.Dark.ActionBar-->
+    </androidx.appcompat.widget.Toolbar>
+</layout>

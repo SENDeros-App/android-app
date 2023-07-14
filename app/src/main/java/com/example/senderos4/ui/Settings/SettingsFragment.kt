@@ -5,12 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.senderos4.hiddenMenu.HiddenMenuFragment
+import androidx.fragment.app.Fragment
 import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
+import com.example.senderos4.databinding.FragmentLoginBinding
+import com.example.senderos4.databinding.FragmentSettingsBinding
 
 
-class SettingsFragment : HiddenMenuFragment() {
+class SettingsFragment : Fragment() {
+
+    private lateinit var binding:FragmentSettingsBinding
 
     val app by lazy {
         requireActivity().application as SenderosApplication
@@ -19,8 +23,8 @@ class SettingsFragment : HiddenMenuFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 }

@@ -5,26 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.senderos4.MainActivity
 import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.databinding.FragmentLoginBinding
-import com.example.senderos4.hiddenMenu.HiddenMenuFragment
 import com.example.senderos4.network.dto.login.LoginData
-import com.example.senderos4.ui.login.viewmodels.LoginViewModel
 import com.example.senderos4.ui.register.ErrorUtils
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import retrofit2.HttpException
 
 
-class LoginFragment : HiddenMenuFragment() {
+class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
