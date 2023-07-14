@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +20,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
+import com.example.senderos4.data.Markers
+import com.example.senderos4.network.socket.socketAlerts
 import com.example.senderos4.ui.Map.MarkerType.*
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -34,8 +36,13 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
+import io.socket.emitter.Emitter
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
@@ -49,6 +56,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     }
 
     private var loggedIn: Boolean = false
+    private lateinit var user: String
+    private lateinit var token: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -65,8 +74,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
         app.loginData.observe(requireActivity()) { loginData ->
             loggedIn = loginData != null
+            user = loginData?.user?.name.toString()
+            token = loginData?.token.toString()
         }
+
+        socketAlerts.initSocket()
+        socketAlerts.connect()
+
+        socketAlerts.addMarkerListener(onNewMarker)
     }
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
@@ -85,6 +102,187 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     }
 
+    private val onNewMarker = Emitter.Listener { args ->
+        requireActivity().runOnUiThread {
+            val marcadoresJSON = args[0]
+            when (marcadoresJSON) {
+                is JSONObject -> {
+                    // Si es uno
+                    val markerJSON = marcadoresJSON
+                    processMarker(markerJSON)
+                }
+                is JSONArray -> {
+                    // Si son múltiples
+                    for (i in 0 until marcadoresJSON.length()) {
+                        val markerJSON = marcadoresJSON.getJSONObject(i)
+                        processMarker(markerJSON)
+                    }
+                }
+                else -> {
+                    // Manejar otro caso
+                    Log.e("tag", "Formato de marcadores no válido: $marcadoresJSON")
+                }
+            }
+        }
+    }
+
+    private fun processMarker(markerJSON: JSONObject) {
+
+        val user = markerJSON.getString("user")
+        val latitude = markerJSON.getDouble("latitud")
+        val longitude = markerJSON.getDouble("longitud")
+        val name = markerJSON.getString("name")
+        val type = markerJSON.getString("type")
+
+
+        addMarkerAPI(user, name, longitude, latitude)
+    }
+
+
+    private fun addMarkerAPI(User:String, type:String, longitude:Double, latitude:Double) {
+
+        val local = LatLng(latitude, longitude)
+
+        var title = ""
+        val description = "Author: $User"
+        var icon = 0
+
+        when (type) {
+            "LIGHT" -> {
+                title = "Sin Luz"
+                icon = R.drawable.incident_without_ligth
+            }
+
+            "WATER" -> {
+                title = "Sin Agua"
+                icon = R.drawable.incident_water
+            }
+
+            "WALKAWAY" -> {
+                title = "Psarela Dañada"
+                icon = R.drawable.incident_walkaway
+            }
+
+            "LEAK_WATER" -> {
+                title = "Fuja de agua"
+                icon = R.drawable.incident_leak
+            }
+
+            "TREE" -> {
+                title = "Árbol caído"
+                icon = R.drawable.incident_tree
+            }
+
+            "SEWER" -> {
+                title = "Alcantarilla sin tapa"
+                icon = R.drawable.incident_sewer
+            }
+
+            "FIRE" -> {
+                title = "Incendio"
+                icon = R.drawable.incident_fire
+            }
+
+            "POTHOLE" -> {
+                title = "Bache Peligroso"
+                icon = R.drawable.incident_bump
+            }
+
+            "CRASH_CAR" -> {
+                title = "Accidente automovilístico"
+                icon = R.drawable.incident_crash
+            }
+        }
+        map.addMarker(
+            MarkerOptions().position(local).title(title).snippet(description).anchor(0.0f, 1.0f)
+                .icon(bitMapFromVector(icon)))
+
+    }
+
+
+
+    private fun addedMarker(type: MarkerType) {
+
+        getCurrentLocation { location ->
+            val latitude = location.latitude
+            val longitude = location.longitude
+            val local = LatLng(latitude, longitude)
+
+            var title = ""
+            var id = ""
+            val description = "Author: $user"
+            var icon = 0
+
+            when (type) {
+                LIGHT -> {
+                    title = "Sin Luz"
+                    icon = R.drawable.incident_without_ligth
+                    id = "64af2e47ba77f0b9c44e53de"
+                }
+
+                WATER -> {
+                    title = "Sin Agua"
+                    icon = R.drawable.incident_water
+                    id = "64af2f0dba77f0b9c44e53e3"
+                }
+
+                WALKAWAY -> {
+                    title = "Pasarela Dañada"
+                    icon = R.drawable.incident_walkaway
+                    id = "64af2f6cba77f0b9c44e53ef"
+                }
+
+                LEAK_WATER -> {
+                    title = "Fuja de agua"
+                    icon = R.drawable.incident_leak
+                    id = "64af2f3bba77f0b9c44e53e9"
+                }
+
+                TREE -> {
+                    title = "Árbol caído"
+                    icon = R.drawable.incident_tree
+                    id = "64af2f8dba77f0b9c44e53f2"
+                }
+
+                SEWER -> {
+                    title = "Alcantarilla sin tapa"
+                    icon = R.drawable.incident_sewer
+                    id = "64af2f59ba77f0b9c44e53ec"
+                }
+
+                FIRE -> {
+                    title = "Incendio"
+                    icon = R.drawable.incident_fire
+                    id = "64af2f2bba77f0b9c44e53e6"
+                }
+
+                POTHOLE -> {
+                    title = "Bache Peligroso"
+                    icon = R.drawable.incident_bump
+                    id = "64af2f9bba77f0b9c44e53f5"
+                }
+
+                CRASH_CAR -> {
+                    title = "Accidente automovilístico"
+                    icon = R.drawable.incident_crash
+                    id = "64af2fa9ba77f0b9c44e53f8"
+                }
+            }
+            map.addMarker(
+                MarkerOptions().position(local).title(title).snippet(description).anchor(0.0f, 1.0f)
+                    .icon(bitMapFromVector(icon))
+            )
+
+
+            val marcador =
+                Markers(token, user, latitude.toString(), longitude.toString(), type.toString(), id)
+
+            socketAlerts.emitCreatedMarker(marcador)
+        }
+
+
+    }
+
     @SuppressLint("InflateParams")
     private fun setAddAlertListener() {
         btn_select_alert.setOnClickListener {
@@ -93,7 +291,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     }
 
-    private fun dialogWarning(){
+    private fun dialogWarning() {
         val dialog_warning = Dialog(requireContext())
         dialog_warning.setCancelable(true)
         dialog_warning.setContentView(R.layout.dialog_warning)
@@ -115,7 +313,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     }
 
-    private fun createDialog(){
+    private fun createDialog() {
         // Función que cree el dialogo
         val dialog_alerts = Dialog(requireContext())
         dialog_alerts.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -183,19 +381,19 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     }
 
     private fun handleClick(id: Int) {
-        if(loggedIn){
-            when(id){
-                R.id.leak-> addedImageDialog(LEAK_WATER)
+        if (loggedIn) {
+            when (id) {
+                R.id.leak -> addedImageDialog(LEAK_WATER)
                 R.id.without_light -> addedImageDialog(LIGHT)
                 R.id.water -> addedImageDialog(WATER)
-                R.id.fire -> addedImageDialog(WATER)
-                R.id.sewer -> addedImageDialog(WATER)
+                R.id.fire -> addedImageDialog(FIRE)
+                R.id.sewer -> addedImageDialog(SEWER)
                 R.id.walkaway -> addedImageDialog(WALKAWAY)
-                R.id.pothole ->addedImageDialog(POTHOLE)
+                R.id.pothole -> addedImageDialog(POTHOLE)
                 R.id.tree -> addedImageDialog(TREE)
-                R.id.crash -> addedImageDialog(TREE)
+                R.id.crash -> addedImageDialog(CRASH_CAR)
             }
-        }else{
+        } else {
             dialogWarning()
         }
     }
@@ -255,7 +453,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         newDialog(image, text, type)
     }
 
-    private fun newDialog(image:Int, text:String, type: MarkerType){
+
+    private fun newDialog(image: Int, text: String, type: MarkerType) {
         val dialog_alert = Dialog(requireContext())
         dialog_alert.setCancelable(true)
         dialog_alert.setContentView(R.layout.dialog_by_alert)
@@ -272,89 +471,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             dialog_alert.dismiss()
         }
     }
-    private fun addedMarker(type: MarkerType) {
 
-        getCurrentLocation { location ->
-            val latitude = location.latitude
-            val longitude = location.longitude
-            val local = LatLng(latitude, longitude)
-
-            var title = ""
-            var description = ""
-            var icon = 0
-
-            when (type) {
-                LIGHT -> {
-                    title = "Sin Luz"
-                    description = "No hay luz"
-                    icon = R.drawable.incident_without_ligth
-                }
-
-                WATER -> {
-                    title = "Sin Agua"
-                    description = "No hay agua"
-                    icon = R.drawable.incident_water
-                }
-
-                WALKAWAY -> {
-                    title = "Psarela Dañada"
-                    description = "Pasarela tiene daños precaución"
-                    icon = R.drawable.incident_walkaway
-                }
-
-                LEAK_WATER -> {
-                    title = "Fuja de agua"
-                    description = "Aqui hay una fuja de agua"
-                    icon = R.drawable.incident_leak
-                }
-
-                TREE -> {
-                    title = "Árbol caído"
-                    description = "El árbol se encuentra obstaculizando el paso"
-                    icon = R.drawable.incident_tree
-                }
-
-                SEWER -> {
-                    title = "Alcantarilla sin tapa"
-                    description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
-                    icon = R.drawable.incident_sewer
-                }
-
-                FIRE -> {
-                    title = "Incendio"
-                    description = "Aqui hay un incendio"
-                    icon = R.drawable.incident_fire
-                }
-
-                POTHOLE -> {
-                    title = "Bache Peligroso"
-                    description = "Hay un bache muy peligroso que puede ocasionar un accidente"
-                    icon = R.drawable.incident_bump
-                }
-
-                CRASH_CAR -> {
-                    title = "Accidente automovilístico"
-                    description = "Hay una accidente de carros por la zona"
-                    icon = R.drawable.incident_crash
-                }
-            }
-            map.addMarker(
-                MarkerOptions().position(local).title(title).snippet(description).anchor(0.0f, 1.0f)
-                    .icon(bitMapFromVector(icon))
-            )
-        }
-
-    }
 
     val markerClickListener = GoogleMap.OnMarkerClickListener { marker ->
-        // Función que cree el dialogo
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_of_alert)
-
-        dialog.show()
-        // Retorna `false` para permitir que se realicen acciones predeterminadas del marcador, como abrir la ventana de información
         false
     }
 
@@ -372,6 +491,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
+
     private fun getMapFragment() {
         val mapFragment: SupportMapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -386,6 +506,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
         locationTask.addOnSuccessListener { currentLocation ->
             onComplete(currentLocation)
+            socketAlerts.userUbication(currentLocation.latitude, currentLocation.longitude)
         }
     }
 
