@@ -14,7 +14,7 @@ object socketAlerts {
     fun initSocket(){
         val options = IO.Options()
         options.forceNew = true
-        socket = IO.socket("http://192.168.1.35:5000")
+        socket = IO.socket("http://10.149.10.2:5000")
     }
 
     fun connect(){
@@ -22,6 +22,12 @@ object socketAlerts {
         Log.d("tag", "Connetion")
     }
 
+    fun userUbication(Latitude:Double, Longitude:Double){
+        val locationData = JSONObject()
+        locationData.put("Latitude", Latitude)
+        locationData.put("Longitude", Longitude)
+        socket.emit("location", locationData)
+    }
 
     fun addMarkerListener(listener:Emitter.Listener){
         socket.on("Marcadores", listener)
@@ -36,7 +42,7 @@ object socketAlerts {
         markerJSON.put("latitud", marker.latitud)
         markerJSON.put("longitud", marker.longitud)
         markerJSON.put("name", marker.name)
-        markerJSON.put("type", marker.id)
+        markerJSON.put("type", marker.type)
 
 
         val markerString = markerJSON.toString()

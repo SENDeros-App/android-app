@@ -40,6 +40,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 import io.socket.emitter.Emitter
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -103,24 +104,38 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     private val onNewMarker = Emitter.Listener { args ->
         requireActivity().runOnUiThread {
-            val markerString = args[0] as String
-
-            try {
-                val markerJSON = JSONObject(markerString)
-                val token = markerJSON.getString("token")
-                val user = markerJSON.getString("user")
-                val latitude = markerJSON.getDouble("latitud")
-                val longitude = markerJSON.getDouble("longitud")
-                val name = markerJSON.getString("name")
-                val id = markerJSON.getString("type")
-
-                addMarkerAPI(name, longitude, latitude)
-                Toast.makeText(requireContext(), name, Toast.LENGTH_LONG).show()
-            } catch (e: JSONException) {
-                // Manejar el error de análisis de JSON adecuadamente
-                Log.e("tag", "Error al analizar el objeto JSON: ${e.message}")
+            val marcadoresJSON = args[0]
+            when (marcadoresJSON) {
+                is JSONObject -> {
+                    // Si es uno
+                    val markerJSON = marcadoresJSON
+                    processMarker(markerJSON)
+                }
+                is JSONArray -> {
+                    // Si son múltiples
+                    for (i in 0 until marcadoresJSON.length()) {
+                        val markerJSON = marcadoresJSON.getJSONObject(i)
+                        processMarker(markerJSON)
+                    }
+                }
+                else -> {
+                    // Manejar otro caso
+                    Log.e("tag", "Formato de marcadores no válido: $marcadoresJSON")
+                }
             }
         }
+    }
+
+    private fun processMarker(markerJSON: JSONObject) {
+
+        val user = markerJSON.getString("user")
+        val latitude = markerJSON.getDouble("latitud")
+        val longitude = markerJSON.getDouble("longitud")
+        val name = markerJSON.getString("name")
+        val type = markerJSON.getString("type")
+
+
+        addMarkerAPI(name, longitude, latitude)
     }
 
 
@@ -518,6 +533,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
             fusedLocationProviderClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
         locationTask.addOnSuccessListener { currentLocation ->
             onComplete(currentLocation)
+            socketAlerts.userUbication(currentLocation.latitude, currentLocation.longitude)
         }
     }
 
