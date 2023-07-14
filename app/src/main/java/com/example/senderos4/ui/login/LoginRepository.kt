@@ -1,5 +1,5 @@
 
-package com.example.senderos4.ui.login.repositories
+package com.example.senderos4.ui.login
 
 import com.example.senderos4.data.User
 import com.example.senderos4.network.ApiResponse

@@ -9,12 +9,11 @@ import android.widget.ImageView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.senderos4.R
-import com.example.senderos4.hiddenMenu.HiddenMenuFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class ContainerFragment : HiddenMenuFragment() {
+class ContainerFragment : Fragment() {
 
     private lateinit var demoCollectionAdapter: DemoCollectionAdapter
     private lateinit var viewPager2: ViewPager2

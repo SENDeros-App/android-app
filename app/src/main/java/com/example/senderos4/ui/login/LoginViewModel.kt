@@ -1,6 +1,5 @@
-package com.example.senderos4.ui.login.viewmodels
+package com.example.senderos4.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -9,8 +8,6 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.network.ApiResponse
-import com.example.senderos4.ui.login.LoginUiStatus
-import com.example.senderos4.ui.login.repositories.LoginRepository
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: LoginRepository) : ViewModel() {

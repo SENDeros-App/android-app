@@ -177,12 +177,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // boton inicio de sesion falta completar
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_toolbar, menu)
-        return true
-    }
-
     //new
     private fun observeLoginData() {
         app.loginData.observe(this) { loginData ->

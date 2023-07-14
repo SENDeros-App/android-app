@@ -24,6 +24,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.senderos4.R
 import com.example.senderos4.SenderosApplication
 import com.example.senderos4.data.Markers
+import com.example.senderos4.databinding.FragmentMapBinding
+import com.example.senderos4.databinding.FragmentRegisterBinding
 import com.example.senderos4.network.socket.socketAlerts
 import com.example.senderos4.ui.Map.MarkerType.*
 import com.google.android.gms.location.LocationServices
@@ -48,6 +50,7 @@ import org.json.JSONObject
 class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener {
 
+    private lateinit var binding: FragmentMapBinding
     private lateinit var btn_select_alert: ImageView
     private lateinit var map: GoogleMap
 
@@ -61,16 +64,15 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false)
+    ): View {
+        binding = FragmentMapBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getMapFragment()
-        bind()
 
         app.loginData.observe(requireActivity()) { loginData ->
             loggedIn = loginData != null
@@ -97,10 +99,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         map.setOnMarkerClickListener(markerClickListener)
     }
 
-    private fun bind() {
-        btn_select_alert = requireView().findViewById(R.id.btn_alert)
-
-    }
 
     private val onNewMarker = Emitter.Listener { args ->
         requireActivity().runOnUiThread {
@@ -285,7 +283,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
     @SuppressLint("InflateParams")
     private fun setAddAlertListener() {
-        btn_select_alert.setOnClickListener {
+        binding.btnAlert.setOnClickListener {
             createDialog()
         }
 
