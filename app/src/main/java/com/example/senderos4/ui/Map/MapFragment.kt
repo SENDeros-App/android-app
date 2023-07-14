@@ -135,71 +135,61 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         val type = markerJSON.getString("type")
 
 
-        addMarkerAPI(name, longitude, latitude)
+        addMarkerAPI(user, name, longitude, latitude)
     }
 
 
-    private fun addMarkerAPI(type:String, longitude:Double, latitude:Double) {
-        Toast.makeText(requireContext(), latitude.toString(), Toast.LENGTH_LONG).show()
+    private fun addMarkerAPI(User:String, type:String, longitude:Double, latitude:Double) {
 
         val local = LatLng(latitude, longitude)
 
         var title = ""
-        var description = ""
+        val description = "Author: $User"
         var icon = 0
 
         when (type) {
             "LIGHT" -> {
                 title = "Sin Luz"
-                description = "No hay luz"
                 icon = R.drawable.incident_without_ligth
             }
 
             "WATER" -> {
                 title = "Sin Agua"
-                description = "No hay agua"
                 icon = R.drawable.incident_water
             }
 
             "WALKAWAY" -> {
                 title = "Psarela Dañada"
-                description = "Pasarela tiene daños precaución"
                 icon = R.drawable.incident_walkaway
             }
 
             "LEAK_WATER" -> {
                 title = "Fuja de agua"
-                description = "Aqui hay una fuja de agua"
                 icon = R.drawable.incident_leak
             }
 
             "TREE" -> {
                 title = "Árbol caído"
-                description = "El árbol se encuentra obstaculizando el paso"
                 icon = R.drawable.incident_tree
             }
 
             "SEWER" -> {
                 title = "Alcantarilla sin tapa"
-                description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
                 icon = R.drawable.incident_sewer
             }
 
             "FIRE" -> {
                 title = "Incendio"
-                description = "Aqui hay un incendio"
                 icon = R.drawable.incident_fire
             }
 
             "POTHOLE" -> {
                 title = "Bache Peligroso"
-                description = "Hay un bache muy peligroso que puede ocasionar un accidente"
                 icon = R.drawable.incident_bump
             }
 
             "CRASH_CAR" -> {
                 title = "Accidente automovilístico"
-                description = "Hay una accidente de carros por la zona"
                 icon = R.drawable.incident_crash
             }
         }
@@ -220,69 +210,60 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
             var title = ""
             var id = ""
-            var description = ""
+            val description = "Author: $user"
             var icon = 0
 
             when (type) {
                 LIGHT -> {
                     title = "Sin Luz"
-                    description = "No hay luz"
                     icon = R.drawable.incident_without_ligth
                     id = "64af2e47ba77f0b9c44e53de"
                 }
 
                 WATER -> {
                     title = "Sin Agua"
-                    description = "No hay agua"
                     icon = R.drawable.incident_water
                     id = "64af2f0dba77f0b9c44e53e3"
                 }
 
                 WALKAWAY -> {
                     title = "Pasarela Dañada"
-                    description = "Pasarela tiene daños precaución"
                     icon = R.drawable.incident_walkaway
                     id = "64af2f6cba77f0b9c44e53ef"
                 }
 
                 LEAK_WATER -> {
                     title = "Fuja de agua"
-                    description = "Aqui hay una fuja de agua"
                     icon = R.drawable.incident_leak
                     id = "64af2f3bba77f0b9c44e53e9"
                 }
 
                 TREE -> {
                     title = "Árbol caído"
-                    description = "El árbol se encuentra obstaculizando el paso"
                     icon = R.drawable.incident_tree
                     id = "64af2f8dba77f0b9c44e53f2"
                 }
 
                 SEWER -> {
                     title = "Alcantarilla sin tapa"
-                    description = "Cuidado la alcantarilla se encuentra sin tapa puedes caer"
                     icon = R.drawable.incident_sewer
                     id = "64af2f59ba77f0b9c44e53ec"
                 }
 
                 FIRE -> {
                     title = "Incendio"
-                    description = "Aqui hay un incendio"
                     icon = R.drawable.incident_fire
                     id = "64af2f2bba77f0b9c44e53e6"
                 }
 
                 POTHOLE -> {
                     title = "Bache Peligroso"
-                    description = "Hay un bache muy peligroso que puede ocasionar un accidente"
                     icon = R.drawable.incident_bump
                     id = "64af2f9bba77f0b9c44e53f5"
                 }
 
                 CRASH_CAR -> {
                     title = "Accidente automovilístico"
-                    description = "Hay una accidente de carros por la zona"
                     icon = R.drawable.incident_crash
                     id = "64af2fa9ba77f0b9c44e53f8"
                 }
@@ -493,14 +474,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
 
     val markerClickListener = GoogleMap.OnMarkerClickListener { marker ->
-        // Función que cree el dialogo
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_of_alert)
-
-        dialog.show()
-        // Retorna `false` para permitir que se realicen acciones predeterminadas del marcador, como abrir la ventana de información
         false
     }
 

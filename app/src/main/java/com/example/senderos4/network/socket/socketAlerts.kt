@@ -14,7 +14,7 @@ object socketAlerts {
     fun initSocket(){
         val options = IO.Options()
         options.forceNew = true
-        socket = IO.socket("http://10.149.10.2:5000")
+        socket = IO.socket("http://senderos.me:5000")
     }
 
     fun connect(){
