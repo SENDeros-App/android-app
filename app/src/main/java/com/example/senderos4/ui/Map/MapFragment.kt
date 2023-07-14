@@ -51,7 +51,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
     GoogleMap.OnMyLocationClickListener {
 
     private lateinit var binding: FragmentMapBinding
-    private lateinit var btn_select_alert: ImageView
     private lateinit var map: GoogleMap
 
     val app by lazy {
@@ -76,9 +75,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
 
         app.loginData.observe(requireActivity()) { loginData ->
             loggedIn = loginData != null
+
             user = loginData?.user?.name.toString()
             token = loginData?.token.toString()
         }
+        mapLogingButton()
 
         socketAlerts.initSocket()
         socketAlerts.connect()
@@ -86,6 +87,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButton
         socketAlerts.addMarkerListener(onNewMarker)
     }
 
+    private fun mapLogingButton() {
+        if (loggedIn) {
+            binding.mapLoginButton.visibility = View.INVISIBLE
+        }
+    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
