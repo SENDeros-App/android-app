@@ -2,7 +2,10 @@
 
 buildscript {
     ext{
-        nav_version = "2.5.3"
+        nav_version = '2.6.0'
+        fragment_version = '1.6.0'
+        activity_version = '1.7.2'
+        lifecycle_version = '2.6.1'
     }
 }
 

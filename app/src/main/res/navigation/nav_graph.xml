@@ -7,32 +7,93 @@
 
     <fragment
         android:id="@+id/map_fragment"
-        android:name="com.example.senderos4.Fragment.MapFragment"
-        android:label="Home"
+        android:name="com.example.senderos4.ui.Map.MapFragment"
+        android:label=""
         tools:layout="@layout/fragment_map" >
-        <action
-            android:id="@+id/action_home_Fragment_to_clasifications_Fragment"
-            app:destination="@id/clasifications_Fragment" />
         <action
             android:id="@+id/action_home_Fragment_to_history_Fragment"
             app:destination="@id/history_Fragment" />
+        <action
+            android:id="@+id/action_map_fragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_map_fragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
+        <action
+            android:id="@+id/action_map_fragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_map_fragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/clasifications_Fragment"
-        android:name="com.example.senderos4.Fragment.ClasificationsFragment"
+        android:name="com.example.senderos4.ui.clasificacion.fragments.ClassificationsFragment"
         android:label="clasifications"
-        tools:layout="@layout/fragment_clasifications" >
-        <action
-            android:id="@+id/action_clasifications_Fragment_to_home_Fragment"
-            app:destination="@id/map_fragment" />
-    </fragment>
+        tools:layout="@layout/fragment_clasifications" />
     <fragment
         android:id="@+id/history_Fragment"
-        android:name="com.example.senderos4.Fragment.HistoryFragment"
+        android:name="com.example.senderos4.ui.record.HistoryFragment"
         android:label="history"
         tools:layout="@layout/fragment_history" >
         <action
             android:id="@+id/action_history_Fragment_to_home_Fragment"
             app:destination="@id/map_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.senderos4.ui.Settings.SettingsFragment"
+        android:label="settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_map_fragment"
+            app:destination="@id/map_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.example.senderos4.ui.clasificacion.fragments.ContainerFragment"
+        tools:layout="@layout/fragment_container" >
+        <action
+            android:id="@+id/action_containerFragment_to_map_fragment"
+            app:destination="@id/map_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.senderos4.ui.login.LoginFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_map_fragment"
+            app:destination="@id/map_fragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.senderos4.ui.register.RegisterFragment"
+        android:label="Register" >
+        <action
+            android:id="@+id/action_registerFragment_to_register2Fragment"
+            app:destination="@id/register2Fragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment2"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/register2Fragment"
+        android:name="com.example.senderos4.ui.register.Register2Fragment"
+        android:label="Crear Usuario" >
+        <action
+            android:id="@+id/action_register2Fragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_register2Fragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
 </navigation>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.senderos4.ui.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginFragment">
+
+
+        <ImageView
+            android:id="@+id/image_background"
+            android:layout_width="@dimen/background_width"
+            android:layout_height="@dimen/background_height"
+            android:src="@drawable/backgroundlogin"
+            android:tintMode="src_in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498"
+            app:tint="#8B9255FF" />
+
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.047" />
+
+        <TextView
+            android:id="@+id/welcomeText"
+            android:layout_width="@dimen/welcomeText_width"
+            android:layout_height="@dimen/welcomeText_height"
+            android:text="@string/Welcome_Text"
+            android:textAlignment="textEnd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.116" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutUser"
+            android:layout_width="@dimen/textInputLayoutUser_width"
+            android:layout_height="@dimen/textInputLayoutUser_height"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_bias="0.304">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textUserName"
+                android:layout_width="@dimen/textInputEditUser_width"
+                android:layout_height="@dimen/textInputEditUser_height"
+                android:hint="@string/userName"
+                android:text="@={viewmodel.name}"
+                tools:layout_editor_absoluteX="74dp"
+                tools:layout_editor_absoluteY="171dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPassword"
+            android:layout_width="@dimen/textInputLayoutPassword_width"
+            android:layout_height="@dimen/textInputLayoutPassword_height"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUser"
+            app:layout_constraintVertical_bias="0.06999999">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textUserPassword"
+                android:layout_width="@dimen/textInputEditPassword_width"
+                android:layout_height="@dimen/textInputEditPassword_height"
+                android:hint="@string/passwordText"
+                android:inputType="textPassword"
+                android:text="@={viewmodel.password}"
+                app:errorEnabled="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/ForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgotPassword"
+            app:layout_constraintBottom_toTopOf="@+id/loginButton"
+            app:layout_constraintEnd_toEndOf="@+id/loginButton"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayoutPassword"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="@dimen/loginButton_width"
+            android:layout_height="@dimen/loginButton_height"
+            android:layout_marginTop="92dp"
+            android:backgroundTint="@color/buttonColor"
+            android:text="@string/login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
+
+        <TextView
+            android:id="@+id/InvitationTextView"
+            android:layout_width="@dimen/InvitationTextView_width"
+            android:layout_height="@dimen/InvitationTextView_height"
+            android:layout_marginTop="20dp"
+            android:text="@string/InvitationText"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+        <TextView
+            android:id="@+id/RegisterView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:textSize="20dp"
+            android:textColor="@color/registerColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/InvitationTextView"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
